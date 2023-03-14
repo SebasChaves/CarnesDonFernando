@@ -1,0 +1,67 @@
+﻿@model IEnumerable<FrontEnd.Models.MensajesContactoViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdMensaje)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombrePersona)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Correo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdLocal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mensaje)
+            </th>
+           
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                    @Html.DisplayFor(modelItem => item.IdMensaje)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.NombrePersona)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Correo)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefono)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdLocal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mensaje)
+                </td>
+          
+            <td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.IdMensaje }) |
+                    @Html.ActionLink("Details", "Details", new {  id=item.IdMensaje }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.IdMensaje })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
