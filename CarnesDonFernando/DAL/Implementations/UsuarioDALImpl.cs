@@ -12,16 +12,16 @@ namespace DAL.Implementations
     public class UsuarioDALImpl : IUsuarioDAL
     {
         
-        proyectoCarnesDonFernandoContext context;
+        pruebasCarnesDonFernandoContext context;
 
         public UsuarioDALImpl()
         {
-            context = new proyectoCarnesDonFernandoContext();
+            context = new pruebasCarnesDonFernandoContext();
 
         }
 
 
-        public UsuarioDALImpl(proyectoCarnesDonFernandoContext _Context)
+        public UsuarioDALImpl(pruebasCarnesDonFernandoContext _Context)
         {
             context = _Context;
         }

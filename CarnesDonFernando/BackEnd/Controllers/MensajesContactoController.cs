@@ -21,7 +21,7 @@ namespace BackEnd.Controllers
 
         public MensajesContactoController(ILogger<MensajesContactoController> logger)
         {
-            DALMensajesContacto = new MensajesContactoDALImpl(new Entities.proyectoCarnesDonFernandoContext());
+            DALMensajesContacto = new MensajesContactoDALImpl(new Entities.pruebasCarnesDonFernandoContext());
             this.logger= logger;
         }
 

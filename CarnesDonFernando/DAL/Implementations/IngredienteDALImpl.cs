@@ -12,16 +12,16 @@ namespace DAL.Implementations
     public class IngredienteDALImpl : IIngredienteDAL
     {
         
-        proyectoCarnesDonFernandoContext context;
+        pruebasCarnesDonFernandoContext context;
 
         public IngredienteDALImpl()
         {
-            context = new proyectoCarnesDonFernandoContext();
+            context = new pruebasCarnesDonFernandoContext();
 
         }
 
 
-        public IngredienteDALImpl(proyectoCarnesDonFernandoContext _Context)
+        public IngredienteDALImpl(pruebasCarnesDonFernandoContext _Context)
         {
             context = _Context;
         }

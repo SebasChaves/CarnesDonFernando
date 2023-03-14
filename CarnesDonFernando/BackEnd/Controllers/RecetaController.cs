@@ -17,7 +17,7 @@ namespace BackEnd.Controllers
 
         public RecetaController(ILogger<RecetaController> logger)
         {
-            recetaDAL = new RecetaDALImpl(new proyectoCarnesDonFernandoContext());
+            recetaDAL = new RecetaDALImpl(new pruebasCarnesDonFernandoContext());
             this.logger = logger;
         }
 
@@ -25,10 +25,10 @@ namespace BackEnd.Controllers
         {
             return new RecetaModel
             {
-                IdReceta= model.IdReceta,
-                IdIngrediente=model.IdIngrediente,
+                IdReceta= model.IdReceta,                
                 DescripcionReceta=model.DescripcionReceta,
-                NombreReceta =model.NombreReceta
+                NombreReceta =model.NombreReceta,
+                UrlImg = model.UrlImg
             };
 
 
@@ -38,9 +38,9 @@ namespace BackEnd.Controllers
             return new Receta
             {
                 IdReceta = model.IdReceta,
-                IdIngrediente = model.IdIngrediente,
                 DescripcionReceta = model.DescripcionReceta,
-                NombreReceta = model.NombreReceta
+                NombreReceta = model.NombreReceta,
+                UrlImg = model.UrlImg
             };
         }
 

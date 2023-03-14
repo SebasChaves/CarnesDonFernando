@@ -18,7 +18,7 @@ namespace BackEnd.Controllers
 
         public ProductoController()
         {
-            productoDAL =  new ProductoDALImpl(new Entities.proyectoCarnesDonFernandoContext());
+            productoDAL =  new ProductoDALImpl(new Entities.pruebasCarnesDonFernandoContext());
 
         }
 

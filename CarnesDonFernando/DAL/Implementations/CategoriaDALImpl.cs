@@ -12,16 +12,16 @@ namespace DAL.Implementations
     public class CategoriaDALImpl : ICategoriaDAL
     {
 
-        proyectoCarnesDonFernandoContext context;
+        pruebasCarnesDonFernandoContext context;
 
         public CategoriaDALImpl ()
         {
-            context = new proyectoCarnesDonFernandoContext ();
+            context = new pruebasCarnesDonFernandoContext ();
 
         }
 
 
-        public CategoriaDALImpl(proyectoCarnesDonFernandoContext _Context)
+        public CategoriaDALImpl(pruebasCarnesDonFernandoContext _Context)
         {
             context = _Context;
 

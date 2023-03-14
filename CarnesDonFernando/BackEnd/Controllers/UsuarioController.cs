@@ -17,7 +17,7 @@ namespace BackEnd.Controllers
 
         public UsuarioController(ILogger<UsuarioController> logger)
         {
-            usuarioDAL = new UsuarioDALImpl(new proyectoCarnesDonFernandoContext());
+            usuarioDAL = new UsuarioDALImpl(new pruebasCarnesDonFernandoContext());
             this.logger = logger;
         }
 

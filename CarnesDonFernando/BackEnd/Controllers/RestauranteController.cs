@@ -18,7 +18,7 @@ namespace BackEnd.Controllers
 
         public RestauranteController(ILogger<RestauranteController> logger)
         {
-            restauranteDAL = new RestauranteDALImpl(new proyectoCarnesDonFernandoContext());
+            restauranteDAL = new RestauranteDALImpl(new pruebasCarnesDonFernandoContext());
             this.logger = logger;
         }
 

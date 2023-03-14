@@ -16,7 +16,7 @@ namespace BackEnd.Controllers
 
         public CategoriaController(ILogger<CategoriaController> logger)
         {
-            categoriaDAL = new CategoriaDALImpl(new proyectoCarnesDonFernandoContext());
+            categoriaDAL = new CategoriaDALImpl(new pruebasCarnesDonFernandoContext());
             this.logger = logger;
         }
 

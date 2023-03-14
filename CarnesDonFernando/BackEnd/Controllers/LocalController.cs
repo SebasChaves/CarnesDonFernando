@@ -18,7 +18,7 @@ namespace BackEnd.Controllers
 
         public LocalController(ILogger<LocalController> logger)
         {
-            localDAL = new LocalDALImpl(new proyectoCarnesDonFernandoContext());
+            localDAL = new LocalDALImpl(new pruebasCarnesDonFernandoContext());
             this.logger = logger;
         }
 

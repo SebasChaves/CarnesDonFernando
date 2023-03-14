@@ -12,16 +12,16 @@ namespace DAL.Implementations
     public class RestauranteDALImpl : IRestauranteDAL
     {
 
-        proyectoCarnesDonFernandoContext context;
+        pruebasCarnesDonFernandoContext context;
 
         public RestauranteDALImpl()
         {
-            context = new proyectoCarnesDonFernandoContext();
+            context = new pruebasCarnesDonFernandoContext();
 
         }
 
 
-        public RestauranteDALImpl(proyectoCarnesDonFernandoContext _Context)
+        public RestauranteDALImpl(pruebasCarnesDonFernandoContext _Context)
         {
             context = _Context;
         }

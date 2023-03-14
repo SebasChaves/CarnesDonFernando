@@ -14,9 +14,9 @@ namespace DAL.Implementations
     public class DALGenericoImpl<TEntity> : IDALGenerico<TEntity> where TEntity : class
     {
 
-        protected readonly proyectoCarnesDonFernandoContext Context;
+        protected readonly pruebasCarnesDonFernandoContext Context;
 
-        public DALGenericoImpl(proyectoCarnesDonFernandoContext context)
+        public DALGenericoImpl(pruebasCarnesDonFernandoContext context)
         {
             Context = context;
         }

@@ -13,16 +13,16 @@ namespace DAL.Implementations
     public class MensajesContactoDALImpl : IDALMensajesContacto
     {
 
-        proyectoCarnesDonFernandoContext context;
+        pruebasCarnesDonFernandoContext context;
 
         public MensajesContactoDALImpl()
         {
-            context = new proyectoCarnesDonFernandoContext();
+            context = new pruebasCarnesDonFernandoContext();
 
         }
 
 
-        public MensajesContactoDALImpl(proyectoCarnesDonFernandoContext _Context)
+        public MensajesContactoDALImpl(pruebasCarnesDonFernandoContext _Context)
         {
             context = _Context;
         }

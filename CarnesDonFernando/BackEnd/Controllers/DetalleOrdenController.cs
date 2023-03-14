@@ -19,7 +19,7 @@ namespace BackEnd.Controllers
 
         public DetalleOrdenController(ILogger<DetalleOrdenController> logger)
         {
-            DALDetalleOrden = new DetalleOrdenDALImpl(new proyectoCarnesDonFernandoContext());
+            DALDetalleOrden = new DetalleOrdenDALImpl(new pruebasCarnesDonFernandoContext());
             this.logger = logger;
         }
 

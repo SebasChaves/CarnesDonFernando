@@ -17,7 +17,7 @@ namespace BackEnd.Controllers
 
         public IngredienteController(ILogger<IngredienteController> logger)
         {
-            ingredienteDAL = new IngredienteDALImpl(new proyectoCarnesDonFernandoContext());
+            ingredienteDAL = new IngredienteDALImpl(new pruebasCarnesDonFernandoContext());
             this.logger = logger;
         }
 
@@ -26,7 +26,9 @@ namespace BackEnd.Controllers
             return new IngredienteModel
             {
                 IdIngrediente = model.IdIngrediente,
-                Descripcion= model.Descripcion
+                Descripcion= model.Descripcion,
+                IdReceta= model.IdReceta
+                
             };
 
 
@@ -36,7 +38,8 @@ namespace BackEnd.Controllers
             return new Ingrediente
             {
                 IdIngrediente = model.IdIngrediente,
-                Descripcion = model.Descripcion
+                Descripcion = model.Descripcion,
+                IdReceta = model.IdReceta
             };
         }
 

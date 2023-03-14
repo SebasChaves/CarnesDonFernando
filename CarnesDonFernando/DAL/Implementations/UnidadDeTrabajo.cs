@@ -10,13 +10,13 @@ namespace DAL.Implementations
 {
     public class UnidadDeTrabajo<T> : IDisposable where T : class
     {
-        private readonly proyectoCarnesDonFernandoContext context;
+        private readonly pruebasCarnesDonFernandoContext context;
         //public IDALGenerico<Queja> quejaDAL;
         //public IDALGenerico<TablaGeneral> tablaDAL;
         public IDALGenerico<T> genericDAL;
 
 
-        public UnidadDeTrabajo(proyectoCarnesDonFernandoContext _context)
+        public UnidadDeTrabajo(pruebasCarnesDonFernandoContext _context)
         {
             context = _context;
             genericDAL = new DALGenericoImpl<T>(context);

@@ -12,16 +12,16 @@ namespace DAL.Implementations
     public class ProductoDALImpl : IProductoDAL
     {
 
-        proyectoCarnesDonFernandoContext context;
+        pruebasCarnesDonFernandoContext context;
 
         public ProductoDALImpl ()
         {
-            context = new proyectoCarnesDonFernandoContext ();
+            context = new pruebasCarnesDonFernandoContext ();
 
         }
 
             
-        public ProductoDALImpl(proyectoCarnesDonFernandoContext _Context)
+        public ProductoDALImpl(pruebasCarnesDonFernandoContext _Context)
         {
             context = _Context;
 

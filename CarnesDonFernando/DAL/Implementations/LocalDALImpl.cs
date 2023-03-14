@@ -12,16 +12,16 @@ namespace DAL.Implementations
     public class LocalDALImpl : ILocalDAL
     {
 
-        proyectoCarnesDonFernandoContext context;
+        pruebasCarnesDonFernandoContext context;
 
         public LocalDALImpl()
         {
-            context = new proyectoCarnesDonFernandoContext();
+            context = new pruebasCarnesDonFernandoContext();
 
         }
 
 
-        public LocalDALImpl(proyectoCarnesDonFernandoContext _Context)
+        public LocalDALImpl(pruebasCarnesDonFernandoContext _Context)
         {
             context = _Context;
         }

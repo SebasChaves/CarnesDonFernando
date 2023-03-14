@@ -12,16 +12,16 @@ namespace DAL.Implementations
     public class DetalleOrdenDALImpl : IDALDetalleOrden
     {
         
-        proyectoCarnesDonFernandoContext context;
+        pruebasCarnesDonFernandoContext context;
 
         public DetalleOrdenDALImpl()
         {
-            context = new proyectoCarnesDonFernandoContext();
+            context = new pruebasCarnesDonFernandoContext();
 
         }
 
 
-        public DetalleOrdenDALImpl(proyectoCarnesDonFernandoContext _Context)
+        public DetalleOrdenDALImpl(pruebasCarnesDonFernandoContext _Context)
         {
             context = _Context;
         }
