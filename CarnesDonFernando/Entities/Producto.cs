@@ -20,6 +20,6 @@ namespace Entities
         public string UrlImg { get; set; } = null!;
 
         public virtual Categoria IdCategoriaNavigation { get; set; } = null!;
-        public virtual ICollection<DetalleOrden> DetalleOrdens { get; set; } 
+        public virtual ICollection<DetalleOrden> DetalleOrdens { get; set; }
     }
 }

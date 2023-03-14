@@ -5,11 +5,16 @@ namespace Entities
 {
     public partial class Receta
     {
+        public Receta()
+        {
+            Ingredientes = new HashSet<Ingrediente>();
+        }
+
         public int IdReceta { get; set; }
-        public int IdIngrediente { get; set; }
         public string NombreReceta { get; set; } = null!;
+        public string UrlImg { get; set; } = null!;
         public string DescripcionReceta { get; set; } = null!;
 
-        public virtual Ingrediente IdIngredienteNavigation { get; set; } = null!;
+        public virtual ICollection<Ingrediente> Ingredientes { get; set; }
     }
 }
