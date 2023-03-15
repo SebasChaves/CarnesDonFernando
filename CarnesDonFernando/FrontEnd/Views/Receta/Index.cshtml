@@ -16,10 +16,10 @@
                 @Html.DisplayNameFor(model => model.IdReceta)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdIngrediente)
+                @Html.DisplayNameFor(model => model.NombreReceta)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NombreReceta)
+                @Html.DisplayNameFor(model => model.UrlImg)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DescripcionReceta)
@@ -34,18 +34,18 @@
                 @Html.DisplayFor(modelItem => item.IdReceta)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdIngrediente)
+                @Html.DisplayFor(modelItem => item.NombreReceta)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NombreReceta)
+                @Html.DisplayFor(modelItem => item.UrlImg)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DescripcionReceta)
             </td>
             <td>
-                    @Html.ActionLink("Edit", "Edit", new {  id=item.IdReceta  }) |
-                    @Html.ActionLink("Details", "Details", new {  id=item.IdReceta  }) |
-                    @Html.ActionLink("Delete", "Delete", new { id=item.IdReceta  })
+                @Html.ActionLink("Edit", "Edit", new { id=item.IdReceta }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.IdReceta }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.IdReceta })
             </td>
         </tr>
 }

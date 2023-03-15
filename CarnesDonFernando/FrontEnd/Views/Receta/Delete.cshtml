@@ -18,16 +18,16 @@
             @Html.DisplayFor(model => model.IdReceta)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdIngrediente)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdIngrediente)
-        </dd>
-        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.NombreReceta)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.NombreReceta)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.UrlImg)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.UrlImg)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.DescripcionReceta)
@@ -37,7 +37,7 @@
         </dd>
     </dl>
     
-     <form asp-action="Delete">
+    <form asp-action="Delete">
 
         @Html.HiddenFor(Model=>Model.IdReceta)
         <input type="submit" value="Delete" class="btn btn-danger" /> |
