@@ -2,13 +2,14 @@
 using FrontEnd.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FrontEnd.Controllers
 {
     public class IngredienteController : Controller
     {
         IngredienteHelper ingredienteHelper;
+        RecetaHelper recetaHelper = new RecetaHelper();
 
         // GET: IngredienteController
         public ActionResult Index()
@@ -32,6 +33,19 @@ namespace FrontEnd.Controllers
         // GET: IngredienteController/Create
         public ActionResult Create()
         {
+            ingredienteHelper = new IngredienteHelper();
+            List<RecetaViewModel> lista = recetaHelper.GetAll();            
+
+            List<SelectListItem> listaRecetas = new();
+          
+            for (int i = 0;i<lista.Count;i++)
+            {
+                 listaRecetas.Add(new SelectListItem { Value = lista[i].IdReceta.ToString(), Text = lista[i].NombreReceta.ToString() });
+            }
+
+             
+            ViewBag.idReceta = listaRecetas;
+
 
             return View();
         }
@@ -46,7 +60,7 @@ namespace FrontEnd.Controllers
                 ingredienteHelper = new IngredienteHelper();
                 ingrediente = ingredienteHelper.Create(ingrediente);
 
-                return RedirectToAction("Details", new { id = ingrediente.IdIngrediente });
+                return RedirectToAction(nameof(Index));
             }
             catch
             {

@@ -44,9 +44,10 @@ namespace FrontEnd.Controllers
             try
             {
                 recetaHelper = new RecetaHelper();
-                receta = recetaHelper.Create(receta);
+                recetaHelper.Create(receta);
 
-                return RedirectToAction("Details", new { id = receta.IdReceta });
+                
+                return RedirectToAction(nameof(Index));
             }
             catch
             {
