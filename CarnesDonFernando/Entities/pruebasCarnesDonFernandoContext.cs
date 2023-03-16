@@ -174,9 +174,10 @@ namespace Entities
 
                 entity.ToTable("producto");
 
-                entity.Property(e => e.IdProducto)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id_producto");
+                /* entity.Property(e => e.IdProducto)
+                     .ValueGeneratedNever()
+                     .HasColumnName("id_producto");*/
+                entity.Property(e => e.IdProducto).HasColumnName("id_producto");
 
                 entity.Property(e => e.Cantidad).HasColumnName("cantidad");
 
@@ -190,9 +191,10 @@ namespace Entities
                     .IsUnicode(false)
                     .HasColumnName("descripcionProductoLarga");
 
-                entity.Property(e => e.IdCategoria)
+                /*entity.Property(e => e.IdCategoria)
                     .ValueGeneratedOnAdd()
-                    .HasColumnName("id_categoria");
+                    .HasColumnName("id_categoria");*/
+                entity.Property(e => e.IdCategoria).HasColumnName("id_categoria");
 
                 entity.Property(e => e.Nombre)
                     .HasMaxLength(30)

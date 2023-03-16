@@ -2,13 +2,14 @@
 using FrontEnd.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FrontEnd.Controllers
 {
     public class ProductoController : Controller
     {
         ProductoHelper productoHelper;
+        CategoriaHelper categoriaHelper = new CategoriaHelper();
 
         // GET: ProductoController
         public ActionResult Index()
@@ -32,6 +33,18 @@ namespace FrontEnd.Controllers
         // GET: ProductoController/Create
         public ActionResult Create()
         {
+            List<CategoriaViewModel> lista = categoriaHelper.GetAll();
+
+            List<SelectListItem> listaCategorias = new();
+
+            for (int i = 0; i < lista.Count; i++)
+            {
+                listaCategorias.Add(new SelectListItem { Value = lista[i].IdCategoria.ToString(), Text = lista[i].Nombre.ToString() });
+            }
+
+
+            ViewBag.idCategorias = listaCategorias;
+
 
             return View();
         }
@@ -46,7 +59,7 @@ namespace FrontEnd.Controllers
                 productoHelper = new ProductoHelper();
                 producto = productoHelper.Create(producto);
 
-                return RedirectToAction("Details", new { id = producto.IdProducto });
+                return RedirectToAction(nameof(Index));
             }
             catch
             {
