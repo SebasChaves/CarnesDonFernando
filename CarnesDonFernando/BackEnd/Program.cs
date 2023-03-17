@@ -1,4 +1,19 @@
+using Entities;
+using Entities.Utilities;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+
+#region ConnectionString
+
+builder.Services.AddDbContext<pruebasCarnesDonFernandoContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+// Add services to the container.
+string connString = builder.Configuration.GetConnectionString("DefaultConnection");
+Util.ConnectionString = connString;
+
+
+#endregion
 
 // Add services to the container.
 
