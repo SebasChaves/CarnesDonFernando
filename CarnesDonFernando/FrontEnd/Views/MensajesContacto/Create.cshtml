@@ -30,7 +30,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="IdLocal" class="control-label"></label>
-                <input asp-for="IdLocal" class="form-control" />
+                <select asp-for="IdLocal" class="form-control" asp-items="@ViewBag.idLocal"></select>
                 <span asp-validation-for="IdLocal" class="text-danger"></span>
             </div>
             <div class="form-group">

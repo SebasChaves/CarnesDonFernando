@@ -11,6 +11,20 @@ namespace FrontEnd.Controllers
         ProductoHelper productoHelper;
         CategoriaHelper categoriaHelper = new CategoriaHelper();
 
+        private List<SelectListItem> dropdownCreate()
+        {
+            List<CategoriaViewModel> lista = categoriaHelper.GetAll();
+
+            List<SelectListItem> listaCategorias = new();
+
+            for (int i = 0; i < lista.Count; i++)
+            {
+                listaCategorias.Add(new SelectListItem { Value = lista[i].IdCategoria.ToString(), Text = lista[i].Nombre.ToString() });
+            }
+
+            return listaCategorias;
+        }
+
         // GET: ProductoController
         public ActionResult Index()
         {
@@ -35,15 +49,15 @@ namespace FrontEnd.Controllers
         {
             List<CategoriaViewModel> lista = categoriaHelper.GetAll();
 
-            List<SelectListItem> listaCategorias = new();
+           /* List<SelectListItem> listaCategorias = new();
 
             for (int i = 0; i < lista.Count; i++)
             {
                 listaCategorias.Add(new SelectListItem { Value = lista[i].IdCategoria.ToString(), Text = lista[i].Nombre.ToString() });
-            }
+            }*/
 
 
-            ViewBag.idCategorias = listaCategorias;
+            ViewBag.idCategorias = dropdownCreate();
 
 
             return View();

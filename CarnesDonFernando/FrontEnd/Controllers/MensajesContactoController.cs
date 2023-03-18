@@ -2,13 +2,27 @@
 using FrontEnd.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FrontEnd.Controllers
 {
     public class MensajesContactoController : Controller
     {
         MensajesContactoHelper mensajesContactoHelper;
+        LocalHelper localHelper = new LocalHelper();
 
+        private List<SelectListItem> dropdownCreate()
+        {
+            List<LocalViewModel> lista = localHelper.GetAll();
+
+            List<SelectListItem> listaLocales = new();
+
+            for (int i = 0; i < lista.Count; i++)
+            {
+                listaLocales.Add(new SelectListItem { Value = lista[i].IdLocal.ToString(), Text = lista[i].NombreLocal.ToString() });
+            }
+            return listaLocales;
+        }
         // GET: MensajesContactoController
         public ActionResult Index()
         {
@@ -31,7 +45,7 @@ namespace FrontEnd.Controllers
         // GET: MensajesContactoController/Create
         public ActionResult Create()
         {
-            
+            ViewBag.idLocal = dropdownCreate();
             return View();
         }
 
@@ -45,7 +59,7 @@ namespace FrontEnd.Controllers
                 mensajesContactoHelper = new MensajesContactoHelper();
                  mensajesContacto = mensajesContactoHelper.Create(mensajesContacto);
 
-                return RedirectToAction("Details", new {id=mensajesContacto.IdMensaje });
+                return RedirectToAction(nameof(Index));
             }
             catch
             {
@@ -58,7 +72,7 @@ namespace FrontEnd.Controllers
         {
             mensajesContactoHelper = new MensajesContactoHelper();
             MensajesContactoViewModel mensajesContacto = mensajesContactoHelper.Get(id);
-
+            ViewBag.idLocal = dropdownCreate();
             return View(mensajesContacto);
         }
 
@@ -71,7 +85,7 @@ namespace FrontEnd.Controllers
             {
                 MensajesContactoHelper mensajesContactoHelper = new MensajesContactoHelper();
                 mensajesContacto =mensajesContactoHelper.Edit(mensajesContacto);
-
+               
 
                 return RedirectToAction(nameof(Index));
             }

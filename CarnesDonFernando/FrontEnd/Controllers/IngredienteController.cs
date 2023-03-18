@@ -11,6 +11,19 @@ namespace FrontEnd.Controllers
         IngredienteHelper ingredienteHelper;
         RecetaHelper recetaHelper = new RecetaHelper();
 
+
+        private List<SelectListItem> dropdownCreate()
+        {
+            List<RecetaViewModel> lista = recetaHelper.GetAll();
+
+            List<SelectListItem> listaRecetas = new();
+
+            for (int i = 0; i < lista.Count; i++)
+            {
+                listaRecetas.Add(new SelectListItem { Value = lista[i].IdReceta.ToString(), Text = lista[i].NombreReceta.ToString() });
+            }
+            return listaRecetas;
+        }
         // GET: IngredienteController
         public ActionResult Index()
         {
@@ -34,17 +47,17 @@ namespace FrontEnd.Controllers
         public ActionResult Create()
         {
             ingredienteHelper = new IngredienteHelper();
-            List<RecetaViewModel> lista = recetaHelper.GetAll();            
+            /*List<RecetaViewModel> lista = recetaHelper.GetAll();            
 
             List<SelectListItem> listaRecetas = new();
           
             for (int i = 0;i<lista.Count;i++)
             {
                  listaRecetas.Add(new SelectListItem { Value = lista[i].IdReceta.ToString(), Text = lista[i].NombreReceta.ToString() });
-            }
+            }*/
 
              
-            ViewBag.idReceta = listaRecetas;
+            ViewBag.idReceta = dropdownCreate();
 
 
             return View();
@@ -73,6 +86,7 @@ namespace FrontEnd.Controllers
         {
             ingredienteHelper = new IngredienteHelper();
             IngredienteViewModel ingrediente = ingredienteHelper.Get(id);
+            ViewBag.idReceta = dropdownCreate();
 
             return View(ingrediente);
         }
