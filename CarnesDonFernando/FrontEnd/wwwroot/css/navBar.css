@@ -1,0 +1,26 @@
+﻿body {
+    font-family: Overpass, Arial;
+    font-size: 20px;
+    font-weight: bold; 
+}
+
+.itemNavbar {
+    margin-right: 50px;
+    border-radius: 8px;
+    padding-bottom: 3px !important;
+    padding-top: 4px !important;
+}
+    .itemNavbar:hover {
+        background-color: #AD2022;
+        border-radius: 8px;
+    }
+.itemDropdown {
+    font-family: Overpass, Arial;
+    font-size: 17px;
+    color: white !important;
+   
+    text-decoration-color:white;
+}
+.itemDropdown:hover {
+    background-color: #912223;
+}
