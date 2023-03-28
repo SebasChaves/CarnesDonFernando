@@ -110,15 +110,86 @@
     <div class="">
         <main role="main"  class="">
             @RenderBody()
-
+            
         </main>
+        <!--footer class="border-top footer text-muted">
+                <div class="container">
+                    &copy; 2023 - FrontEnd - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </div>
+            </footer-->
+        <footer class="text-center text-white footer" style="background-color: #AD2022;">
+            <!-- Grid container -->
+            <div class="container ">
+                <!-- Section: Social media -->
+                <div class="text-center" style="line-height:normal">
+                    <!-- Facebook -->
+                    <a class="btn  btn-link btn-floating btn-lg text-dark m-1 iconosFooter" style=" background-color:#AD2022"
+                       href="https://www.facebook.com/carnesdonfernando/"
+                       role="button" arget="_blank"
+                       data-mdb-ripple-color="dark">
+
+                        <img src="~/Imagenes/Iconos/facebook.svg" style="filter: invert(1);" />
+
+                    </a>
+
+                    <!-- Twitter -->
+                    <a class="btn btn-link btn-floating btn-lg text-dark m-1 iconosFooter" style=" background-color:#AD2022"
+                       href="https://www.instagram.com/donfernandocr/" +
+                       role="button" arget="_blank"
+                       data-mdb-ripple-color="dark">
+
+                        <img src="~/Imagenes/Iconos/instagram.svg" style="filter: invert(1)" />
+
+                    </a>
+
+                    <!-- Google -->
+                    <a class="btn btn-link btn-floating btn-lg text-dark m-1 iconosFooter" style=" background-color:#AD2022"
+                       href="https://api.whatsapp.com/send?phone=50672612983"
+                       role="button" arget="_blank"
+                       data-mdb-ripple-color="dark">
+
+                        <img src="~/Imagenes/Iconos/whatsapp.svg" style="filter: invert(1)" />
+
+                    </a>
+
+
+                </div>
+                <div class="text-center" style="line-height:normal">
+                    <!-- Facebook -->
+                    <a class="btn btn-link btn-floating btn-lg m-1 menuFooter" style=" background-color:#AD2022"
+                       role="button" arget="_blank"
+                       data-mdb-ripple-color="dark">
+                        Inicio
+                    </a>
+
+                    <!-- Twitter -->
+                    <a class="btn btn-link btn-floating btn-lg text-dark m-1 menuFooter" style=" background-color:#AD2022"
+                       role="button" arget="_blank"
+                       data-mdb-ripple-color="dark">
+                        Nosotros
+                    </a>
+
+                    <a class="btn btn-link btn-floating btn-lg text-dark m-1 menuFooter" style=" background-color:#AD2022"
+                       role="button" arget="_blank"
+                       data-mdb-ripple-color="dark">
+                        Contacto
+                    </a>
+
+
+                </div>
+
+                <!-- Section: Social media -->
+            </div>
+            <!-- Grid container -->
+            <!-- Copyright -->
+            <div class="text-center menuFooter" style="">
+                <p style=" font-weight: normal; line-height:normal">Copyright © @DateTime.Now.Year Carnes Don Fernando</p>
+            </div>
+            <!-- Copyright -->
+        </footer>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - FrontEnd - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

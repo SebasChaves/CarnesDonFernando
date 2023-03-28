@@ -1,8 +1,10 @@
 ﻿body {
     font-family: Overpass, Arial;
     font-size: 20px;
-    font-weight: bold; 
+    font-weight: bold;
+    /**/
 }
+
 
 .itemNavbar {
     margin-right: 50px;
@@ -23,4 +25,155 @@
 }
 .itemDropdown:hover {
     background-color: #912223;
+}
+
+.search-text {
+    margin-top: 50px;
+    background-color: #7dabdb;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+    .search-text .input-search {
+        height: 45px;
+        width: 400px;
+        padding-left: 20px;
+        color: #333;
+    }
+
+    .search-text .btn-search {
+        background-color: #7dabdb;
+        border: 1px solid #FFF;
+        color: #FFF;
+        padding: 11px 22px;
+    }
+
+        .search-text.btn-search:hover {
+            background-color: #FFF;
+            color: #7dabdb;
+        }
+
+.copyright {
+    background-color: #f0f0f0;
+}
+
+    .copyright p {
+        margin: 20px 0px;
+    }
+
+footer {
+    background-color: #AD2022;
+    padding: 15px 0px;
+    /**/
+   
+}
+
+    footer .menu li a {
+        color: white;
+        padding: 10px;
+        text-decoration: none;
+    }
+
+        footer .menu li a:hover {
+            color: #222222;
+        }
+
+.iconosFooter {
+    background-color: #AD2022 !important;
+    margin-bottom: 0px !important;
+    padding-bottom: 0px !important;
+}
+.menuFooter {
+    color: white !important;
+    /*padding: 10px;*/
+    text-decoration: none;
+    font-size: 15px;
+    padding: 5px;
+    background-color: #AD2022 !important;
+}
+    a.menuFooter:hover {
+        color: #222222 !important;
+    }
+
+.fa.fa-facebook,
+.fa.fa-dropbox,
+.fa.fa-flickr,
+.fa.fa-github,
+.fa.fa-linkedin,
+.fa, fa-tumblr,
+.fa.fa-google-plus,
+.fa.fa-tumblr {
+    color: #b1aca1;
+    font-size: 20px;
+    padding: 10px;
+}
+
+    .fa.fa-facebook:hover,
+    .fa.fa-dropbox:hover,
+    .fa.fa-flickr:hover,
+    .fa.fa-github:hover,
+    .fa.fa-linkedin:hover,
+    .fa, fa-tumblr:hover,
+    .fa.fa-google-plus:hover,
+    .fa.fa-tumblr:hover {
+        color: #6794c2;
+    }
+
+.subtituloPaginaIndex {
+    font-family: 'playball', "Arial CE" !important;
+    text-align: center !important;
+    color: #AD2022;
+}
+
+
+
+/*TARJETAS index*/
+.titulosTarjetas {
+    /*Pone el titulo a las tarjetas de las carnes*/
+    font-family: Overpass Black, Arial;
+    text-align: center;
+    color: #AD2022;
+    font-size: x-large;
+}
+
+.descripcionTarjetas {
+    font-family: Overpass, Arial;
+    text-align: center;
+    color: black;
+    font-size: large;
+    font-weight:normal;
+}
+
+.card-body h6 {
+    font-family: Overpass Black, Arial;
+    text-align: center;
+    color: black;
+    font-size: large;
+}
+
+a.btn {
+    color: white;
+    background-color: #AD2022;
+    border-radius: 7px !important;
+}
+
+    a.btn:hover {
+        color: white !important;
+        background-color: #222222;
+    }
+
+.tarjetasProdDest {
+    /* margin-left: 40px;
+    margin-right: 40px;*/
+    margin: 10px;
+}
+
+.card {
+    border: none;
+}
+
+.subtituloPaginaIndex {
+    font-family: 'playball', "Arial CE" !important;
+    text-align: center !important;
+    color: #AD2022;
 }
