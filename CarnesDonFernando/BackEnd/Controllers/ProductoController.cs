@@ -81,7 +81,23 @@ namespace BackEnd.Controllers
         }
 
 
+        // GET api/<ProductoController>/5
+        [HttpGet("int2/{id}")]
+        public JsonResult GetProductos(int id)
+        {
+            IEnumerable<Producto> productos = productoDAL.GetAll();
+            List<ProductoModel> lista = new List<ProductoModel>();
 
+            foreach (var producto in productos)
+            {
+                if (producto.IdCategoria==id)
+                {
+                    lista.Add(Convertir(producto));
+                }
+            }
+
+            return new JsonResult(lista);
+        }
         // POST api/<ProductoController>
         [HttpPost]
         public JsonResult Post([FromBody] ProductoModel producto)

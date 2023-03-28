@@ -42,6 +42,19 @@ namespace FrontEnd.Helpers
 
             return Producto;
         }
+        public List<ProductoViewModel> GetProductos(int id)
+        {
+            List<ProductoViewModel> lista;
+
+
+            HttpResponseMessage responseMessage = ServiceRepository.GetResponse("api/Producto/int2/" + id.ToString());
+            var content = responseMessage.Content.ReadAsStringAsync().Result;
+            lista = JsonConvert.DeserializeObject<List<ProductoViewModel>>(content);
+
+
+
+            return lista;
+        }
 
 
         public ProductoViewModel Create(ProductoViewModel producto)

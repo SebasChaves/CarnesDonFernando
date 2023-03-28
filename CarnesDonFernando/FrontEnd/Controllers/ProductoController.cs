@@ -30,8 +30,8 @@ namespace FrontEnd.Controllers
         {
 
             productoHelper = new ProductoHelper();
-            List<ProductoViewModel> lista = productoHelper.GetAll();
-
+            List<ProductoViewModel> lista = productoHelper.GetProductos(id);
+            
             return View(lista);
         }
 
