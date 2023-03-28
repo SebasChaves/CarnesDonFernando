@@ -80,6 +80,8 @@ namespace BackEnd.Controllers
             return new JsonResult(Convertir(producto));
         }
 
+
+
         // POST api/<ProductoController>
         [HttpPost]
         public JsonResult Post([FromBody] ProductoModel producto)

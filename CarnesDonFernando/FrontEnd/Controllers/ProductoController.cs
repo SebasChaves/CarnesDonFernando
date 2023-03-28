@@ -26,7 +26,7 @@ namespace FrontEnd.Controllers
         }
 
         // GET: ProductoController
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
 
             productoHelper = new ProductoHelper();

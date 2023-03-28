@@ -67,14 +67,14 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-center">
                     <ul class="navbar-nav  mb-2 mb-lg-0 text-al">
                         <li class="nav-item" id="menuInicial">
-                            @Html.ActionLink("Nosotros", "Index", "Categoria",null, new { @class = "itemNavbar nav-link active" })                            
+                            @Html.ActionLink("Nosotros", "Index", "Nosotros",null, new { @class = "itemNavbar nav-link active" })                            
                         </li>                        
                         <li class="nav-item dropdown" id="menuInicial">
                             <a class="itemNavbar active nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-hover="dropdown">
                                 Comprar
                             </a>                            
                             <ul class="dropdown-menu " style="background-color: #AD2022;" id="menuDrop" aria-labelledby="navbarDropdown">
-                                <li>@Html.ActionLink("Corte de Res", "Index", "Categoria",null, new { @class = "itemDropdown text-center dropdown-item" })</li>
+                                <li>@Html.ActionLink("Corte de Res", "Index", "Producto",new { id=1 }, new { @class = "itemDropdown text-center dropdown-item" })</li>
                                 <li>@Html.ActionLink("Corte de Pollo", "Index", "Categoria",null, new { @class = "itemDropdown text-center dropdown-item" })</li>
                                 <li>@Html.ActionLink("Corte de Cerdo", "Index", "Categoria",null, new { @class = "itemDropdown text-center dropdown-item" })</li>
                                 <li>@Html.ActionLink("Productos Varios", "Index", "Categoria",null, new { @class = "itemDropdown text-center dropdown-item" })</li>
@@ -85,7 +85,7 @@
                             @Html.ActionLink("Tiendas", "Index", "Categoria",null, new { @class = "itemNavbar nav-link active" })
                         </li>
                         <li class="nav-item" id="menuInicial">
-                            @Html.ActionLink("Contacto", "Index", "Categoria",null, new { @class = "itemNavbar nav-link active" })
+                            @Html.ActionLink("Contacto", "Index", "Contacto",null, new { @class = "itemNavbar nav-link active" })
                         </li>
                         
                         <li class="nav-item" id="menuInicial">
