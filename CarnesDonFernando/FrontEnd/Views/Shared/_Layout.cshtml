@@ -67,29 +67,29 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-center">
                     <ul class="navbar-nav  mb-2 mb-lg-0 text-al">
                         <li class="nav-item" id="menuInicial">
-                            <a id="" class="nav-link active itemNavbar" aria-current="page" href="http://localhost/proyectoPrograTres-1.0-SNAPSHOT/faces/nosotros.xhtml">Nosotros</a>
-                        </li>
+                            @Html.ActionLink("Nosotros", "Index", "Categoria",null, new { @class = "itemNavbar nav-link active" })                            
+                        </li>                        
                         <li class="nav-item dropdown" id="menuInicial">
                             <a class="itemNavbar active nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-hover="dropdown">
                                 Comprar
-                            </a>
+                            </a>                            
                             <ul class="dropdown-menu " style="background-color: #AD2022;" id="menuDrop" aria-labelledby="navbarDropdown">
-                                <li><a class=" itemDropdown  text-center dropdown-item" href="http://localhost/proyectoPrograTres-1.0-SNAPSHOT/faces/catalogo.xhtml?id=1">Corte de Res</a></li>
-                                <li><a class="itemDropdown  text-center  dropdown-item " href="http://localhost/proyectoPrograTres-1.0-SNAPSHOT/faces/catalogo.xhtml?id=3">Corte de Pollo</a></li>
-                                <li><a class=" itemDropdown  text-center dropdown-item " href="http://localhost/proyectoPrograTres-1.0-SNAPSHOT/faces/catalogo.xhtml?id=2">Corte de Cerdo</a></li>
-                                <li><a class=" itemDropdown  text-center dropdown-item " href="http://localhost/proyectoPrograTres-1.0-SNAPSHOT/faces/catalogo.xhtml?id=4">Productos Varios</a></li>
+                                <li>@Html.ActionLink("Corte de Res", "Index", "Categoria",null, new { @class = "itemDropdown text-center dropdown-item" })</li>
+                                <li>@Html.ActionLink("Corte de Pollo", "Index", "Categoria",null, new { @class = "itemDropdown text-center dropdown-item" })</li>
+                                <li>@Html.ActionLink("Corte de Cerdo", "Index", "Categoria",null, new { @class = "itemDropdown text-center dropdown-item" })</li>
+                                <li>@Html.ActionLink("Productos Varios", "Index", "Categoria",null, new { @class = "itemDropdown text-center dropdown-item" })</li>
                             </ul>
                         </li>
 
                         <li class="nav-item" id="menuInicial">
-                            <a class="itemNavbar active nav-link" id="" href="http://localhost/proyectoPrograTres-1.0-SNAPSHOT/faces/catalogoInformativo.xhtml">Tiendas</a>
+                            @Html.ActionLink("Tiendas", "Index", "Categoria",null, new { @class = "itemNavbar nav-link active" })
                         </li>
                         <li class="nav-item" id="menuInicial">
-                            <a id="" class="itemNavbar nav-link active" aria-current="page" href="http://localhost/proyectoPrograTres-1.0-SNAPSHOT/faces/contacto.xhtml">Contacto</a>
+                            @Html.ActionLink("Contacto", "Index", "Categoria",null, new { @class = "itemNavbar nav-link active" })
                         </li>
                         
                         <li class="nav-item" id="menuInicial">
-                            <a id="" class="itemNavbar nav-link active" aria-current="page" href="http://localhost/proyectoPrograTres-1.0-SNAPSHOT/faces/restaurantes.xhtml">Restaurantes</a>
+                            @Html.ActionLink("Restaurantes", "Index", "Categoria",null, new { @class = "itemNavbar nav-link active" })
                         </li>
                     </ul>
                 </div>

@@ -13,7 +13,7 @@
     padding-top: 4px !important;
 }
     .itemNavbar:hover {
-        background-color: #AD2022;
+        background-color: #AD2022 !important;
         border-radius: 8px;
     }
 .itemDropdown {
