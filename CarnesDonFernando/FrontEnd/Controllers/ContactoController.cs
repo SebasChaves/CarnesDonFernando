@@ -56,19 +56,21 @@ namespace FrontEnd.Controllers
         }
 
         [HttpPost]
-        public void Create(MensajesContactoViewModel mensajesContacto)
+        public IActionResult Create(MensajesContactoViewModel mensajesContacto)
         {
             try
             {
                 mensajesContactoHelper = new MensajesContactoHelper();
                 mensajesContacto = mensajesContactoHelper.Create(mensajesContacto);
                 ViewBag.isConfirm = true;
-                 //return RedirectToAction(nameof(Index));
+                Thread.Sleep(5000);
+
+                return RedirectToAction(nameof(Index));
                 //return View();
             }
             catch
             {
-               // return View();
+                return View();
             }
         }
     }

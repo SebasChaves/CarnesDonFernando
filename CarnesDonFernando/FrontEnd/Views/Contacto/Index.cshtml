@@ -2,14 +2,9 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<h1 class="display-4 text-center tituloPagina">Visitenos</h1>
-<br />
+
+<h1 class="display-4 text-center tituloPaginaIndex" style="margin-top: 200px;">Contacto</h1>
+
 <div class="container-fluid">
     <div class="row g-0 bg-light position-relative vinculoDonFer">
 
@@ -61,7 +56,7 @@
 
                 <div class="form-group">
                     <label asp-for="NombrePersona" class="control-label"></label>
-                    <input asp-for="NombrePersona" class="form-control text-center" style="margin-bottom: 15px"/>
+                    <input asp-for="NombrePersona" required class="form-control text-center" style="margin-bottom: 15px"/>
                     <span asp-validation-for="NombrePersona" class="text-danger msjError"></span>
                 </div>
                 <div class="form-group">
@@ -71,8 +66,8 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Telefono" class="control-label"></label>
-                    <input asp-for="Telefono" class="form-control text-center" style="margin-bottom: 15px" />
-                    <span asp-validation-for="Telefono" class="text-danger msjError"></span>
+                    <input asp-for="Telefono" id="Telefono" class="form-control text-center" style="margin-bottom: 15px" />
+                    <span asp-validation-for="Telefono" id="Telefono-validation" class="text-danger msjError"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="IdLocal" class="control-label"></label>
@@ -81,7 +76,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Mensaje" class="control-label"></label>
-                    <textarea asp-for="Mensaje" class="form-control " style="margin-bottom: 15px" ></textarea>
+                    <textarea  asp-for="Mensaje" required class="form-control " style="margin-bottom: 15px" ></textarea>
                     <span asp-validation-for="Mensaje"  class="text-danger msjError"></span>
                 </div>
                 <div class="form-group">
@@ -93,40 +88,24 @@
     </div>
    
 </div>
-@if (ViewBag.isConfirm is not null)
-{
-    if (ViewBag.isConfirm)
-    {
-        <div id="success-message" class="success-message hidden">
-            <i class="fa fa-check-circle"></i>
-            <span>¡Formulario enviado con éxito!</span>
-        </div>
-    }
-    
-}
 
+<div id="success-message" class="success-message hidden">
+    <i class="fa fa-check-circle"></i>
+    <span>¡El mensaje se envio con exito!</span>
+</div>
 <script>
-    // Obtener el formulario y escuchar el evento de envío
-   /* const form = document.querySelector('#formularioMio');
-    form.addEventListener('submit', function (event) {
-        event.preventDefault();
-
-        // Si el formulario es válido, mostrar el mensaje de éxito
-        if (form.checkValidity()) {
-            const successMessage = document.querySelector('#success-message');
-            successMessage.classList.add('show');
-            setTimeout(() => {
-                successMessage.classList.remove('show');
-            }, 3000);
-        }
-    });*/  
+    
     const correoInput = document.getElementById('Correo');
     const correoValidation = document.getElementById('Correo-validation');   
+
+
+    const telefonoInput = document.getElementById('Telefono');
+    //alert(telefonoInput);
     document.querySelector('#formularioMio').addEventListener('submit', (event) => {
     
         if (formularioMio.checkValidity()) {
            
-            //alert("Entro");
+                
             const successMessage = document.querySelector('#success-message');
             successMessage.classList.add('show');
             setTimeout(() => {
