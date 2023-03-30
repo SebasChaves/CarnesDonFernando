@@ -4,84 +4,56 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
-<p>
+
+<!--p>
     <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IdCategoria)
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.IdProducto)
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-
-             <th>
-                @Html.DisplayNameFor(model => model.Precio)
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.DescripcionProductoLarga)
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.DescripcionProductoCorta)
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.Cantidad)
-            </th>
-
-           
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                    @Html.DisplayFor(modelItem => item.IdCategoria)
-            </td>
-
-            <td>
-                    @Html.DisplayFor(modelItem => item.IdProducto)
-            </td>
-
-            <td>
-                    @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-
-              <td>
-                    @Html.DisplayFor(modelItem => item.Precio)
-            </td>
-
-            <td>
-                    @Html.DisplayFor(modelItem => item.DescripcionProductoLarga)
-            </td>
-
-            <td>
-                    @Html.DisplayFor(modelItem => item.DescripcionProductoCorta)
-            </td>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cantidad)
-                </td>
-          
-            <td>
-                    @Html.ActionLink("Edit", "Edit", new { id=item.IdProducto }) |
-                    @Html.ActionLink("Details", "Details", new {  id=item.IdProducto }) |
-                    @Html.ActionLink("Delete", "Delete", new { id=item.IdProducto })
-            </td>
-        </tr>
+</p-->
+@if(Model.Count() != 0)
+{
+    if (Model.First().IdCategoria == 1)
+    {
+        <h1 class="display-4 text-center tituloPaginaIndex" style="margin-top: 200px;">Cortes de res</h1>
+    }
+    else if (Model.First().IdCategoria == 2)
+    {
+        <h1 class="display-4 text-center tituloPaginaIndex" style="margin-top: 200px;">Cortes de cerdo</h1>
+    }
+    else if (Model.First().IdCategoria == 3)
+    {
+        <h1 class="display-4 text-center tituloPaginaIndex" style="margin-top: 200px;">Cortes de pollo</h1>
+    }
+    else if (Model.First().IdCategoria == 4)
+    {
+        <h1 class="display-4 text-center tituloPaginaIndex" style="margin-top: 200px;">Productos Varios</h1>
+    }
+    else
+    {
+        <h1 class="display-4 text-center tituloPaginaIndex" style="margin-top: 200px;">Cortes de cerdo</h1>
+    }
 }
-    </tbody>
-</table>
+
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        @foreach (var item in Model)
+        {
+            <div class="card tarjetasProdDest col-md-4" style="width: 23rem;">
+                <img src="@Url.Content(@item.UrlImg)" class="card-img-top " alt="" />
+                <div class="card-body text-center">
+                    <h5 class="card-title titulosTarjetas">@Html.DisplayFor(modelItem => item.Nombre)</h5>
+                    <p class="card-text descripcionTarjetas">@Html.DisplayFor(modelItem => item.DescripcionProductoCorta)</p>
+                    <h6 class="card-text">
+                        ₡@Html.DisplayFor(modelItem => item.Precio)
+                        <img class="" width="20" height="18" src="~/Imagenes/Iconos/tag-fill.svg" />
+                    </h6>
+                    <a href="http://localhost/proyectoPrograTres-1.0-SNAPSHOT/faces/compraProducto.xhtml?id_product=1&amp;id_cata=2" class="btn">Ver Productos</a>
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
+<br />
+<br />
+<br />
