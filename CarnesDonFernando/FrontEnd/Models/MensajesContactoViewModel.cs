@@ -6,24 +6,26 @@ namespace FrontEnd.Models
     {
         public int IdMensaje { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Debe especificar un nombre")]
         [Display(Name = "Nombre de la persona")]
         [StringLength(50)]
         public string NombrePersona { get; set; } = null!;
 
-        [StringLength(50)]
-        [EmailAddress]
+        [Required(ErrorMessage = "Debe especificar un correo")]
+        [EmailAddress(ErrorMessage = "Debe especificar un correo valido")]
         public string? Correo { get; set; }
 
-        [StringLength(50)]
-        [Phone]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Solo se permiten números en este campo.")]
+        [StringLength(8, ErrorMessage = "Debe especificar un telefono valido")]
+        [Phone(ErrorMessage = "Debe especificar un telefono valido")]
+        [MinLength(8,ErrorMessage = "Debe especificar un telefono valido")]
         public string? Telefono { get; set; }
 
         [Required]
-        [Display(Name = "Id del local")]
+        [Display(Name = "Nombre del local")]
         public int IdLocal { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Debe especificar un mensaje")]
         [StringLength(500)]
         public string Mensaje { get; set; } = null!;
 

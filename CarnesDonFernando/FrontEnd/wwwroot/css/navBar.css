@@ -373,8 +373,32 @@ contenedorNosotros p {
     }
 
 
+    /*CONTACTO*/
+   .msjError{
+        font-weight:normal;
+        font-size:15px;
+   }
 
-   
+
+
+.success-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #c1e1c5;
+    color: #5f8c5f;
+    padding: 10px 20px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+}
+
+    .success-message.show {
+        opacity: 1;
+    }
 
 
   
