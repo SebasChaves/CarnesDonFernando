@@ -187,6 +187,18 @@ a.btn {
     border: none;
 }
 
+
+.btnCatalogo {
+    color: white;
+    background-color: #AD2022;
+    border-radius: 7px !important;
+}
+
+    .btnCatalogo:hover {
+        color: white !important;
+        background-color: #222222;
+    }
+
 /*.subtituloPaginaIndex {
     font-family: 'playball', "Arial CE" !important;
     text-align: center !important;
@@ -312,4 +324,70 @@ contenedorNosotros p {
         float: none;
     }
 }
+
+/*Comprar producto*/
+
+.tituloProductoCompra {
+    color: #AD2022;
+    font-weight: bold;
+    font-size: 45px;
+}
+
+.subtituloProductoCompra {
+    font-weight: bold;
+    font-size: 23px;
+}
+
+.textoProductoCompra{
+    font-weight: normal;
+}
+.imagenProducto{
+    margin:0px !important;
+}
+
+.selectCantidad {
+    border-color: #AD2022;
+    border-width: 2.5px;
+    color: #AD2022;
+    font-weight: bold;
+}
+/*PRUEBAS*/
+.zoom-container {
+    overflow: hidden;
+    position: relative;
+    width: 500px;
+    height: 390px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+    .zoom-container img {
+        display: block;
+        width: 100%;
+        height: auto;
+        transition: transform 0.1s;
+    }
+
+    .zoom-container:hover img {
+        transform: scale(1.2);
+    }
+
+
+
+   
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
 

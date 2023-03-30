@@ -1,0 +1,159 @@
+﻿@model FrontEnd.Models.ProductoViewModel
+
+@{
+    ViewData["Title"] = "compraProducto";
+}
+
+
+
+<!--div>
+    <h4>ProductoViewModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdCategoria)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdCategoria)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdProducto)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdProducto)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Precio)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Precio)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DescripcionProductoLarga)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DescripcionProductoLarga)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DescripcionProductoCorta)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DescripcionProductoCorta)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cantidad)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cantidad)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.UrlImg)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.UrlImg)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div-->
+
+
+
+ 
+<div class="row g-0  position-relative compraProduc" style="margin-top: 200px;">
+    <div class="zoom-container">
+        <img src="@Url.Content(@Model.UrlImg)" alt="Tu imagen">
+    </div>
+    <script>
+        const zoomContainers = document.querySelectorAll('.zoom-container');
+
+        zoomContainers.forEach((container) => {
+            container.addEventListener('mousemove', (e) => {
+                const image = container.querySelector('img');
+                const rect = container.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const dx = (x - centerX) / centerX;
+                const dy = (y - centerY) / centerY;
+                const transformValue = `scale(1.8) translate(${dx * 50}px, ${dy * 50}px)`;
+                image.style.transform = transformValue;
+            });
+
+            container.addEventListener('mouseleave', (e) => {
+                const image = container.querySelector('img');
+                image.style.transform = 'scale(1)';
+            });
+        });
+
+
+
+    </script>
+    <div class="col-md-4 p-0 ps-md-0">
+        <h5 class="mt-0 tituloProductoCompra">@Html.DisplayFor(model => model.Nombre)</h5>
+        <p class="textoProductoCompra">
+            @Html.DisplayFor(model => model.DescripcionProductoLarga)
+        </p>
+        <h6 class="subtituloProductoCompra">UNIDAD DE MEDIDA</h6>
+        <p class="textoProductoCompra">@Html.DisplayFor(model => model.DescripcionProductoCorta)</p>
+
+        <h6 class="subtituloProductoCompra">PRECIO UNIDAD</h6>        
+        <p class="textoProductoCompra" id="">₡@Html.DisplayFor(model => model.Precio)</p>
+        <h6 class="subtituloProductoCompra">CANTIDAD</h6>
+        <div class="col-2 p-0">
+            <input type="number" id="cantidadProducto"
+                   class="form-control m-0 selectCantidad"
+                   name="quantity" value="" title="Cantidad" size="2" placeholder="1" inputmode="numeric" min="1" max="@Model.Cantidad" />
+        </div>
+        <br />
+        <h6 class="subtituloProductoCompra">PRECIO TOTAL</h6>
+        <p class="textoProductoCompra" id="result">₡@Html.DisplayFor(model => model.Precio)</p>
+        <br />
+        <div class="btnComprar">
+
+            <a href="http://localhost/proyectoPrograTres-1.0-SNAPSHOT/faces/pago.xhtml?id_product=#{tarjeta.idProducto}&amp;id_cata=#{compraProducto.idCatalogo}&amp;cant=#{compraProducto.cantidadProduct}"
+               onclick="getDatos()" class="btn btnProducto">Confirmar Compra</a>
+
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <p hidden id="precioProducto">@Html.DisplayFor(model => model.Precio)</p>
+       
+        
+        <script>
+
+            const myInput = document.getElementById("precioProducto");
+            const cantidad = document.getElementById("cantidadProducto");
+            const precioProducto = myInput.textContent;
+
+
+            cantidad.addEventListener("change", function () {
+                ;
+                const precioProductoValue = @Html.DisplayFor(model => model.Precio);
+                const cantidadProductoValue = parseFloat(cantidad.value);
+                //alert(precioProductoValue)
+                const multiplicacion = cantidadProductoValue * precioProductoValue; 
+                result.textContent = `₡${multiplicacion}`;
+            });
+
+        </script>
+
+   
+    </div>
+</div>
+
+
+

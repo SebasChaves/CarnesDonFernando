@@ -47,7 +47,7 @@
                         ₡@Html.DisplayFor(modelItem => item.Precio)
                         <img class="" width="20" height="18" src="~/Imagenes/Iconos/tag-fill.svg" />
                     </h6>
-                    <a href="http://localhost/proyectoPrograTres-1.0-SNAPSHOT/faces/compraProducto.xhtml?id_product=1&amp;id_cata=2" class="btn">Ver Productos</a>
+                    @Html.ActionLink("Ver productos", "CompraProducto", "Producto",new { id=item.IdProducto }, new { @class = "btnCatalogo btn"})
                 </div>
             </div>
 

@@ -136,5 +136,13 @@ namespace FrontEnd.Controllers
                 return View();
             }
         }
+
+        public ActionResult CompraProducto(int id)
+        {
+            productoHelper = new ProductoHelper();
+            ProductoViewModel producto = productoHelper.Get(id);
+
+            return View(producto);
+        }
     }
 }
