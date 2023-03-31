@@ -403,8 +403,21 @@ contenedorNosotros p {
 
   
 
+    /*TIENDAS*/
+.tarjetasCatalogoInfo {
+    margin: 40px;
+    color: white;
+}
 
+    .tarjetasCatalogoInfo h5 {
+        font-family: Playball, "Arial CE" !important;
+        font-size: 32px;
+    }
 
+    .tarjetasCatalogoInfo p {
+        font-size: 18px;
+        font-family: Overpass, Arial;
+    }
 
 
 
