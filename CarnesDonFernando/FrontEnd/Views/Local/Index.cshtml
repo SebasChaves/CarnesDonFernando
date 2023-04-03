@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+
 
 <!--p>
     <a asp-action="Create">Create New</a>
@@ -90,7 +90,7 @@
                         <h5 class="card-title"> @Html.DisplayFor(modelItem => item.NombreLocal)</h5>
                         <p class="card-text"> @Html.DisplayFor(modelItem => item.Ubicacion)</p>
                         <p class="card-text"> @Html.DisplayFor(modelItem => item.Telefono)</p>
-                        <p class="card-text"> @Html.DisplayFor(modelItem => item.Horario))</p>
+                        <p class="card-text"> @Html.DisplayFor(modelItem => item.Horario)</p>
                     </div>
                 <img src="@Url.Content(@item.UrlImg)" class="card-img-top" />
                 </div>

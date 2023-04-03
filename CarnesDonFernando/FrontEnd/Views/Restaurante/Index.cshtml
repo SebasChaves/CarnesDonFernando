@@ -4,56 +4,48 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IdRestaurante)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NombreRestaurante)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ubicacion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Horario)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UrlImg)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdRestaurante)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreRestaurante)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ubicacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Horario)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UrlImg)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new {  id=item.IdRestaurante  }) |
-                    @Html.ActionLink("Details", "Details", new { id=item.IdRestaurante }) |
-                    @Html.ActionLink("Delete", "Delete", new { id=item.IdRestaurante })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<h1 class="display-4 text-center tituloPaginaIndex" style="margin-top: 200px;">Restaurante</h1>
+
+
+<div class="container-fluid">
+    <div class="row g-0 bg-light position-relative vinculoDonFer">
+
+        <div class="col-md-6 p-4 ps-md-0">
+            <h5 class="card-title subTituloResta subtituloPaginaIndex subTituloNosotros">Disfrute de exquisitos platillos</h5>
+            <p>
+                En el restaurante Don Fernando disfrutará de una experiencia gastronómica para todos los gustos, gracias a la variedad de platillos
+                y cortes de carne que son preparados cuidadosamente por expertos parrilleros. Además, encontrará el ambiente ideal para compartir
+                un rato agradable y saborear carne 100% costarricense, libre de hormonas, antibióticos y aditivos.
+            </p>
+        </div>
+        <div class="col-md-6 mb-md-0 p-md-4">
+            <img src="~/Imagenes/imgNosotros/finca-carbono-neutro.jpg" class="w-100" style="max-width: 600px" />
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col">
+
+                <div class="card  tarjetasCatalogoInfo" style="max-width: 350px">
+
+                    <div class="card-body" style="background-color: #B32C2F">
+                        <h5 class="card-title"> @Html.DisplayFor(modelItem => item.NombreRestaurante)</h5>
+                        <p class="card-text"> @Html.DisplayFor(modelItem => item.Ubicacion)</p>
+                        <p class="card-text"> @Html.DisplayFor(modelItem => item.Telefono)</p>
+                        <p class="card-text"> @Html.DisplayFor(modelItem => item.Horario)</p>
+                    </div>
+                    <img src="@Url.Content(@item.UrlImg)" class="card-img-top" />
+                </div>
+
+            </div>
+        }
+    </div>
+</div>
+<br />
+<br />
+<br />
