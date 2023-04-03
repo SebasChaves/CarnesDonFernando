@@ -14,6 +14,7 @@ namespace FrontEnd.Models
         public string Horario { get; set; } = null!;
         [Required]
         public string UrlImg { get; set; } = null!;
+        public string Telefono { get; set; } = null!;
 
     }
 }

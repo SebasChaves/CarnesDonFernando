@@ -36,7 +36,8 @@ namespace BackEnd.Controllers
                     Horario = model.Horario,
                     NombreLocal = model.NombreLocal,
                     Ubicacion = model.Ubicacion,
-                    UrlImg = model.UrlImg
+                    UrlImg = model.UrlImg,
+                    Telefono = model.Telefono
                 };
             }
         }
@@ -54,7 +55,8 @@ namespace BackEnd.Controllers
                     Horario = model.Horario,
                     NombreLocal = model.NombreLocal,
                     Ubicacion = model.Ubicacion,
-                    UrlImg = model.UrlImg
+                    UrlImg = model.UrlImg,
+                    Telefono = model.Telefono
                 };
             }
         }

@@ -132,6 +132,11 @@ namespace Entities
                     .HasMaxLength(50)
                     .IsUnicode(false)
                     .HasColumnName("urlImg");
+
+                entity.Property(e => e.Telefono)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("telefono");
             });
 
             modelBuilder.Entity<MensajesContacto>(entity =>
@@ -273,6 +278,12 @@ namespace Entities
                     .HasMaxLength(50)
                     .IsUnicode(false)
                     .HasColumnName("urlImg");
+
+                entity.Property(e => e.Telefono)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("telefono");
+
             });
 
             modelBuilder.Entity<Usuario>(entity =>

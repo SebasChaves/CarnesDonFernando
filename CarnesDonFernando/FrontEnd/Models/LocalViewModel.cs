@@ -25,5 +25,6 @@ namespace FrontEnd.Models
         [Required]
         [StringLength(50)]
         public string UrlImg { get; set; } = null!;
+        public string Telefono { get; set; } = null!;
     }
 }

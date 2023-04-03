@@ -58,10 +58,9 @@
     </tbody>
 </table-->
 
-<h1 class="display-4 text-center subTitulosPagPrinci">Restaurantes</h1>
+<h1 class="display-4 text-center tituloPaginaIndex" style="margin-top: 200px;">Tiendas</h1>
 
-<br />
-<br />
+
 <div class="container-fluid">
     <div class="row g-0 bg-light position-relative vinculoDonFer">
 
@@ -81,19 +80,25 @@
 
 <div class="container-fluid">
     <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var item in Model)
+        {
             <div class="col">
 
                 <div class="card  tarjetasCatalogoInfo" style="max-width: 350px">
 
                     <div class="card-body" style="background-color: #B32C2F">
-                        <h5 class="card-title">Nombre</h5>
-                        <p class="card-text">Ubicacion</p>
-                        <p class="card-text">Telefono</p>
-                        <p class="card-text">Horario</p>
+                        <h5 class="card-title"> @Html.DisplayFor(modelItem => item.NombreLocal)</h5>
+                        <p class="card-text"> @Html.DisplayFor(modelItem => item.Ubicacion)</p>
+                        <p class="card-text"> @Html.DisplayFor(modelItem => item.Telefono)</p>
+                        <p class="card-text"> @Html.DisplayFor(modelItem => item.Horario))</p>
                     </div>
-                    <img src="~/Imagenes/imgCatalogoInfo/tienda_escazu.jpg" class="card-img-top" />
+                <img src="@Url.Content(@item.UrlImg)" class="card-img-top" />
                 </div>
 
             </div>
+        }
     </div>
 </div>
+<br />
+<br />
+<br />

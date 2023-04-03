@@ -10,5 +10,6 @@ namespace Entities
         public string Ubicacion { get; set; } = null!;
         public string Horario { get; set; } = null!;
         public string UrlImg { get; set; } = null!;
+        public string Telefono { get; set; } = null!;
     }
 }
