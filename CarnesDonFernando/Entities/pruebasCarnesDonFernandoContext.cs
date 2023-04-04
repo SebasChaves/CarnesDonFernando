@@ -18,7 +18,8 @@ namespace Entities
             : base(options)
         {
         }
-
+        public virtual DbSet<Carrito> Carritos { get; set; } = null!;
+        public virtual DbSet<CarritoItem> CarritoItems { get; set; } = null!;
         public virtual DbSet<Categoria> Categorias { get; set; } = null!;
         public virtual DbSet<DetalleOrden> DetalleOrdens { get; set; } = null!;
         public virtual DbSet<Ingrediente> Ingredientes { get; set; } = null!;
@@ -42,6 +43,58 @@ namespace Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Carrito>(entity =>
+            {
+                entity.HasKey(e => e.IdCarrito)
+                    .HasName("PK__Carrito__83A2AD9C9A106C49");
+
+                entity.ToTable("Carrito");
+
+                entity.Property(e => e.IdCarrito).HasColumnName("id_carrito");
+
+                entity.Property(e => e.FechaCreado)
+                    .HasColumnType("datetime")
+                    .HasColumnName("fecha_creado");
+
+                entity.Property(e => e.IdUsuario).HasColumnName("id_usuario");
+
+                entity.HasOne(d => d.IdUsuarioNavigation)
+                    .WithMany(p => p.Carritos)
+                    .HasForeignKey(d => d.IdUsuario)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Carrito__id_usua__66603565");
+            });
+
+            modelBuilder.Entity<CarritoItem>(entity =>
+            {
+                entity.HasKey(e => e.IdCarritoItems)
+                    .HasName("PK__CarritoI__459388842E59CE49");
+
+                entity.Property(e => e.IdCarritoItems).HasColumnName("id_carritoItems");
+
+                entity.Property(e => e.Cantidad).HasColumnName("cantidad");
+
+                entity.Property(e => e.IdCarrito).HasColumnName("id_carrito");
+
+                entity.Property(e => e.IdProducto).HasColumnName("id_producto");
+
+                entity.Property(e => e.Precio)
+                    .HasColumnType("decimal(18, 2)")
+                    .HasColumnName("precio");
+
+                entity.HasOne(d => d.IdCarritoNavigation)
+                    .WithMany(p => p.CarritoItems)
+                    .HasForeignKey(d => d.IdCarrito)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__CarritoIt__id_ca__693CA210");
+
+                entity.HasOne(d => d.IdProductoNavigation)
+                    .WithMany(p => p.CarritoItems)
+                    .HasForeignKey(d => d.IdProducto)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__CarritoIt__id_pr__6A30C649");
+            });
+
             modelBuilder.Entity<Categoria>(entity =>
             {
                 entity.HasKey(e => e.IdCategoria)

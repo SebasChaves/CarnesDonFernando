@@ -1,0 +1,97 @@
+﻿@model FrontEnd.Models.ProductoCarritoViewModelCompuesto
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<br />
+<br />
+<br />
+<br />
+<h1>Index</h1>
+
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container padding-bottom-3x mb-1">
+  
+    <div class="table-responsive shopping-cart">
+        <table class="table">
+            <thead>
+                <tr style="border: hidden">
+                    <th style="border: hidden">Nombre del producto</th>
+                    <th style="border: hidden" class="text-center">Cantidad</th>
+                    <th style="border: hidden" class="text-center">Precio c/u</th>
+                    <th style="border: hidden" class="text-center">Subtotal</th>
+                    <th style="border: hidden" class="text-center"><a class="btn btn-sm btn-outline-danger" href="#">Vaciar carrito</a></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    /*
+                    foreach (var item in Model.CarritoItems)
+                    {
+                        <tr>
+                            <td>
+                                <div class="product-item">
+                                    <a class="product-thumb" href="#"><img src="@Model.Productos[1]" alt="Product"></a>
+                                    <div class="product-info">
+                                        <h4 class="product-title "><a href="#"> @Html.DisplayNameFor(model => model.Productos.Nombre)</a></h4>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="count-input">
+                                    <input type="number" class="form-control" min="1" max="@item.Cantidad" />
+                                </div>
+                            </td>
+                            <td class="text-center text-lg text-medium">₡@Html.DisplayNameFor(model => model.Productos.Precio)</td>
+                            <td class="text-center text-lg text-medium">₡@Html.DisplayFor(modelItem => item.Precio)</td>
+                            <td class="text-center"><a class="remove-from-cart" href="#" data-toggle="tooltip" title="" data-original-title="Remove item"><i class="fa fa-trash"></i></a></td>
+                        </tr>
+                    }*/
+
+                    for(int i = 0;i<Model.CarritoItems.Count();i++){
+                        <tr>
+                            <td>
+                                <div class="product-item">
+                                    <a class="product-thumb" href="#"><img src="@Url.Content(Model.Productos[i].UrlImg)" alt="Product"></a>
+                                    <div class="product-info">
+                                        <h4 class="product-title "><a href="#"> @Model.Productos[i].Nombre</a></h4>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="count-input">
+                                    <input type="number" class="form-control" min="1" value="@Model.CarritoItems[i].Cantidad" max="@Model.Productos[i].Cantidad" />
+                                </div>
+                            </td>
+                            <td class="text-center text-lg text-medium">₡@Model.Productos[i].Precio</td>
+                            <td class="text-center text-lg text-medium">₡@Model.CarritoItems[i].Precio</td>
+                            <td class="text-center"><a class="remove-from-cart" href="#" data-toggle="tooltip" title="" data-original-title="Remove item"><i class="fa fa-trash"></i></a></td>
+                        </tr>
+                    }
+                }
+                
+                
+                
+            </tbody>
+        </table>
+    </div>
+    <div class="shopping-cart-footer">
+       
+        <div class="column text-lg">Total: <span class="text-medium">$289.68</span></div>
+    </div>
+    <div class="shopping-cart-footer">
+        <div class="column"><a class="btn btn-outline-secondary" href="#"><i class="icon-arrow-left"></i>&nbsp;Back to Shopping</a></div>
+        <div class="column"><a class="btn btn-primary" href="#" data-toast="" data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Your cart" data-toast-message="is updated successfully!">Update Cart</a><a class="btn btn-success" href="#">Checkout</a></div>
+    </div>
+</div>
+
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />

@@ -8,6 +8,7 @@ namespace Entities
         public Producto()
         {
             DetalleOrdens = new HashSet<DetalleOrden>();
+            CarritoItems = new HashSet<CarritoItem>();
         }
 
         public int IdCategoria { get; set; }
@@ -21,5 +22,6 @@ namespace Entities
 
         public virtual Categoria IdCategoriaNavigation { get; set; } = null!;
         public virtual ICollection<DetalleOrden> DetalleOrdens { get; set; }
+        public virtual ICollection<CarritoItem> CarritoItems { get; set; }
     }
 }
