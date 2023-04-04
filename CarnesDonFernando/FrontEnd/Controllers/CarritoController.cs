@@ -12,10 +12,12 @@ namespace FrontEnd.Controllers
         CarritoHelper carritoHelper = new CarritoHelper();
         CarritoItemsHelper carritoItemsHelper = new CarritoItemsHelper();
 
+        int idCarritoUsuario = 0;
 
         // GET: CarritoController
         public ActionResult Index(int idUsuario)
         {
+            idCarritoUsuario = carritoHelper.SetUsuario(idUsuario).IdCarrito;
 
             carritoItemsHelper.GetCarrito(carritoHelper.SetUsuario(idUsuario).IdCarrito);
             List<CarritoItemViewModel> lista = carritoItemsHelper.GetCarrito(carritoHelper.SetUsuario(idUsuario).IdCarrito);
@@ -98,6 +100,26 @@ namespace FrontEnd.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpPost]
+        public ActionResult AgregarCarrito(int idProducto, int cantidadProducto)
+        {
+            this.idCarritoUsuario = carritoHelper.SetUsuario(1).IdCarrito;
+
+            int precioFinal = productoHelper.Get(idProducto).Precio * cantidadProducto;
+            CarritoItemViewModel model = new CarritoItemViewModel
+            {
+                IdCarrito = this.idCarritoUsuario,
+                IdProducto = idProducto,
+                Cantidad = cantidadProducto,
+                Precio = precioFinal
+            };
+
+            carritoItemsHelper.Create(model);
+
+
+            return RedirectToAction(nameof(Index), new { idUsuario = 1 });
         }
     }
 }
