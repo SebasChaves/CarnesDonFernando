@@ -33,11 +33,11 @@
 
                 <div class="card  tarjetasCatalogoInfo" style="max-width: 350px">
 
-                    <div class="card-body" style="background-color: #B32C2F">
-                        <h5 class="card-title"> @Html.DisplayFor(modelItem => item.NombreRestaurante)</h5>
-                        <p class="card-text"> @Html.DisplayFor(modelItem => item.Ubicacion)</p>
-                        <p class="card-text"> @Html.DisplayFor(modelItem => item.Telefono)</p>
-                        <p class="card-text"> @Html.DisplayFor(modelItem => item.Horario)</p>
+                    <div class="card-body" style="background-color: #D20005">
+                        <h5 class="card-title tituloTienda"> @Html.DisplayFor(modelItem => item.NombreRestaurante)</h5>
+                        <p class="card-text textoTienda"> @Html.DisplayFor(modelItem => item.Ubicacion)</p>
+                        <p class="card-text textoTienda"> @Html.DisplayFor(modelItem => item.Telefono)</p>
+                        <p class="card-text textoTienda"> @Html.DisplayFor(modelItem => item.Horario)</p>
                     </div>
                     <img src="@Url.Content(@item.UrlImg)" class="card-img-top" />
                 </div>
@@ -46,6 +46,9 @@
         }
     </div>
 </div>
+<br />
+<br />
+<br />
 <br />
 <br />
 <br />

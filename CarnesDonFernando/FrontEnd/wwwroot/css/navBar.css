@@ -404,6 +404,18 @@ contenedorNosotros p {
   
 
     /*TIENDAS*/
+.tituloTienda {
+    font-family: 'playball', "Arial CE" !important;
+    color: white;
+    font-size: 30px;
+}
+
+.textoTienda{
+    color: white;
+    font-size: 18px;
+    padding-left:18px;
+}
+/*CARRITO*/
 select.form-control {
     padding-right: 38px;
     background-position: center right 17px;
