@@ -164,6 +164,13 @@ namespace BackEnd.Controllers
         [HttpPut]
         public JsonResult Put([FromBody] CarritoItemModel carrito)
         {
+
+
+            /*
+             * Agregar codigo
+             * Que actualiza el precio final en la tabla carrito
+             */
+
             carritoDAL.Update(Convertir(carrito));
             return new JsonResult(carrito);
         }

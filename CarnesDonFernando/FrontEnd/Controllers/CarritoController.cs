@@ -145,5 +145,26 @@ namespace FrontEnd.Controllers
 
             return RedirectToAction(nameof(Index), new { idUsuario = idUsuarioSession });
         }
+
+        [HttpPost]
+        public ActionResult ActualizaCarrito(int idProducto, int cantidadProducto, int idCarritoItem)
+        {
+            this.idCarritoUsuario = carritoHelper.SetUsuario(1).IdCarrito;
+
+            int precioFinal = productoHelper.Get(idProducto).Precio * cantidadProducto;
+            CarritoItemViewModel model = new CarritoItemViewModel
+            {
+                IdCarrito = this.idCarritoUsuario,
+                IdProducto = idProducto,
+                Cantidad = cantidadProducto,
+                Precio = precioFinal,
+                IdCarritoItems = idCarritoItem
+            };
+
+            carritoItemsHelper.Edit(model);
+
+
+            return RedirectToAction(nameof(Index), new { idUsuario = idUsuarioSession });
+        }
     }
 }
