@@ -23,13 +23,14 @@ namespace FrontEnd.Controllers
             carritoItemsHelper.GetCarrito(carritoHelper.SetUsuario(idUsuario).IdCarrito);
             List<CarritoItemViewModel> lista = carritoItemsHelper.GetCarrito(carritoHelper.SetUsuario(idUsuario).IdCarrito);
             List<ProductoViewModel> productos = new List<ProductoViewModel>();
+            CarritoViewModel carritoCompuesto = carritoHelper.SetUsuario(idUsuario);
 
             foreach (var producto in lista)
             {
                 productos.Add(productoHelper.Get(producto.IdProducto));
             }
             
-            var viewModel = new ProductoCarritoViewModelCompuesto { Productos = productos, CarritoItems = lista };
+            var viewModel = new ProductoCarritoViewModelCompuesto { Productos = productos, CarritoItems = lista, Carrito = carritoCompuesto };
 
             return View(viewModel);
         }

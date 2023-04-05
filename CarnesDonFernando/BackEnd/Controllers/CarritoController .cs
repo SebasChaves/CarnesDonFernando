@@ -33,7 +33,8 @@ namespace BackEnd.Controllers
                 {
                     IdCarrito = model.IdCarrito,
                     FechaCreado = model.FechaCreado,
-                   IdUsuario = model.IdUsuario
+                   IdUsuario = model.IdUsuario,
+                   PrecioFinal = model.PrecioFinal
                 };
             }
         }
@@ -49,7 +50,8 @@ namespace BackEnd.Controllers
                 {
                     IdCarrito = model.IdCarrito,
                     FechaCreado = model.FechaCreado,
-                    IdUsuario = model.IdUsuario
+                    IdUsuario = model.IdUsuario,
+                    PrecioFinal = model.PrecioFinal
                 };
             }
         }
@@ -103,6 +105,25 @@ namespace BackEnd.Controllers
         public JsonResult Post([FromBody] CarritoModel carrito)
         {
             carritoDAL.Add(Convertir(carrito));
+            return new JsonResult(carrito);
+        }
+
+        [HttpPut("PutPrecio")]
+        public JsonResult Put(decimal precio, int id)
+        {
+            Carrito carrito;
+            using (UnidadDeTrabajo<Carrito> unidad = new UnidadDeTrabajo<Carrito>(new pruebasCarnesDonFernandoContext()))
+            {
+                carrito = unidad.genericDAL.Get(id);
+                carrito.PrecioFinal = precio;
+                unidad.genericDAL.Update(carrito);
+                unidad.Complete();
+            }
+
+
+            //Carrito carrito = carritoDAL.Get(id);
+            /*carrito.PrecioFinal = precio;
+            carritoDAL.Update(carrito);*/
             return new JsonResult(carrito);
         }
 

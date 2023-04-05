@@ -58,11 +58,17 @@ namespace Entities
 
                 entity.Property(e => e.IdUsuario).HasColumnName("id_usuario");
 
+                entity.Property(e => e.PrecioFinal)
+                    .HasColumnType("decimal(18, 2)")
+                    .HasColumnName("precioFinal");
+
                 entity.HasOne(d => d.IdUsuarioNavigation)
                     .WithMany(p => p.Carritos)
                     .HasForeignKey(d => d.IdUsuario)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Carrito__id_usua__66603565");
+
+                
             });
 
             modelBuilder.Entity<CarritoItem>(entity =>
