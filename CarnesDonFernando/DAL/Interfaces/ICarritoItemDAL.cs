@@ -9,5 +9,6 @@ namespace DAL.Interfaces
 {
     public interface ICarritoItemDAL : IDALGenerico<CarritoItem>
     {
+        bool RemoveRangeCarrito(IEnumerable<CarritoItem> entities);
     }
 }

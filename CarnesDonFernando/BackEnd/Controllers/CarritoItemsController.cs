@@ -3,6 +3,7 @@ using DAL.Implementations;
 using Entities;
 using Microsoft.AspNetCore.Mvc;
 using BackEnd.Models;
+using Newtonsoft.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -126,6 +127,44 @@ namespace BackEnd.Controllers
             carritoDAL.Remove(carrito);
 
             return new JsonResult(Convertir(carrito));
+        }
+
+        [HttpDelete]
+        public JsonResult DeleteRange()
+        {        
+            carritoDAL.RemoveRange(carritoDAL.GetAll());
+
+            return new JsonResult(Get());
+        }
+
+        [HttpDelete("DeleteCarrito/{id}")]
+        public JsonResult DeleteCarrito(int id)
+        {
+            // IEnumerable<CarritoItem> carritos = JsonConvert.DeserializeObject<List<Producto>>(contenidoJson) GetCarritoUsuario(id);
+            JsonResult resultado = GetCarritoUsuario(id);
+            string contenidoJson = JsonConvert.SerializeObject(resultado.Value);
+            List<CarritoItem> lista = JsonConvert.DeserializeObject<List<CarritoItem>>(contenidoJson);
+            
+            
+
+           /* CarritoItem carrito = new CarritoItem { IdCarritoItems = id };
+            carritoDAL.Remove(carrito);*/
+            /*foreach (var producto in carritos)
+            {
+                if (producto.IdCarrito == id)
+                {                   
+                    lista.Add(producto);
+                }
+            }
+            bool flag = true;*/
+            foreach (var producto in lista)
+            {
+                CarritoItem carrito = new CarritoItem { IdCarritoItems = producto.IdCarrito };
+                carritoDAL.Remove(carrito);
+            }
+
+            // return new JsonResult(GetCarritoUsuario(id));
+            return new JsonResult("HOLA");
         }
     }
 }

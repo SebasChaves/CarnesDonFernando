@@ -113,7 +113,20 @@ namespace FrontEnd.Helpers
                 return carrito;
             }
 
-        }
+            public List<CarritoItemViewModel> DeleteRange()
+            {
+            List<CarritoItemViewModel> lista = new List<CarritoItemViewModel>();
+
+            HttpResponseMessage responseMessage = ServiceRepository.DeleteResponse("api/CarritoItems/");
+                var content = responseMessage.Content.ReadAsStringAsync();
+           // lista = JsonConvert.DeserializeObject<List<CarritoItemViewModel>>(content);
+
+
+
+            return lista;
+            }
+
+    }
 
 
 

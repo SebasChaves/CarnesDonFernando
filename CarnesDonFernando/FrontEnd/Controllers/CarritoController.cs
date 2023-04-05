@@ -13,6 +13,7 @@ namespace FrontEnd.Controllers
         CarritoItemsHelper carritoItemsHelper = new CarritoItemsHelper();
 
         int idCarritoUsuario = 0;
+        int idUsuarioSession = 1;
 
         // GET: CarritoController
         public ActionResult Index(int idUsuario)
@@ -82,18 +83,40 @@ namespace FrontEnd.Controllers
         }
 
         // GET: CarritoController/Delete/5
-        public ActionResult Delete(int id)
+        /*public ActionResult Delete(int id)
         {
             return View();
-        }
+        }*/
 
         // POST: CarritoController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+       
+        public ActionResult Delete(int id)
         {
             try
             {
+                carritoItemsHelper.Delete(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+       
+        public ActionResult DeleteAll()
+        {
+            try
+            {
+                List<CarritoItemViewModel> lista = carritoItemsHelper.GetCarrito(carritoHelper.SetUsuario(idUsuarioSession).IdCarrito);
+
+                foreach (var item in lista)
+                {
+                    carritoItemsHelper.Delete(item.IdCarritoItems);
+                }
+
+                //carritoItemsHelper.Delete(3);
+
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -119,7 +142,7 @@ namespace FrontEnd.Controllers
             carritoItemsHelper.Create(model);
 
 
-            return RedirectToAction(nameof(Index), new { idUsuario = 1 });
+            return RedirectToAction(nameof(Index), new { idUsuario = idUsuarioSession });
         }
     }
 }

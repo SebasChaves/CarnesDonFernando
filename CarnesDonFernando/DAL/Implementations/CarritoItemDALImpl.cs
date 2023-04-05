@@ -107,9 +107,25 @@ namespace DAL.Implementations
             return result;
         }
 
-        public void RemoveRange(IEnumerable<CarritoItem> entities)
+        public bool RemoveRangeCarrito(IEnumerable<CarritoItem> entities)
         {
-            throw new NotImplementedException();
+            bool result = false;
+            try
+            {
+                using (UnidadDeTrabajo<CarritoItem> unidad = new UnidadDeTrabajo<CarritoItem>(context))
+                {
+                    unidad.genericDAL.RemoveRange(entities);
+                    result = unidad.Complete();
+                }
+
+            }
+            catch (Exception)
+            {
+
+                result = false;
+            }
+
+            return result;
         }
 
         public CarritoItem SingleOrDefault(Expression<Func<CarritoItem, bool>> predicate)
@@ -137,6 +153,11 @@ namespace DAL.Implementations
             }
 
             return result;
+        }
+
+        void IDALGenerico<CarritoItem>.RemoveRange(IEnumerable<CarritoItem> entities)
+        {
+            throw new NotImplementedException();
         }
     }
 }

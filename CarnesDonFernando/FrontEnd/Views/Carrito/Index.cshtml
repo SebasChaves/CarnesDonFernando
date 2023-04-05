@@ -23,7 +23,7 @@
                     <th style="border: hidden" class="text-center">Cantidad</th>
                     <th style="border: hidden" class="text-center">Precio c/u</th>
                     <th style="border: hidden" class="text-center">Subtotal</th>
-                    <th style="border: hidden" class="text-center"><a class="btn btn-sm btn-outline-danger" href="#">Vaciar carrito</a></th>
+                    <th style="border: hidden" class="text-center">@Html.ActionLink("Vaciar carrito", "DeleteAll", "Carrito",null,new { @class = "btnCatalogo btn"})</th>
                 </tr>
             </thead>
             <tbody>
@@ -68,7 +68,13 @@
                             </td>
                             <td class="text-center text-lg text-medium">₡@Model.Productos[i].Precio</td>
                             <td class="text-center text-lg text-medium">₡@Model.CarritoItems[i].Precio</td>
-                            <td class="text-center"><a class="remove-from-cart" href="#" data-toggle="tooltip" title="" data-original-title="Remove item"><i class="fa fa-trash"></i></a></td>
+                            <td class="text-center">
+                                <a class="remove-from-cart" href="@Url.Action("Delete", "Carrito", new { id = Model.CarritoItems[i].IdCarritoItems })" data-toggle="tooltip" title="" data-original-title="Remove item">
+                                    <i class="fa fa-trash">
+                                        
+                                    </i>
+                                </a>
+                            </td>
                         </tr>
                     }
                 }
