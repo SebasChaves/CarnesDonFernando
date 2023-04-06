@@ -164,14 +164,36 @@ namespace BackEnd.Controllers
         [HttpPut]
         public JsonResult Put([FromBody] CarritoItemModel carrito)
         {
+            using (UnidadDeTrabajo<CarritoItem> unidad = new UnidadDeTrabajo<CarritoItem>(new pruebasCarnesDonFernandoContext()))
+            {
+                unidad.genericDAL.Update(Convertir(carrito));
+                unidad.Complete();
+
+                decimal precioFinal = 0;
+
+                IEnumerable<CarritoItem> carritos = carritoDAL.GetAll();
+
+                foreach (var producto in carritos)
+                {
+                    if (producto.IdCarrito == carrito.IdCarrito)
+                    {
+                        precioFinal = precioFinal + producto.Precio;
+                    }
+                }
+                string apiUrl = "http://localhost:5180/api/Carrito/" + carrito.IdCarrito.ToString();
+                HttpResponseMessage response = client.GetAsync(apiUrl).Result;
+                var content = response.Content.ReadAsStringAsync().Result;
+                Carrito carritoGet = JsonConvert.DeserializeObject<Carrito>(content);
+
+                Carrito carritoApi = new Carrito { IdCarrito = carritoGet.IdCarrito, FechaCreado = carritoGet.FechaCreado, IdUsuario = carritoGet.IdUsuario, PrecioFinal = precioFinal };
+                HttpClient ClientPut = new HttpClient();
+                ClientPut.BaseAddress = new Uri("http://localhost:5180");
+                HttpResponseMessage responseMessage = ClientPut.PutAsJsonAsync("api/Carrito/", carritoApi).Result;
+            }
 
 
-            /*
-             * Agregar codigo
-             * Que actualiza el precio final en la tabla carrito
-             */
 
-            carritoDAL.Update(Convertir(carrito));
+                //carritoDAL.Update(Convertir(carrito));
             return new JsonResult(carrito);
         }
 
@@ -179,23 +201,6 @@ namespace BackEnd.Controllers
         [HttpDelete("{id}")]
         public JsonResult Delete(int id)
         {
-            //decimal precioFinal;
-
-            /*string apiUrl = "http://localhost:5180/api/Carrito/" + id.ToString();
-            HttpResponseMessage response = client.GetAsync(apiUrl).Result;
-            var content = response.Content.ReadAsStringAsync().Result;
-            Carrito carritoGet = JsonConvert.DeserializeObject<Carrito>(content);
-
-           // precioFinal = carritoGet.PrecioFinal;
-
-            Carrito carritoApi = new Carrito { IdCarrito = carritoGet.IdCarrito, FechaCreado = carritoGet.FechaCreado, IdUsuario = carritoGet.IdUsuario, PrecioFinal = precioFinal };
-            HttpClient ClientPut = new HttpClient();
-            ClientPut.BaseAddress = new Uri("http://localhost:5180");
-            HttpResponseMessage responseMessage = ClientPut.PutAsJsonAsync("api/Carrito/", carritoApi).Result;
-
-
-            CarritoItem carrito= new CarritoItem { IdCarritoItems= id };
-            carritoDAL.Remove(carrito);            */
 
 
             CarritoItem carritoItem;
@@ -215,11 +220,6 @@ namespace BackEnd.Controllers
                 HttpClient ClientPut = new HttpClient();
                 ClientPut.BaseAddress = new Uri("http://localhost:5180");
                 HttpResponseMessage responseMessage = ClientPut.PutAsJsonAsync("api/Carrito/", carritoApi).Result;
-
-                /*CarritoItem carritoQuitar = new CarritoItem { IdCarritoItems = id };
-                unidad.genericDAL.Remove(carritoQuitar);
-                unidad.Complete();
-                return new JsonResult(Convertir(carritoQuitar));*/
             }
             CarritoItem carritoItem1 = new CarritoItem { IdCarritoItems = id };
             carritoDAL.Remove(carritoItem1);

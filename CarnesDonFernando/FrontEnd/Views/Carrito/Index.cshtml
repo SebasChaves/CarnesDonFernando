@@ -5,11 +5,8 @@
     ViewData["Title"] = "Index";
 }
 
-<br />
-<br />
-<br />
-<br />
-<h1>Index</h1>
+
+<h1 class="display-4 text-center tituloPaginaIndex" style="margin-top: 200px;">Carrito</h1>
 
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
@@ -93,11 +90,9 @@
             <div class="column text-lg">Total: <span class="text-medium">₡@Model.Carrito.PrecioFinal</span></div>
         </div>
         <div class="shopping-cart-footer">
-            <div class="column"><a class="btn btn-outline-secondary" href="#"><i class="icon-arrow-left"></i>&nbsp;Back to Shopping</a></div>
             <div class="column">
-                <a class="btn btn-primary" href="#" data-toast="" data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Your cart" data-toast-message="is updated successfully!">Update Cart</a>
-                <button type="submit" class="btnCatalogo btn">Agregar al carrito</button>
-                <a class="btn btn-success" href="#">Checkout</a>
+                <button type="submit" class="btnCatalogo btn">Acutualizar carrito</button>
+                <a class="btn btn-success" href="#">Finalizar compra</a>
             </div>
         </div>
     </form>
