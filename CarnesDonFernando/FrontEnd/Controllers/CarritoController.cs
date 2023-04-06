@@ -96,7 +96,7 @@ namespace FrontEnd.Controllers
             try
             {
                 carritoItemsHelper.Delete(id);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { idUsuario = idUsuarioSession });
             }
             catch
             {
@@ -118,7 +118,7 @@ namespace FrontEnd.Controllers
 
                 //carritoItemsHelper.Delete(3);
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { idUsuario = idUsuarioSession });
             }
             catch
             {
@@ -147,11 +147,28 @@ namespace FrontEnd.Controllers
         }
 
         [HttpPost]
-        public ActionResult ActualizaCarrito(int idProducto, int cantidadProducto, int idCarritoItem)
+        public ActionResult ActualizaCarrito(int[] idProducto, int[] cantidadProducto, int[] idCarritoItem)
         {
+
+           
+
             this.idCarritoUsuario = carritoHelper.SetUsuario(1).IdCarrito;
 
-            int precioFinal = productoHelper.Get(idProducto).Precio * cantidadProducto;
+            for(int i = 0; i < idProducto.Length; i++)
+            {
+                int precioFinal = productoHelper.Get(idProducto[i]).Precio * cantidadProducto[i];
+                CarritoItemViewModel model = new CarritoItemViewModel
+                {
+                    IdCarrito = this.idCarritoUsuario,
+                    IdProducto = idProducto[i],
+                    Cantidad = cantidadProducto[i],
+                    Precio = precioFinal,
+                    IdCarritoItems = idCarritoItem[i]
+                };
+
+                carritoItemsHelper.Edit(model);
+            }
+           /* int precioFinal = productoHelper.Get(idProducto).Precio * cantidadProducto;
             CarritoItemViewModel model = new CarritoItemViewModel
             {
                 IdCarrito = this.idCarritoUsuario,
@@ -161,7 +178,7 @@ namespace FrontEnd.Controllers
                 IdCarritoItems = idCarritoItem
             };
 
-            carritoItemsHelper.Edit(model);
+            carritoItemsHelper.Edit(model);*/
 
 
             return RedirectToAction(nameof(Index), new { idUsuario = idUsuarioSession });

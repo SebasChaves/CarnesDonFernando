@@ -51,8 +51,8 @@
                             }*/
 
                             for(int i = 0;i<Model.CarritoItems.Count();i++){
-                                <input type="number" value="@Model.CarritoItems[i].IdProducto" id="idProducto" name="idProducto" hidden />
-                            <input type="number" value="@Model.CarritoItems[i].IdCarritoItems" id="idCarritoItem" name="idCarritoItem" hidden />
+                                <input type="number" value="@Model.CarritoItems[i].IdProducto" id="idProducto" name="idProducto[]" hidden />
+                            <input type="number" value="@Model.CarritoItems[i].IdCarritoItems" id="idCarritoItem" name="idCarritoItem[]" hidden />
                                 <tr>
                                     <td>
                                         <div class="product-item">
@@ -64,7 +64,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="count-input">
-                                        <input name="cantidadProducto" type="number" class="form-control" min="1" value="@Model.CarritoItems[i].Cantidad" max="@Model.Productos[i].Cantidad" />
+                                        <input name="cantidadProducto[]" type="number" class="form-control" min="1" value="@Model.CarritoItems[i].Cantidad" max="@Model.Productos[i].Cantidad" />
                                         </div>
                                     </td>
                                     <td class="text-center text-lg text-medium">₡@Model.Productos[i].Precio</td>
@@ -91,7 +91,7 @@
         </div>
         <div class="shopping-cart-footer">
             <div class="column">
-                <button type="submit" class="btnCatalogo btn">Acutualizar carrito</button>
+                <button type="submit" class="btnCatalogo btn">Actualizar carrito</button>
                 <a class="btn btn-success" href="#">Finalizar compra</a>
             </div>
         </div>

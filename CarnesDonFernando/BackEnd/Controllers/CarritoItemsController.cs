@@ -26,6 +26,7 @@ namespace BackEnd.Controllers
         {
             carritoDAL = new CarritoItemDALImpl(new pruebasCarnesDonFernandoContext());
             this.logger = logger;
+            //client.DefaultRequestHeaders.Add("ApiKey", "1234");
         }
 
         private CarritoItemModel? Convertir(CarritoItem model)
@@ -66,7 +67,7 @@ namespace BackEnd.Controllers
         }
 
         // GET: api/<CarritoController>        
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         public JsonResult Get()
         {
@@ -112,6 +113,7 @@ namespace BackEnd.Controllers
 
         private void actualizaPrecio(int idCarrito, decimal precioFinal)
         {
+            client.DefaultRequestHeaders.Add("ApiKey", "1234");
             string apiUrl = "http://localhost:5180/api/Carrito/" + idCarrito;
             HttpResponseMessage response = client.GetAsync(apiUrl).Result;
             var content = response.Content.ReadAsStringAsync().Result;
@@ -119,6 +121,7 @@ namespace BackEnd.Controllers
 
             Carrito carritoApi = new Carrito { IdCarrito = carritoGet.IdCarrito, FechaCreado = carritoGet.FechaCreado, IdUsuario = carritoGet.IdUsuario, PrecioFinal = precioFinal };
             HttpClient ClientPut = new HttpClient();
+            ClientPut.DefaultRequestHeaders.Add("ApiKey", "1234");
             ClientPut.BaseAddress = new Uri("http://localhost:5180");
             HttpResponseMessage responseMessage = ClientPut.PutAsJsonAsync("api/Carrito/", carritoApi).Result;
         }
@@ -144,6 +147,10 @@ namespace BackEnd.Controllers
                     }
                 }
 
+                if (!client.DefaultRequestHeaders.Contains("ApiKey"))
+                {
+                    client.DefaultRequestHeaders.Add("ApiKey", "1234");
+                }
                 string apiUrl = "http://localhost:5180/api/Carrito/" + carrito.IdCarrito.ToString();
                 HttpResponseMessage response = client.GetAsync(apiUrl).Result;
                 var content = response.Content.ReadAsStringAsync().Result;
@@ -151,6 +158,10 @@ namespace BackEnd.Controllers
 
                 Carrito carritoApi = new Carrito { IdCarrito = carritoGet.IdCarrito, FechaCreado = carritoGet.FechaCreado, IdUsuario = carritoGet.IdUsuario, PrecioFinal = precioFinal };
                 HttpClient ClientPut = new HttpClient();
+                if (!ClientPut.DefaultRequestHeaders.Contains("ApiKey"))
+                {
+                    ClientPut.DefaultRequestHeaders.Add("ApiKey", "1234");
+                };
                 ClientPut.BaseAddress = new Uri("http://localhost:5180");
                 HttpResponseMessage responseMessage = ClientPut.PutAsJsonAsync("api/Carrito/", carritoApi).Result;
 
@@ -182,6 +193,10 @@ namespace BackEnd.Controllers
                         precioFinal = precioFinal + producto.Precio;
                     }
                 }
+                if (!client.DefaultRequestHeaders.Contains("ApiKey"))
+                {
+                    client.DefaultRequestHeaders.Add("ApiKey", "1234");
+                }
                 string apiUrl = "http://localhost:5180/api/Carrito/" + carrito.IdCarrito.ToString();
                 HttpResponseMessage response = client.GetAsync(apiUrl).Result;
                 var content = response.Content.ReadAsStringAsync().Result;
@@ -189,6 +204,10 @@ namespace BackEnd.Controllers
 
                 Carrito carritoApi = new Carrito { IdCarrito = carritoGet.IdCarrito, FechaCreado = carritoGet.FechaCreado, IdUsuario = carritoGet.IdUsuario, PrecioFinal = precioFinal };
                 HttpClient ClientPut = new HttpClient();
+                if (!ClientPut.DefaultRequestHeaders.Contains("ApiKey"))
+                {
+                    ClientPut.DefaultRequestHeaders.Add("ApiKey", "1234");
+                };
                 ClientPut.BaseAddress = new Uri("http://localhost:5180");
                 HttpResponseMessage responseMessage = ClientPut.PutAsJsonAsync("api/Carrito/", carritoApi).Result;
             }
@@ -211,6 +230,10 @@ namespace BackEnd.Controllers
             {
                 CarritoItem itemTraido = unidad.genericDAL.Get(id);
 
+                if (!client.DefaultRequestHeaders.Contains("ApiKey"))
+                {
+                    client.DefaultRequestHeaders.Add("ApiKey", "1234");
+                }
                 string apiUrl = "http://localhost:5180/api/Carrito/" + itemTraido.IdCarrito.ToString();
                 HttpResponseMessage response = client.GetAsync(apiUrl).Result;
                 var content = response.Content.ReadAsStringAsync().Result;
@@ -220,6 +243,10 @@ namespace BackEnd.Controllers
 
                 Carrito carritoApi = new Carrito { IdCarrito = carritoGet.IdCarrito, FechaCreado = carritoGet.FechaCreado, IdUsuario = carritoGet.IdUsuario, PrecioFinal = precioFinal };
                 HttpClient ClientPut = new HttpClient();
+                if (!ClientPut.DefaultRequestHeaders.Contains("ApiKey"))
+                {
+                    ClientPut.DefaultRequestHeaders.Add("ApiKey", "1234");
+                };
                 ClientPut.BaseAddress = new Uri("http://localhost:5180");
                 HttpResponseMessage responseMessage = ClientPut.PutAsJsonAsync("api/Carrito/", carritoApi).Result;
             }

@@ -10,7 +10,7 @@ namespace FrontEnd.Helpers
         {
             Client = new HttpClient();
             Client.BaseAddress = new Uri("http://localhost:5180");
-
+            Client.DefaultRequestHeaders.Add("ApiKey", "1234");
         }
         public HttpResponseMessage GetResponse(string url)
         {
