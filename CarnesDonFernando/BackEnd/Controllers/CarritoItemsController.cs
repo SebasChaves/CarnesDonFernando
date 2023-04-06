@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System.Text;
 using System.Net.Http.Headers;
 using System;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -64,7 +65,8 @@ namespace BackEnd.Controllers
             }
         }
 
-        // GET: api/<CarritoController>
+        // GET: api/<CarritoController>        
+        [Authorize]
         [HttpGet]
         public JsonResult Get()
         {

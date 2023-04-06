@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using Entities.Authentication;
 using Entities.Utilities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Entities
 {
-    public partial class pruebasCarnesDonFernandoContext : DbContext
+    public partial class pruebasCarnesDonFernandoContext : IdentityDbContext<ApplicationUser>
     {
         public pruebasCarnesDonFernandoContext()
         {
@@ -43,6 +45,7 @@ namespace Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Carrito>(entity =>
             {
                 entity.HasKey(e => e.IdCarrito)
