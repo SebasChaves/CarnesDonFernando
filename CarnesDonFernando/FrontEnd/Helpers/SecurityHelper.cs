@@ -18,7 +18,7 @@ namespace FrontEnd.Helpers
 
 
 
-        public TokenModel Login(UsuarioNetViewModel usuario)
+        public TokenModel Login(LoginModel usuario)
         {
             try
             {
@@ -42,6 +42,24 @@ namespace FrontEnd.Helpers
                 throw;
             }
         } 
+
+        public IdUsuario getIdUsuario(LoginModel usuario)
+        {
+            try {
+                IdUsuario idUsuario;
+
+                HttpResponseMessage responseMessage = ServiceRepository.PostResponse("api/Authenticate/getUsuario", usuario);
+                var content = responseMessage.Content.ReadAsStringAsync().Result;
+                idUsuario = JsonConvert.DeserializeObject<IdUsuario>(content);
+
+                return idUsuario;
+            } catch (Exception) { 
+                
+                throw; 
+            }
+
+            
+        }
 
     }
 }

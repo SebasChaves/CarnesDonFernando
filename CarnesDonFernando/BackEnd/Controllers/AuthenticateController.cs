@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -31,12 +32,16 @@ namespace BackEndAPI.Controllers
             _configuration = configuration;
         }
 
-        [HttpPost("getUsuario")]
-        public async Task<string> getUsuario(LoginModel model)
+        [HttpPost]
+        [Route("getUsuario")]
+        public async Task<IActionResult> getUsuario([FromBody] LoginModel model)
         {
             var userExists = await userManager.FindByNameAsync(model.Username);
             var userId = userExists.Id;
-            return userId.ToString();
+            return Ok(new
+            {
+                UserId = userId
+            });
         }
 
         [HttpPost]

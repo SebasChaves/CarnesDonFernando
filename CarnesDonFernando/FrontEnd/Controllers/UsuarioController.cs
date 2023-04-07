@@ -19,13 +19,16 @@ namespace FrontEnd.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(UsuarioNetViewModel usuario)
+        public IActionResult Index(LoginModel usuario)
         {
             
-           /* TokenModel tokenModel = securityHelper.Login(usuario);
-            HttpContext.Session.SetString("token", tokenModel.Token);
-            HttpContext.Session.SetString("userId", );*/
+            TokenModel tokenModel = securityHelper.Login(usuario);
+            IdUsuario idUsuario1 = securityHelper.getIdUsuario(usuario);
 
+            HttpContext.Session.SetString("token", tokenModel.Token);
+            HttpContext.Session.SetString("userId", idUsuario1.UserId);
+            var token = HttpContext.Session.GetString("token"); 
+            var idUsuario = HttpContext.Session.GetString("userId");
             return View();
         }
 
