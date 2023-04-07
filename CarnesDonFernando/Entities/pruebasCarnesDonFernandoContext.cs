@@ -49,7 +49,7 @@ namespace Entities
             modelBuilder.Entity<Carrito>(entity =>
             {
                 entity.HasKey(e => e.IdCarrito)
-                    .HasName("PK__Carrito__83A2AD9C9A106C49");
+                    .HasName("PK__Carrito__83A2AD9C60442540");
 
                 entity.ToTable("Carrito");
 
@@ -59,17 +59,13 @@ namespace Entities
                     .HasColumnType("datetime")
                     .HasColumnName("fecha_creado");
 
-                //entity.Property(e => e.IdUsuario).HasColumnName("id_usuario");
-
-                entity.Property(e => e.PrecioFinal)
-                    .HasColumnType("decimal(18, 2)")
-                    .HasColumnName("precioFinal");
-
                 entity.Property(e => e.IdUsuario)
                     .HasMaxLength(450)
                     .HasColumnName("id_usuario");
 
-
+                entity.Property(e => e.PrecioFinal)
+                    .HasColumnType("decimal(18, 2)")
+                    .HasColumnName("precioFinal");
             });
 
             modelBuilder.Entity<CarritoItem>(entity =>

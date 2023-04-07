@@ -100,8 +100,11 @@ namespace Entities.Migrations
                         .HasColumnType("datetime")
                         .HasColumnName("fecha_creado");
 
-                    b.Property<int>("IdUsuario")
+                    /*b.Property<int>("IdUsuario")
                         .HasColumnType("int")
+                        .HasColumnName("id_usuario");*/
+                    b.Property<string>("IdUsuario")
+                        .HasColumnType("nvarchar(450)")
                         .HasColumnName("id_usuario");
 
                     b.Property<decimal>("PrecioFinal")
@@ -111,7 +114,7 @@ namespace Entities.Migrations
                     b.HasKey("IdCarrito")
                         .HasName("PK__Carrito__83A2AD9C9A106C49");
 
-                    b.HasIndex("IdUsuario");
+                    //b.HasIndex("IdUsuario");
 
                     b.ToTable("Carrito", (string)null);
                 });
