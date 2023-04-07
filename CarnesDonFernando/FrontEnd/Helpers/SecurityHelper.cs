@@ -80,5 +80,26 @@ namespace FrontEnd.Helpers
 
 
         }
+
+        public ResponseModel CambioContrasenia(ContraseniaModel usuario)
+        {
+            try
+            {
+                ResponseModel response;
+
+                HttpResponseMessage responseMessage = ServiceRepository.PostResponse("api/Authenticate/putContrasenia", usuario);
+                var content = responseMessage.Content.ReadAsStringAsync().Result;
+                response = JsonConvert.DeserializeObject<ResponseModel>(content);
+
+                return response;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+        }
     }
 }

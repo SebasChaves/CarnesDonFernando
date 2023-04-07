@@ -14,7 +14,8 @@ namespace FrontEnd.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Debe ingresar la contraseña")]
-        [RegularExpression("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^\\da-zA-Z]).{8,}$", ErrorMessage = "La cadena debe tener al menos un número, una letra mayúscula, una letra minúscula y un carácter especial.")] public string Password { get; set; }
+        [RegularExpression("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^\\da-zA-Z]).{8,}$", ErrorMessage = "La cadena debe tener al menos un número, una letra mayúscula, una letra minúscula y un carácter especial.")] 
+        public string Password { get; set; }
 
         [Required(ErrorMessage = "Debe ingresar la contraseña")]
         [Compare("Password", ErrorMessage = "Las contraseñas no coinciden.")]

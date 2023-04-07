@@ -105,7 +105,35 @@ namespace FrontEnd.Controllers
             return View();
         }
 
+        public ActionResult CambioContrasenia()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public IActionResult CambioContrasenia(ContraseniaModel usuario)
+        {
+
+            ResponseModel response = securityHelper.CambioContrasenia(usuario);
+            if (response.Status.Equals("Success"))
+            {
+                LoginModel login = new LoginModel
+                {
+                    Username = usuario.Username,
+                    Password = usuario.NewPassword
+                };
+                Login(login);
+                return RedirectToAction(nameof(Index));
+            }
+            else if (response.Status.Equals("Error"))
+            {
+                ViewBag.Message = response.Message.ToString();
+            }
+
+            var token = HttpContext.Session.GetString("token");
+            var idUsuario = HttpContext.Session.GetString("userId");
+            return View();
+        }
 
 
 

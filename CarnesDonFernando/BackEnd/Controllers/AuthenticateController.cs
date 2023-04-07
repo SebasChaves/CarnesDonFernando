@@ -172,5 +172,21 @@ namespace BackEndAPI.Controllers
 
             return Ok(new Response { Status = "Success", Message = "User created successfully!" });
         }
+
+        [HttpPost]
+        [Route("putContrasenia")]
+        public async Task<IActionResult> PutContrasenia([FromBody] ContraseniaModel model)
+        {
+            var user = await userManager.FindByNameAsync(model.Username);
+            if (user != null && await userManager.CheckPasswordAsync(user, model.OldPassword))
+            {
+                var userRoles = await userManager.GetRolesAsync(user);
+                var changePass = await userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+
+
+                return Ok(new Response { Status = "Success", Message = "Cambio realizado correctamente!" });
+            }
+            return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Fallo el cambio de contraseña, revise las credenciales" });
+        }
     }
 }
