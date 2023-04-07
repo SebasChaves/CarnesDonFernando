@@ -44,12 +44,12 @@ namespace FrontEnd.Helpers
                 return carrito;
             }
 
-            public CarritoViewModel SetUsuario(int id)
+            public CarritoViewModel SetUsuario(string id)
             {
             CarritoViewModel carrito;
 
 
-            HttpResponseMessage responseMessage = ServiceRepository.GetResponse("api/Carrito/GetCarritoUsuario/" + id.ToString());
+            HttpResponseMessage responseMessage = ServiceRepository.GetResponse("api/Carrito/GetCarritoUsuario/" + id);
                 var content = responseMessage.Content.ReadAsStringAsync().Result;
                 carrito = JsonConvert.DeserializeObject<CarritoViewModel>(content);
 

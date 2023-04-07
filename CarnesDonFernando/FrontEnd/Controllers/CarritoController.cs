@@ -13,10 +13,10 @@ namespace FrontEnd.Controllers
         CarritoItemsHelper carritoItemsHelper = new CarritoItemsHelper();
 
         int idCarritoUsuario = 0;
-        int idUsuarioSession = 1;
+        string idUsuarioSession = "1bc7f5a7-e7ea-4a91-9e43-1e5d3aaa604e";
 
         // GET: CarritoController
-        public ActionResult Index(int idUsuario)
+        public ActionResult Index(string idUsuario)
         {
             idCarritoUsuario = carritoHelper.SetUsuario(idUsuario).IdCarrito;
 
@@ -129,12 +129,12 @@ namespace FrontEnd.Controllers
         [HttpPost]
         public ActionResult AgregarCarrito(int idProducto, int cantidadProducto)
         {
-            if (HttpContext.Session.GetString("idUsuario") is null)
+            /*if (HttpContext.Session.GetString("idUsuario") is null)
             {
-                this.idCarritoUsuario = carritoHelper.SetUsuario(1).IdCarrito;
-            }
+                //this.idCarritoUsuario = carritoHelper.SetUsuario(1).IdCarrito;
+            }*/
 
-            this.idCarritoUsuario = carritoHelper.SetUsuario(1).IdCarrito;
+            this.idCarritoUsuario = carritoHelper.SetUsuario("1bc7f5a7-e7ea-4a91-9e43-1e5d3aaa604e").IdCarrito;
 
             int precioFinal = productoHelper.Get(idProducto).Precio * cantidadProducto;
             CarritoItemViewModel model = new CarritoItemViewModel
@@ -157,7 +157,7 @@ namespace FrontEnd.Controllers
 
            
 
-            this.idCarritoUsuario = carritoHelper.SetUsuario(1).IdCarrito;
+            this.idCarritoUsuario = carritoHelper.SetUsuario("1bc7f5a7-e7ea-4a91-9e43-1e5d3aaa604e").IdCarrito;
 
             for(int i = 0; i < idProducto.Length; i++)
             {

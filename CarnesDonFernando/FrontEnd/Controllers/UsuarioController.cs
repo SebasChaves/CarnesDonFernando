@@ -22,9 +22,9 @@ namespace FrontEnd.Controllers
         public IActionResult Index(UsuarioNetViewModel usuario)
         {
             
-            TokenModel tokenModel = securityHelper.Login(usuario);
+           /* TokenModel tokenModel = securityHelper.Login(usuario);
             HttpContext.Session.SetString("token", tokenModel.Token);
-            HttpContext.Session.SetString("userId", );
+            HttpContext.Session.SetString("userId", );*/
 
             return View();
         }
