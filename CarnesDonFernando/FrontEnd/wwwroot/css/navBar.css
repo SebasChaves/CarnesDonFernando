@@ -7,7 +7,18 @@
    
 }
 
+.itemNavbarLogin {
+    text-align: center;
+    /*font-size: 10px;*/
+    justify-content: center;
+    color: #9D9D8D !important;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
 
+    .itemNavbarLogin:hover {
+        color: white !important;
+    }
 .itemNavbar {
     margin-right: 50px;
     border-radius: 8px;
@@ -647,3 +658,26 @@ select.form-control {
     height: 36px;
 }
 
+/*LOGIN*/
+.LoginInput {
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none !important;
+   border-radius: 0px;
+   font-size: 18px
+}
+
+.LoginTitulo{
+    font-size: 40px;
+}
+
+.LoginCambiarContra {
+    font-weight: normal;
+    text-decoration: none;
+    color: blue;
+    font-size: 16px
+}
+
+.LoginCambiarContra:hover {
+    text-decoration: underline;
+}

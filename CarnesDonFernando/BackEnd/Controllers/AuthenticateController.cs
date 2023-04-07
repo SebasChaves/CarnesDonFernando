@@ -1,4 +1,5 @@
-﻿using Entities.Authentication;
+﻿using BackEnd.Models;
+using Entities.Authentication;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -28,6 +29,12 @@ namespace BackEndAPI.Controllers
             this.userManager = userManager;
             this.roleManager = roleManager;
             _configuration = configuration;
+        }
+
+        [HttpPost("getUsuario")]
+        public UsuarioNet getUsuario()
+        {
+            return new UsuarioNet();
         }
 
         [HttpPost]
@@ -74,6 +81,8 @@ namespace BackEndAPI.Controllers
         public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {
             var userExists = await userManager.FindByNameAsync(model.Username);
+            var userId = userExists.Id;
+
             if (userExists != null)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
 

@@ -129,6 +129,11 @@ namespace FrontEnd.Controllers
         [HttpPost]
         public ActionResult AgregarCarrito(int idProducto, int cantidadProducto)
         {
+            if (HttpContext.Session.GetString("idUsuario") is null)
+            {
+                this.idCarritoUsuario = carritoHelper.SetUsuario(1).IdCarrito;
+            }
+
             this.idCarritoUsuario = carritoHelper.SetUsuario(1).IdCarrito;
 
             int precioFinal = productoHelper.Get(idProducto).Precio * cantidadProducto;

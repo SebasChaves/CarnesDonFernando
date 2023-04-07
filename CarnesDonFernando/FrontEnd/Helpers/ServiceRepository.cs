@@ -12,6 +12,15 @@ namespace FrontEnd.Helpers
             Client.BaseAddress = new Uri("http://localhost:5180");
             Client.DefaultRequestHeaders.Add("ApiKey", "1234");
         }
+        public ServiceRepository(string token)
+        {
+            Client = new HttpClient();
+            Client.BaseAddress = new Uri("http://localhost:5180");
+            Client.DefaultRequestHeaders.Add("ApiKey", "1234");
+            Client.DefaultRequestHeaders.Authorization =
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+        }
         public HttpResponseMessage GetResponse(string url)
         {
             return Client.GetAsync(url).Result;

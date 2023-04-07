@@ -23,50 +23,7 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <!--div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Categoria" asp-action="Index">Categoria</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="DetalleOrden" asp-action="Index">Detalle</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Producto" asp-action="Index">Producto</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="MensajesContacto" asp-action="Index">MensajesContacto</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Index">Usuarios</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Ingrediente" asp-action="Index">Ingredientes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Receta" asp-action="Index">Recetas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Restaurante" asp-action="Index">Restaurante</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Categoria" asp-action="Index">Categoria</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="MensajesContacto" asp-action="Index">Mensaje Contacto</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Local" asp-action="Index">Local</a>
-                        </li>
-                    </ul>
-                </div-->
+                
                 <div class="navbar-collapse  collapse d-sm-inline-flex justify-content-center">
                     <ul class="navbar-nav  mb-2 mb-lg-0 text-al">
                         <li class="nav-item" id="menuInicial">
@@ -97,20 +54,20 @@
                         <li class="nav-item" id="menuInicial">
                             @Html.ActionLink("Carrito", "Index", "Carrito",new {idUsuario = 3}, new { @class = "itemNavbar nav-link active" })
                         </li>
+                        <li class="nav-item" id="menuInicial">
+                            @Html.ActionLink("Perfil", "Index", "Usuario",null, new { @class = "itemNavbar nav-link active" })
+                        </li>
                     </ul>
+                    
                 </div>
 
             </div>
-            <!--div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
-                <svg xmlns="http://www.w3.org/2000/svg" style="color:white; margin-right:20px;" width="25" height="25" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
-                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                </svg>
-            </div-->
+           
 
         </nav>
 
         <script>
-            // When the user scrolls down 80px from the top of the document, resize the navbar's padding and the logo's font size
+         
             window.onscroll = function () { scrollFunction() };
 
             function scrollFunction() {
@@ -142,17 +99,12 @@
             @RenderBody()
             
         </main>
-        <!--footer class="border-top footer text-muted">
-                <div class="container">
-                    &copy; 2023 - FrontEnd - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                </div>
-            </footer-->
+       
         <footer class="text-center text-white footer" style="background-color: #AD2022;">
-            <!-- Grid container -->
+      
             <div class="container ">
-                <!-- Section: Social media -->
                 <div class="text-center" style="line-height:normal">
-                    <!-- Facebook -->
+                
                     <a class="btn  btn-link btn-floating btn-lg text-dark m-1 iconosFooter" style=" background-color:#AD2022"
                        href="https://www.facebook.com/carnesdonfernando/"
                        role="button" arget="_blank"
@@ -162,7 +114,7 @@
 
                     </a>
 
-                    <!-- Twitter -->
+                 
                     <a class="btn btn-link btn-floating btn-lg text-dark m-1 iconosFooter" style=" background-color:#AD2022"
                        href="https://www.instagram.com/donfernandocr/" +
                        role="button" arget="_blank"
@@ -172,7 +124,7 @@
 
                     </a>
 
-                    <!-- Google -->
+           
                     <a class="btn btn-link btn-floating btn-lg text-dark m-1 iconosFooter" style=" background-color:#AD2022"
                        href="https://api.whatsapp.com/send?phone=50672612983"
                        role="button" arget="_blank"
@@ -185,14 +137,14 @@
 
                 </div>
                 <div class="text-center" style="line-height:normal">
-                    <!-- Facebook -->
+           
                     <a class="btn btn-link btn-floating btn-lg m-1 menuFooter" style=" background-color:#AD2022"
                        role="button" arget="_blank"
                        data-mdb-ripple-color="dark">
                         Inicio
                     </a>
 
-                    <!-- Twitter -->
+                
                     <a class="btn btn-link btn-floating btn-lg text-dark m-1 menuFooter" style=" background-color:#AD2022"
                        role="button" arget="_blank"
                        data-mdb-ripple-color="dark">
@@ -208,14 +160,12 @@
 
                 </div>
 
-                <!-- Section: Social media -->
+         
             </div>
-            <!-- Grid container -->
-            <!-- Copyright -->
+        
             <div class="text-center menuFooter" style="">
                 <p style=" font-weight: normal; line-height:normal">Copyright © @DateTime.Now.Year Carnes Don Fernando</p>
             </div>
-            <!-- Copyright -->
         </footer>
     </div>
 

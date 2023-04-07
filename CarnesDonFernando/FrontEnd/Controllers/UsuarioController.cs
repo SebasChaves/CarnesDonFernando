@@ -9,14 +9,24 @@ namespace FrontEnd.Controllers
     public class UsuarioController : Controller
     {
         UsuarioHelper usuarioHelper = new UsuarioHelper();
+        SecurityHelper securityHelper = new SecurityHelper();
 
         // GET: ProductoController
         public ActionResult Index()
         {
                        
-            List<UsuarioViewModel> lista = usuarioHelper.GetAll();
+           return View();
+        }
 
-            return View(lista);
+        [HttpPost]
+        public IActionResult Index(UsuarioNetViewModel usuario)
+        {
+            
+            TokenModel tokenModel = securityHelper.Login(usuario);
+            HttpContext.Session.SetString("token", tokenModel.Token);
+            HttpContext.Session.SetString("userId", );
+
+            return View();
         }
 
         // GET: ProductoController/Details/5

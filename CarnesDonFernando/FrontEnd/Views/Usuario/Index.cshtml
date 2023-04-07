@@ -1,47 +1,37 @@
-﻿@model IEnumerable<FrontEnd.Models.UsuarioViewModel>
+﻿@model FrontEnd.Helpers.SecurityHelper
 
 @{
     ViewData["Title"] = "Index";
 }
+<section class="vh-100" style="margin-top: 100px; margin-bottom: 100px">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card shadow-2-strong" style="border-radius: 1rem; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3)">
+                    <div class="card-body p-5 text-center">
 
-<h1>Index</h1>
+                        <h3 class="mb-5 LoginTitulo" style="color: #8492AF">Iniciar <span style="color: #AD2022">Sesión!</span></h3>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IdUsuario)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NombreUsuario)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Contrasenia)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdUsuario)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreUsuario)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Contrasenia)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id= item.IdUsuario }) |
-                    @Html.ActionLink("Details", "Details", new { id= item.IdUsuario }) |
-                    @Html.ActionLink("Delete", "Delete", new { id= item.IdUsuario })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                        <div class="form-outline mb-4">
+                            <input type="email" id="typeEmailX-2" placeHolder="Nombre de usuario" class="form-control form-control-lg LoginInput" />
+                            
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <input type="password" id="typePasswordX-2" placeHolder="Contraseña" class="form-control form-control-lg LoginInput" />
+                           
+                        </div>
+                       
+
+                        <button class="btnCatalogo btn"  type="submit">Iniciar Sesión</button>
+                        <br />
+                        <br />
+                        @Html.ActionLink("¿Olvidó la contraseña?", "Index", "Usuario",null, new { @class = "LoginCambiarContra" })
+                        
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
