@@ -7,6 +7,17 @@
    
 }
 
+.nombreUsuarioNavBar {
+    font-size: 12px;
+    color: #9D9D8D;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+.nombreUsuarioNavBar:hover {
+    color: blue !important;    
+}
+
 .itemNavbarLogin {
     text-align: center;
     /*font-size: 10px;*/
@@ -20,7 +31,7 @@
         color: white !important;
     }
 .itemNavbar {
-    margin-right: 50px;
+    margin-right: 30px;
     border-radius: 8px;
     padding-bottom: 3px !important;
     padding-top: 4px !important;
@@ -680,4 +691,8 @@ select.form-control {
 
 .LoginCambiarContra:hover {
     text-decoration: underline;
+}
+
+.msjText{
+    font-size: 15px;
 }

@@ -2,7 +2,7 @@
 using FrontEnd.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace FrontEnd.Controllers
 {
@@ -14,23 +14,94 @@ namespace FrontEnd.Controllers
         // GET: ProductoController
         public ActionResult Index()
         {
-                       
-           return View();
+            if (HttpContext.Session.GetString("token") is not null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction(nameof(Login));
+            } 
+            
+           
         }
 
         [HttpPost]
         public IActionResult Index(LoginModel usuario)
         {
-            
-            TokenModel tokenModel = securityHelper.Login(usuario);
-            IdUsuario idUsuario1 = securityHelper.getIdUsuario(usuario);
+            return View();
+        }
 
-            HttpContext.Session.SetString("token", tokenModel.Token);
-            HttpContext.Session.SetString("userId", idUsuario1.UserId);
-            var token = HttpContext.Session.GetString("token"); 
+        public ActionResult Login() { 
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Login(LoginModel usuario)
+        {
+
+            TokenModel tokenModel = securityHelper.Login(usuario);
+
+
+            if (tokenModel.Token is not null)
+            {
+                IdUsuario idUsuario1 = securityHelper.getIdUsuario(usuario);
+                HttpContext.Session.SetString("token", tokenModel.Token);
+                HttpContext.Session.SetString("userId", idUsuario1.UserId);
+                HttpContext.Session.SetString("userCorreo", idUsuario1.UserCorreo);
+
+                HttpContext.Session.SetString("nombreUsuario", usuario.Username);
+                return RedirectToAction(nameof(Index));
+            }
+            var token = HttpContext.Session.GetString("token");
             var idUsuario = HttpContext.Session.GetString("userId");
             return View();
         }
+        public ActionResult LogOff()
+        {
+            if (HttpContext.Session.GetString("token") is not null)
+            {
+                HttpContext.Session.Clear();
+
+                return RedirectToAction(nameof(Login));
+            }
+            else
+            {
+                return RedirectToAction(nameof(Login));
+            }
+
+        
+        }
+        public ActionResult Registrar()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Registrar(RegisterModel usuario)
+        {
+            ResponseModel response = securityHelper.Registrar(usuario);
+            if (response.Status.Equals("Success"))
+            {
+                LoginModel login = new LoginModel {
+                Username= usuario.Username,
+                Password= usuario.Password
+                };
+                Login(login);
+                return RedirectToAction(nameof(Index));
+            }
+
+            var token = HttpContext.Session.GetString("token");
+            var idUsuario = HttpContext.Session.GetString("userId");
+            return View();
+        }
+
+
+
+
+
+
+
+
+
 
         // GET: ProductoController/Details/5
         public ActionResult Details(int id)

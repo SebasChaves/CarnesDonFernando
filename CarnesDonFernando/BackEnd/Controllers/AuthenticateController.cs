@@ -38,9 +38,11 @@ namespace BackEndAPI.Controllers
         {
             var userExists = await userManager.FindByNameAsync(model.Username);
             var userId = userExists.Id;
+            var userEmail = userExists.Email;
             return Ok(new
             {
-                UserId = userId
+                UserId = userId,
+                UserCorreo = userEmail
             });
         }
 
@@ -88,7 +90,6 @@ namespace BackEndAPI.Controllers
         public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {
             var userExists = await userManager.FindByNameAsync(model.Username);
-            var userId = userExists.Id;
 
             if (userExists != null)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
@@ -103,6 +104,15 @@ namespace BackEndAPI.Controllers
             if (!result.Succeeded)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
 
+            if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
+                await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+            if (!await roleManager.RoleExistsAsync(UserRoles.User))
+                await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+
+            if (await roleManager.RoleExistsAsync(UserRoles.User))
+            {
+                await userManager.AddToRoleAsync(user, UserRoles.User);
+            }
             return Ok(new Response { Status = "Success", Message = "User created successfully!" });
         }
 

@@ -60,6 +60,25 @@ namespace FrontEnd.Helpers
 
             
         }
+        public ResponseModel Registrar(RegisterModel usuario)
+        {
+            try
+            {
+                ResponseModel response;
 
+                HttpResponseMessage responseMessage = ServiceRepository.PostResponse("api/Authenticate/register", usuario);
+                var content = responseMessage.Content.ReadAsStringAsync().Result;
+                response = JsonConvert.DeserializeObject<ResponseModel>(content);
+
+                return response;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+        }
     }
 }

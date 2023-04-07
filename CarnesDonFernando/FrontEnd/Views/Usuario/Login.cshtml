@@ -1,0 +1,48 @@
+﻿@model FrontEnd.Models.LoginModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+<form asp-controller="Usuario" asp-action="Login" method="post">
+    <section class="vh-100" style="margin-top: 100px; margin-bottom: 100px">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div class="card shadow-2-strong" style="border-radius: 1rem; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3)">
+                        <div class="card-body p-5 text-center">
+
+                            <h3 class="mb-5 LoginTitulo" style="color: #8492AF">Iniciar <span style="color: #AD2022">Sesión!</span></h3>
+
+                            <div class="form-outline mb-4">
+                                <!--input  id="typeEmailX-2" placeHolder="Nombre de usuario" class="form-control form-control-lg LoginInput" /-->
+                                <input asp-for="Username" placeHolder="Nombre de usuario" class="form-control form-control-lg LoginInput" />
+                                <span asp-validation-for="Username" class="text-danger msjText"></span>
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <!--input type="password" id="typePasswordX-2" placeHolder="Contraseña" class="form-control form-control-lg LoginInput" /-->
+                                <input asp-for="Password" placeHolder="Contraseña" class="form-control form-control-lg LoginInput" />
+                                <span asp-validation-for="Password" class="text-danger msjText"></span>
+                            </div>
+
+
+                            <button class="btnCatalogo btn" type="submit">Iniciar Sesión</button>
+
+                            <br />
+                            <br />
+                            @Html.ActionLink("¿Olvidó la contraseña?", "Index", "Usuario",null, new { @class = "LoginCambiarContra" })
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
