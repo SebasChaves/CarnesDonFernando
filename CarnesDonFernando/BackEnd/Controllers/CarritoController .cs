@@ -91,7 +91,7 @@ namespace BackEnd.Controllers
 
             foreach (var producto in carritos)
             {
-                if (producto.IdUsuario == id)
+                if (producto.IdUsuario == id.ToString())
                 {
                     carrito = Convertir(producto);
                 }

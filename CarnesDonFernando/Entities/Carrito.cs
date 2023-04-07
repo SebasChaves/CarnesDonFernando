@@ -15,7 +15,7 @@ namespace Entities
         public string IdUsuario { get; set; }
         public decimal PrecioFinal { get; set; }
 
-        public virtual Usuario IdUsuarioNavigation { get; set; } = null!;
+     
         public virtual ICollection<CarritoItem> CarritoItems { get; set; }
     }
 }
