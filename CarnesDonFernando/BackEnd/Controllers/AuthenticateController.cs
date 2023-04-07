@@ -32,9 +32,11 @@ namespace BackEndAPI.Controllers
         }
 
         [HttpPost("getUsuario")]
-        public UsuarioNet getUsuario()
+        public async Task<string> getUsuario(LoginModel model)
         {
-            return new UsuarioNet();
+            var userExists = await userManager.FindByNameAsync(model.Username);
+            var userId = userExists.Id;
+            return userId.ToString();
         }
 
         [HttpPost]

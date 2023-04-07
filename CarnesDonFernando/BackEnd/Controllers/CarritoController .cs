@@ -84,14 +84,14 @@ namespace BackEnd.Controllers
         }
 
         [HttpGet("GetCarritoUsuario/{id}")]
-        public JsonResult GetCarritoUsuario(int id)
+        public JsonResult GetCarritoUsuario(string id)
         {
             IEnumerable<Carrito> carritos = carritoDAL.GetAll();
             CarritoModel carrito = new CarritoModel();
 
             foreach (var producto in carritos)
             {
-                if (producto.IdUsuario == id.ToString())
+                if (producto.IdUsuario == id)
                 {
                     carrito = Convertir(producto);
                 }
