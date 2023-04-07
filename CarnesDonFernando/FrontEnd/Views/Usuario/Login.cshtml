@@ -3,8 +3,11 @@
 @{
     ViewData["Title"] = "Index";
 }
-<form asp-controller="Usuario" asp-action="Login" method="post">
-    <section class="vh-100" style="margin-top: 100px; margin-bottom: 100px">
+<br />
+<br />
+<br />
+<form asp-controller="Usuario" style="margin-top: 100px; margin-bottom: 100px" asp-action="Login" method="post">
+    <section class="vh-100" >
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -22,7 +25,8 @@
                             <div class="form-outline mb-4">
                                 <!--input type="password" id="typePasswordX-2" placeHolder="Contraseña" class="form-control form-control-lg LoginInput" /-->
                                 <input asp-for="Password" placeHolder="Contraseña" class="form-control form-control-lg LoginInput" />
-                                <span asp-validation-for="Password" class="text-danger msjText"></span>
+                                <span asp-validation-for="Password" class="text-danger msjText"></span><br />
+                                <span class="text-danger msjText">@ViewBag.Message</span>
                             </div>
 
 
@@ -40,7 +44,9 @@
         </div>
     </section>
 </form>
-
+<br />
+<br />
+<br />
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

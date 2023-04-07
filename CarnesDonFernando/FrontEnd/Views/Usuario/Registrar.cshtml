@@ -33,6 +33,8 @@
                                 <!--input type="password" id="typePasswordX-2" placeHolder="Contraseña" class="form-control form-control-lg LoginInput" /-->
                                 <input asp-for="ConfirmPassword" type="password" placeHolder="Confirmar contraseña" class="form-control form-control-lg LoginInput" />
                                 <span asp-validation-for="ConfirmPassword" class="text-danger msjText"></span>
+                                <br />
+                                <span class="text-danger msjText">@ViewBag.Message</span>
                             </div>
 
                             <button class="btnCatalogo btn" type="submit">Crear cuenta</button>

@@ -10,6 +10,8 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -92,7 +94,7 @@ namespace BackEndAPI.Controllers
             var userExists = await userManager.FindByNameAsync(model.Username);
 
             if (userExists != null)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "El usuario ya existe" });
 
             ApplicationUser user = new ApplicationUser()
             {
@@ -102,7 +104,7 @@ namespace BackEndAPI.Controllers
             };
             var result = await userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Fallo la creación del usuario, revise las credenciales" });
 
             if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
                 await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
@@ -113,6 +115,30 @@ namespace BackEndAPI.Controllers
             {
                 await userManager.AddToRoleAsync(user, UserRoles.User);
             }
+
+            string fromAddress = "freddiemercury1705@gmail.com";
+            string toAddress = model.Email;
+            string subject = "Creacion de cuenta en Carnes Don Fernando";
+            string body = "<h3 style: color='#000000 '>Se ha creado una cuenta en la pagina de Carnes Don Fernando, con el siguiente nombre de usuario: </h3><h3 style: color='#AD2022'>" + model.Username+"</h3>";
+
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+            client.EnableSsl = true;
+            client.UseDefaultCredentials = false;
+            client.Credentials = new NetworkCredential("freddiemercury1705@gmail.com", "dhxpwyxyugncbezo");
+
+            MailMessage message = new MailMessage(fromAddress, toAddress, subject, body);
+            message.IsBodyHtml = true;
+            message.IsBodyHtml = true;
+
+            try
+            {
+                client.Send(message);
+            }
+            catch (SmtpException ex)
+            {
+                Console.WriteLine("Error al enviar el correo electrónico: " + ex.Message);
+            }
+
             return Ok(new Response { Status = "Success", Message = "User created successfully!" });
         }
 

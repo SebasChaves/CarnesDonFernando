@@ -3,6 +3,8 @@ using FrontEnd.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Net.Mail;
+using System.Net;
 
 namespace FrontEnd.Controllers
 {
@@ -52,8 +54,14 @@ namespace FrontEnd.Controllers
                 HttpContext.Session.SetString("nombreUsuario", usuario.Username);
                 return RedirectToAction(nameof(Index));
             }
+            else
+            {
+                ViewBag.Message = "Error al iniciar sesión";
+            }
             var token = HttpContext.Session.GetString("token");
             var idUsuario = HttpContext.Session.GetString("userId");
+            
+
             return View();
         }
         public ActionResult LogOff()
@@ -87,6 +95,9 @@ namespace FrontEnd.Controllers
                 };
                 Login(login);
                 return RedirectToAction(nameof(Index));
+            }else if (response.Status.Equals("Error"))
+            {
+                ViewBag.Message = response.Message.ToString();
             }
 
             var token = HttpContext.Session.GetString("token");
