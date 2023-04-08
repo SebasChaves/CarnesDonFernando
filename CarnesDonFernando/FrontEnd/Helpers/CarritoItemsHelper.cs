@@ -82,7 +82,7 @@ namespace FrontEnd.Helpers
             public CarritoItemViewModel Edit(CarritoItemViewModel categoria)
             {
 
-
+            categoria.idUsuario = "";
             CarritoItemViewModel carrito;
 
 

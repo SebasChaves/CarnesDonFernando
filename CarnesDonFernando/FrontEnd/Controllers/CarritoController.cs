@@ -13,26 +13,35 @@ namespace FrontEnd.Controllers
         CarritoItemsHelper carritoItemsHelper = new CarritoItemsHelper();
 
         int idCarritoUsuario = 0;
-        string idUsuarioSession = "1bc7f5a7-e7ea-4a91-9e43-1e5d3aaa604e";
+        //string idUsuarioSession = "Prueba";
 
         // GET: CarritoController
         public ActionResult Index(string idUsuario)
         {
-            idCarritoUsuario = carritoHelper.SetUsuario(idUsuario).IdCarrito;
-
-            carritoItemsHelper.GetCarrito(carritoHelper.SetUsuario(idUsuario).IdCarrito);
-            List<CarritoItemViewModel> lista = carritoItemsHelper.GetCarrito(carritoHelper.SetUsuario(idUsuario).IdCarrito);
-            List<ProductoViewModel> productos = new List<ProductoViewModel>();
-            CarritoViewModel carritoCompuesto = carritoHelper.SetUsuario(idUsuario);
-
-            foreach (var producto in lista)
+            /*if (HttpContext.Session.GetString("userId") is not null)
             {
-                productos.Add(productoHelper.Get(producto.IdProducto));
-            }
-            
-            var viewModel = new ProductoCarritoViewModelCompuesto { Productos = productos, CarritoItems = lista, Carrito = carritoCompuesto };
+                this.idUsuarioSession = HttpContext.Session.GetString("userId");
+            }*/
+            if (HttpContext.Session.GetString("userId") is not null)
+            {
+                idCarritoUsuario = carritoHelper.SetUsuario(HttpContext.Session.GetString("userId")).IdCarrito;
 
-            return View(viewModel);
+                carritoItemsHelper.GetCarrito(carritoHelper.SetUsuario(HttpContext.Session.GetString("userId")).IdCarrito);
+                List<CarritoItemViewModel> lista = carritoItemsHelper.GetCarrito(carritoHelper.SetUsuario(HttpContext.Session.GetString("userId")).IdCarrito);
+                List<ProductoViewModel> productos = new List<ProductoViewModel>();
+                CarritoViewModel carritoCompuesto = carritoHelper.SetUsuario(HttpContext.Session.GetString("userId"));
+
+                foreach (var producto in lista)
+                {
+                    productos.Add(productoHelper.Get(producto.IdProducto));
+                }
+
+
+
+                var viewModel = new ProductoCarritoViewModelCompuesto { Productos = productos, CarritoItems = lista, Carrito = carritoCompuesto };
+
+                return View(viewModel);
+            }return View();
         }
 
         // GET: CarritoController/Details/5
@@ -96,7 +105,7 @@ namespace FrontEnd.Controllers
             try
             {
                 carritoItemsHelper.Delete(id);
-                return RedirectToAction(nameof(Index), new { idUsuario = idUsuarioSession });
+                return RedirectToAction(nameof(Index), new { idUsuario = HttpContext.Session.GetString("userId") });
             }
             catch
             {
@@ -109,16 +118,20 @@ namespace FrontEnd.Controllers
         {
             try
             {
-                List<CarritoItemViewModel> lista = carritoItemsHelper.GetCarrito(carritoHelper.SetUsuario(idUsuarioSession).IdCarrito);
-
-                foreach (var item in lista)
+                if(HttpContext.Session.GetString("userId") is not null)
                 {
-                    carritoItemsHelper.Delete(item.IdCarritoItems);
-                }
+                    List<CarritoItemViewModel> lista = carritoItemsHelper.GetCarrito(carritoHelper.SetUsuario(HttpContext.Session.GetString("userId")).IdCarrito);
 
-                //carritoItemsHelper.Delete(3);
+                    foreach (var item in lista)
+                    {
+                        carritoItemsHelper.Delete(item.IdCarritoItems);
+                    }
 
-                return RedirectToAction(nameof(Index), new { idUsuario = idUsuarioSession });
+                    //carritoItemsHelper.Delete(3);
+
+                    return RedirectToAction(nameof(Index), new { idUsuario = HttpContext.Session.GetString("userId") });
+                } return View();
+                
             }
             catch
             {
@@ -133,22 +146,26 @@ namespace FrontEnd.Controllers
             {
                 //this.idCarritoUsuario = carritoHelper.SetUsuario(1).IdCarrito;
             }*/
-
-            this.idCarritoUsuario = carritoHelper.SetUsuario("1bc7f5a7-e7ea-4a91-9e43-1e5d3aaa604e").IdCarrito;
-
-            int precioFinal = productoHelper.Get(idProducto).Precio * cantidadProducto;
-            CarritoItemViewModel model = new CarritoItemViewModel
+            if(HttpContext.Session.GetString("userId") is not null)
             {
-                IdCarrito = this.idCarritoUsuario,
-                IdProducto = idProducto,
-                Cantidad = cantidadProducto,
-                Precio = precioFinal
-            };
+                this.idCarritoUsuario = carritoHelper.SetUsuario(HttpContext.Session.GetString("userId")).IdCarrito;
 
-            carritoItemsHelper.Create(model);
+                int precioFinal = productoHelper.Get(idProducto).Precio * cantidadProducto;
+                CarritoItemViewModel model = new CarritoItemViewModel
+                {
+                    IdCarrito = this.idCarritoUsuario,
+                    IdProducto = idProducto,
+                    Cantidad = cantidadProducto,
+                    Precio = precioFinal,
+                    idUsuario = HttpContext.Session.GetString("userId")
+                };
+
+                carritoItemsHelper.Create(model);
 
 
-            return RedirectToAction(nameof(Index), new { idUsuario = idUsuarioSession });
+                return RedirectToAction(nameof(Index), new { idUsuario = HttpContext.Session.GetString("userId") });
+            }
+            return View();
         }
 
         [HttpPost]
@@ -157,36 +174,24 @@ namespace FrontEnd.Controllers
 
            
 
-            this.idCarritoUsuario = carritoHelper.SetUsuario("1bc7f5a7-e7ea-4a91-9e43-1e5d3aaa604e").IdCarrito;
+           // this.idCarritoUsuario = carritoHelper.SetUsuario(HttpContext.Session.GetString("userId")).IdCarrito;
 
             for(int i = 0; i < idProducto.Length; i++)
             {
                 int precioFinal = productoHelper.Get(idProducto[i]).Precio * cantidadProducto[i];
                 CarritoItemViewModel model = new CarritoItemViewModel
                 {
-                    IdCarrito = this.idCarritoUsuario,
+                    IdCarrito = carritoHelper.SetUsuario(HttpContext.Session.GetString("userId")).IdCarrito,
                     IdProducto = idProducto[i],
                     Cantidad = cantidadProducto[i],
                     Precio = precioFinal,
-                    IdCarritoItems = idCarritoItem[i]
+                    IdCarritoItems = idCarritoItem[i],
+                    idUsuario = ""
                 };
 
                 carritoItemsHelper.Edit(model);
             }
-           /* int precioFinal = productoHelper.Get(idProducto).Precio * cantidadProducto;
-            CarritoItemViewModel model = new CarritoItemViewModel
-            {
-                IdCarrito = this.idCarritoUsuario,
-                IdProducto = idProducto,
-                Cantidad = cantidadProducto,
-                Precio = precioFinal,
-                IdCarritoItems = idCarritoItem
-            };
-
-            carritoItemsHelper.Edit(model);*/
-
-
-            return RedirectToAction(nameof(Index), new { idUsuario = idUsuarioSession });
+            return RedirectToAction(nameof(Index), new { idUsuario = HttpContext.Session.GetString("userId") });
         }
     }
 }

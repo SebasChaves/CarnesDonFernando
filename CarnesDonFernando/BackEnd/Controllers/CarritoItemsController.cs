@@ -8,6 +8,8 @@ using System.Text;
 using System.Net.Http.Headers;
 using System;
 using Microsoft.AspNetCore.Authorization;
+using System.Reflection.Metadata;
+using Entities.Authentication;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -130,7 +132,27 @@ namespace BackEnd.Controllers
         [HttpPost]
         public JsonResult Post([FromBody] CarritoItemModel carrito)
         {
-            
+            if (carrito.IdCarrito == 0)
+            {
+                Carrito carritoPost = new Carrito { IdCarrito = 0, FechaCreado = DateTime.Now, IdUsuario = carrito.idUsuario, PrecioFinal = 0 };
+
+                HttpClient ClientPost = new HttpClient();
+                if (!ClientPost.DefaultRequestHeaders.Contains("ApiKey"))
+                {
+                    ClientPost.DefaultRequestHeaders.Add("ApiKey", "1234");
+                };
+                ClientPost.BaseAddress = new Uri("http://localhost:5180");
+                HttpResponseMessage responseMessage = ClientPost.PostAsJsonAsync("api/Carrito/", carritoPost).Result;
+                
+
+                string apiUrlGetUsuario = "http://localhost:5180/api/Carrito/GetCarritoUsuario/" + carritoPost.IdUsuario;
+                HttpResponseMessage responseGetUsuario = client.GetAsync(apiUrlGetUsuario).Result;
+                var contentGetUsuario = responseGetUsuario.Content.ReadAsStringAsync().Result;
+                Carrito carritoGetUsuario = JsonConvert.DeserializeObject<Carrito>(contentGetUsuario);
+
+                carrito.IdCarrito = carritoGetUsuario.IdCarrito;
+
+            }
             CarritoItem carritoItem;
             using (UnidadDeTrabajo<CarritoItem> unidad = new UnidadDeTrabajo<CarritoItem>(new pruebasCarnesDonFernandoContext()))
             {
