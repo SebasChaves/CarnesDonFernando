@@ -20,37 +20,48 @@
                         <th style="border: hidden" class="text-center">Cantidad</th>
                         <th style="border: hidden" class="text-center">Precio c/u</th>
                         <th style="border: hidden" class="text-center">Subtotal</th>
-                        <th style="border: hidden" class="text-center">@Html.ActionLink("Vaciar carrito", "DeleteAll", "Carrito",null,new { @class = "btnCatalogo btn"})</th>
+                        @if(Model.Carrito.PrecioFinal == 0)
+                        {
+                            <th style="border: hidden" disabled class="text-center"><a style="background-color: gray;"  class="btnCatalogo btn" disable>Vaciar carrito</a></th>
+                        }
+                        else
+                        {
+                            <th style="border: hidden" class="text-center">@Html.ActionLink("Vaciar carrito", "DeleteAll", "Carrito",null,new { @class = "btnCatalogo btn"})</th>
+                        }
+
                     </tr>
                 </thead>
                 <tbody>
                 
 
-                        @{
-                            /*
+                    @{
+                        /*
                             foreach (var item in Model.CarritoItems)
                             {
                                 <tr>
                                     <td>
                                         <div class="product-item">
-                                            <a class="product-thumb" href="#"><img src="@Model.Productos[1]" alt="Product"></a>
-                                            <div class="product-info">
-                                                <h4 class="product-title "><a href="#"> @Html.DisplayNameFor(model => model.Productos.Nombre)</a></h4>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="text-center">
+                            <a class="product-thumb" href="#"><img src="@Model.Productos[1]" alt="Product"></a>
+                                        <div class="product-info">
+                                            <h4 class="product-title "><a href="#"> @Html.DisplayNameFor(model => model.Productos.Nombre)</a></h4>
+                                                </div>
+                                                </div>
+                                                </td>
+                                            <td class="text-center">
                                         <div class="count-input">
-                                            <input type="number" class="form-control" min="1" max="@item.Cantidad" />
-                                        </div>
-                                    </td>
-                                    <td class="text-center text-lg text-medium">₡@Html.DisplayNameFor(model => model.Productos.Precio)</td>
+                                    <input type="number" class="form-control" min="1" max="@item.Cantidad" />
+                                            </div>
+                                            </td>
+                                        <td class="text-center text-lg text-medium">₡@Html.DisplayNameFor(model => model.Productos.Precio)</td>
                                     <td class="text-center text-lg text-medium">₡@Html.DisplayFor(modelItem => item.Precio)</td>
                                     <td class="text-center"><a class="remove-from-cart" href="#" data-toggle="tooltip" title="" data-original-title="Remove item"><i class="fa fa-trash"></i></a></td>
-                                </tr>
+                                    </tr>
                             }*/
-
-                            for(int i = 0;i<Model.CarritoItems.Count();i++){
+                        if(Model is not null)
+                        {
+                            
+                        }
+                        for(int i = 0;i<Model.CarritoItems.Count();i++){
                                 <input type="number" value="@Model.CarritoItems[i].IdProducto" id="idProducto" name="idProducto[]" hidden />
                             <input type="number" value="@Model.CarritoItems[i].IdCarritoItems" id="idCarritoItem" name="idCarritoItem[]" hidden />
                                 <tr>
@@ -91,8 +102,17 @@
         </div>
         <div class="shopping-cart-footer">
             <div class="column">
-                <button type="submit" class="btnCatalogo btn">Actualizar carrito</button>
-                <a class="btn btn-success" href="#">Finalizar compra</a>
+                @if (Model.Carrito.PrecioFinal == 0)
+                {
+                    <a style="background-color: gray;" class="btnCatalogo btn" disable>Actualizar carrito</a>
+                    <a style="background-color: gray;" class="btnCatalogo btn" disable>Finalizar compra</a>
+                }
+                else
+                {
+                    <button type="submit" class="btnCatalogo btn">Actualizar carrito</button>
+                    <a class="btn btn-success" href="#">Finalizar compra</a>
+                }
+                
             </div>
         </div>
     </form>

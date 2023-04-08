@@ -22,26 +22,35 @@ namespace FrontEnd.Controllers
             {
                 this.idUsuarioSession = HttpContext.Session.GetString("userId");
             }*/
-            if (HttpContext.Session.GetString("userId") is not null)
+            if(idUsuario is null)
             {
-                idCarritoUsuario = carritoHelper.SetUsuario(HttpContext.Session.GetString("userId")).IdCarrito;
-
-                carritoItemsHelper.GetCarrito(carritoHelper.SetUsuario(HttpContext.Session.GetString("userId")).IdCarrito);
-                List<CarritoItemViewModel> lista = carritoItemsHelper.GetCarrito(carritoHelper.SetUsuario(HttpContext.Session.GetString("userId")).IdCarrito);
-                List<ProductoViewModel> productos = new List<ProductoViewModel>();
-                CarritoViewModel carritoCompuesto = carritoHelper.SetUsuario(HttpContext.Session.GetString("userId"));
-
-                foreach (var producto in lista)
+                return RedirectToAction("Login", "Usuario");
+            }
+            else
+            {
+                if (HttpContext.Session.GetString("userId") is not null)
                 {
-                    productos.Add(productoHelper.Get(producto.IdProducto));
+                    idCarritoUsuario = carritoHelper.SetUsuario(HttpContext.Session.GetString("userId")).IdCarrito;
+
+                    carritoItemsHelper.GetCarrito(carritoHelper.SetUsuario(HttpContext.Session.GetString("userId")).IdCarrito);
+                    List<CarritoItemViewModel> lista = carritoItemsHelper.GetCarrito(carritoHelper.SetUsuario(HttpContext.Session.GetString("userId")).IdCarrito);
+                    List<ProductoViewModel> productos = new List<ProductoViewModel>();
+                    CarritoViewModel carritoCompuesto = carritoHelper.SetUsuario(HttpContext.Session.GetString("userId"));
+
+                    foreach (var producto in lista)
+                    {
+                        productos.Add(productoHelper.Get(producto.IdProducto));
+                    }
+
+
+
+                    var viewModel = new ProductoCarritoViewModelCompuesto { Productos = productos, CarritoItems = lista, Carrito = carritoCompuesto };
+
+                    return View(viewModel);
                 }
-
-
-
-                var viewModel = new ProductoCarritoViewModelCompuesto { Productos = productos, CarritoItems = lista, Carrito = carritoCompuesto };
-
-                return View(viewModel);
-            }return View();
+                return View();
+            }
+            
         }
 
         // GET: CarritoController/Details/5
@@ -165,7 +174,7 @@ namespace FrontEnd.Controllers
 
                 return RedirectToAction(nameof(Index), new { idUsuario = HttpContext.Session.GetString("userId") });
             }
-            return View();
+            return RedirectToAction("Login", "Usuario");
         }
 
         [HttpPost]
