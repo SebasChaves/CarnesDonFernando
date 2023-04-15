@@ -1,0 +1,98 @@
+﻿@model FrontEnd.FacturaViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+<h1 class="display-4 text-center tituloPaginaIndex" style="margin-top: 200px;">Chequeo</h1>
+<div class="container-fluid">
+    <div class="row abs-center form-factura">
+        <div class="row">
+            <ul>
+                <li>Por favor tomar en cuenta los horarios de su sucursal más cercana antes de realizar el pedido.</li>
+                <li>Los pedidos en días feriados, festivos y domingos, serán entregados en el próximo día hábil.</li>
+                <li>Las compras deberán ser superiores a los 25.000 colones para ser entregadas a domicilio de lo contrario la persona deberá retirarlo en el punto de venta de su preferencia. El servicio a domicilio cubre 8km a la redonda del establecimiento.</li>
+                <li>En caso de que el cliente no retire su pedido en un máximo de 1 día hábil posterior a la realización de su orden el pedido será cancelado. Carnes Don Fernando no se responsabilizará por el incumplimiento en el retiro por parte del cliente. Motivo por el cual librará a Carnes Don Fernando de realizar devolución de dinero.</li>
+            </ul>
+        </div>
+        <div class="col-md">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="NombreUsuario" class="control-label"></label>
+                            <input asp-for="NombreUsuario" class="form-control" />
+                            <span asp-validation-for="NombreUsuario" class="text-danger"></span>
+
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group ">
+                            <label asp-for="ApellidoUsuario" class="control-label"></label>
+                            <input asp-for="ApellidoUsuario" class="form-control" />
+                            <span asp-validation-for="ApellidoUsuario" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CedulaUsuario" class="control-label"></label>
+                    <input asp-for="CedulaUsuario" class="form-control" />
+                    <span asp-validation-for="CedulaUsuario" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DireccionUsuario" class="control-label"></label>
+                    <input asp-for="DireccionUsuario" class="form-control" />
+                    <span asp-validation-for="DireccionUsuario" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TelefonoUsuario" class="control-label"></label>
+                    <input asp-for="TelefonoUsuario" class="form-control" />
+                    <span asp-validation-for="TelefonoUsuario" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CorreoUsuario" class="control-label"></label>
+                    <input asp-for="CorreoUsuario" class="form-control" />
+                    <span asp-validation-for="CorreoUsuario" class="text-danger"></span>
+                </div>
+                <!--div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div-->
+            </form>
+        </div>
+        <div class="row" style="margin-top: 70px">
+            <table class="tabla-final" >
+                <tr class="tabla-precio">
+                    <th>Concepto</th>
+                    <th>Subtotal</th>
+                </tr>
+                <tr style="border-block-end: 1px solid; border-color: #E5E5E5; font-weight: normal">
+                    <td>Carne molida x1</td>
+                    <td>₡25,000</td>
+                </tr>
+                <tr style="border-block-end: 1px solid; border-color: #E5E5E5; font-weight: normal">
+                    <td>Carne molida</td>
+                    <td>₡25,000</td>
+                </tr>
+                <tr>
+                    <td class="tabla-precio">Total</td>
+                    <td>₡27,500</td>
+                </tr>
+            </table>
+        </div>
+        <div class="shopping-cart-footer" style="margin-top: 50px; border-color: white">
+            <div class="column">
+                <input type="submit" value="Realizar el pedido" class="btn btnCatalogo" />
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -142,11 +142,31 @@ namespace Entities
             modelBuilder.Entity<Factura>(entity =>
             {
                 entity.HasKey(e => e.IdFactura)
-                    .HasName("PK__factura__6C08ED537549A92B");
+                    .HasName("PK__factura__6C08ED53B113BEC2");
 
                 entity.ToTable("factura");
 
                 entity.Property(e => e.IdFactura).HasColumnName("id_factura");
+
+                entity.Property(e => e.ApellidoUsuario)
+                    .HasMaxLength(450)
+                    .HasColumnName("apellido_usuario");
+
+                entity.Property(e => e.CedulaUsuario)
+                    .HasMaxLength(450)
+                    .HasColumnName("cedula_usuario");
+
+                entity.Property(e => e.IdUsuario)
+                    .HasMaxLength(450)
+                    .HasColumnName("id_usuario");
+
+                entity.Property(e => e.CorreoUsuario)
+                    .HasMaxLength(450)
+                    .HasColumnName("correo_usuario");
+
+                entity.Property(e => e.DireccionUsuario)
+                    .HasMaxLength(450)
+                    .HasColumnName("direccion_usuario");
 
                 entity.Property(e => e.EstadoFactura)
                     .HasMaxLength(30)
@@ -157,13 +177,17 @@ namespace Entities
                     .HasColumnType("datetime")
                     .HasColumnName("fecha_creado");
 
-                entity.Property(e => e.IdUsuario)
+                entity.Property(e => e.NombreUsuario)
                     .HasMaxLength(450)
-                    .HasColumnName("id_usuario");
+                    .HasColumnName("nombre_usuario");
 
                 entity.Property(e => e.PrecioFinal)
                     .HasColumnType("decimal(18, 2)")
                     .HasColumnName("precioFinal");
+
+                entity.Property(e => e.TelefonoUsuario)
+                    .HasMaxLength(450)
+                    .HasColumnName("telefono_usuario");
             });
 
             modelBuilder.Entity<FacturaDetalle>(entity =>

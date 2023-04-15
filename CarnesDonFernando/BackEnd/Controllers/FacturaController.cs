@@ -25,11 +25,17 @@ namespace BackEnd.Controllers
         {
             return new FacturaModel
             {
-                IdFactura = model.IdFactura,
-                IdUsuario = model.IdUsuario,
+                IdFactura = model.IdFactura,                
                 FechaCreado = model.FechaCreado,
                 EstadoFactura = model.EstadoFactura,
-                PrecioFinal = model.PrecioFinal
+                PrecioFinal = model.PrecioFinal,
+                ApellidoUsuario = model.ApellidoUsuario,
+                CedulaUsuario = model.CedulaUsuario,
+                CorreoUsuario = model.CorreoUsuario,
+                DireccionUsuario = model.DireccionUsuario,
+                NombreUsuario = model.NombreUsuario,
+                TelefonoUsuario = model.TelefonoUsuario,
+                IdUsuario = model.IdUsuario
             };
 
 
@@ -39,10 +45,16 @@ namespace BackEnd.Controllers
             return new Factura
             {
                 IdFactura = model.IdFactura,
-                IdUsuario = model.IdUsuario,
                 FechaCreado = model.FechaCreado,
                 EstadoFactura = model.EstadoFactura,
-                PrecioFinal = model.PrecioFinal
+                PrecioFinal = model.PrecioFinal,
+                ApellidoUsuario = model.ApellidoUsuario,
+                CedulaUsuario = model.CedulaUsuario,
+                CorreoUsuario = model.CorreoUsuario,
+                DireccionUsuario = model.DireccionUsuario,
+                NombreUsuario = model.NombreUsuario,
+                TelefonoUsuario = model.TelefonoUsuario,
+                IdUsuario = model.IdUsuario
             };
         }
         // GET: api/<RecetaController>

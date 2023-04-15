@@ -453,7 +453,7 @@ select.form-control {
 .form-control {
     padding: 0 18px 3px;
     border: 1px solid #dbe2e8;
-    border-radius: 22px;
+    border-radius: 15px;
     background-color: #fff;
     color: #606975;
     font-family: "Maven Pro",Helvetica,Arial,sans-serif;
@@ -695,4 +695,47 @@ select.form-control {
 
 .msjText{
     font-size: 15px;
+}
+
+/*FACTURA*/
+.abs-center {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    min-height: 100vh;
+}
+
+.form-factura{
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+    .form-factura label {
+        font-family: Overpass, Arial ;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .form-factura input:focus {
+        background-color: #FBF2F2;
+        border-color: #AD2022;
+    }
+    .form-factura li{
+        font-weight: normal;
+    }
+
+.tabla-final {
+    padding: 5px;
+    border: 2px solid;
+    border-color: #8C0C0C;
+}
+.tabla-precio {
+    background-color: #8C0C0C;
+    color: white;
+    border: 1px solid;
+    border-color: #8C0C0C;
+}
+
+.tabla-precio th{
+    
 }
