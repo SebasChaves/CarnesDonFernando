@@ -24,6 +24,8 @@ namespace Entities
         public virtual DbSet<CarritoItem> CarritoItems { get; set; } = null!;
         public virtual DbSet<Categoria> Categorias { get; set; } = null!;
         public virtual DbSet<DetalleOrden> DetalleOrdens { get; set; } = null!;
+        public virtual DbSet<Factura> Facturas { get; set; } = null!;
+        public virtual DbSet<FacturaDetalle> FacturaDetalles { get; set; } = null!;
         public virtual DbSet<Ingrediente> Ingredientes { get; set; } = null!;
         public virtual DbSet<Local> Locals { get; set; } = null!;
         public virtual DbSet<MensajesContacto> MensajesContactos { get; set; } = null!;
@@ -135,6 +137,65 @@ namespace Entities
                     .HasForeignKey(d => d.IdProducto)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__detalle_o__id_pr__30F848ED");
+            });
+
+            modelBuilder.Entity<Factura>(entity =>
+            {
+                entity.HasKey(e => e.IdFactura)
+                    .HasName("PK__factura__6C08ED537549A92B");
+
+                entity.ToTable("factura");
+
+                entity.Property(e => e.IdFactura).HasColumnName("id_factura");
+
+                entity.Property(e => e.EstadoFactura)
+                    .HasMaxLength(30)
+                    .IsUnicode(false)
+                    .HasColumnName("estadoFactura");
+
+                entity.Property(e => e.FechaCreado)
+                    .HasColumnType("datetime")
+                    .HasColumnName("fecha_creado");
+
+                entity.Property(e => e.IdUsuario)
+                    .HasMaxLength(450)
+                    .HasColumnName("id_usuario");
+
+                entity.Property(e => e.PrecioFinal)
+                    .HasColumnType("decimal(18, 2)")
+                    .HasColumnName("precioFinal");
+            });
+
+            modelBuilder.Entity<FacturaDetalle>(entity =>
+            {
+                entity.HasKey(e => e.IdFacturaDetalle)
+                    .HasName("PK__facturaD__9DC50B0CD89C73F3");
+
+                entity.ToTable("facturaDetalle");
+
+                entity.Property(e => e.IdFacturaDetalle).HasColumnName("id_facturaDetalle");
+
+                entity.Property(e => e.Cantidad).HasColumnName("cantidad");
+
+                entity.Property(e => e.IdFactura).HasColumnName("id_factura");
+
+                entity.Property(e => e.IdProducto).HasColumnName("id_producto");
+
+                entity.Property(e => e.Precio)
+                    .HasColumnType("decimal(18, 2)")
+                    .HasColumnName("precio");
+
+                entity.HasOne(d => d.IdFacturaNavigation)
+                    .WithMany(p => p.FacturaDetalles)
+                    .HasForeignKey(d => d.IdFactura)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__facturaDe__id_fa__18EBB532");
+
+                entity.HasOne(d => d.IdProductoNavigation)
+                    .WithMany(p => p.FacturaDetalles)
+                    .HasForeignKey(d => d.IdProducto)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__facturaDe__id_pr__19DFD96B");
             });
 
             modelBuilder.Entity<Ingrediente>(entity =>

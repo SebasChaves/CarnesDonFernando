@@ -23,5 +23,6 @@ namespace Entities
         public virtual Categoria IdCategoriaNavigation { get; set; } = null!;
         public virtual ICollection<DetalleOrden> DetalleOrdens { get; set; }
         public virtual ICollection<CarritoItem> CarritoItems { get; set; }
+        public virtual ICollection<FacturaDetalle> FacturaDetalles{ get; set; }
     }
 }
