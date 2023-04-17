@@ -25,7 +25,8 @@
                         </div>
                         <h4 class="mb-2">@HttpContextAccessor.HttpContext.Session.GetString("nombreUsuario")</h4>
                         <p class="text-muted mb-4">
-                            @HttpContextAccessor.HttpContext.Session.GetString("userCorreo") <br /> @Html.ActionLink("Cerrar Sesión", "LogOff", "Usuario")
+                            @HttpContextAccessor.HttpContext.Session.GetString("userCorreo") <br />@Html.ActionLink("Cambiar contraseña", "CambioContrasenia", "Usuario") <br />
+                            @Html.ActionLink("Cerrar Sesión", "LogOff", "Usuario")
                         </p>
                     </div>
                 </div>

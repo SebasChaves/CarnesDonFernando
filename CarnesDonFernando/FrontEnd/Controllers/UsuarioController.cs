@@ -113,7 +113,8 @@ namespace FrontEnd.Controllers
         [HttpPost]
         public IActionResult CambioContrasenia(ContraseniaModel usuario)
         {
-
+            var nombreUsuario = HttpContext.Session.GetString("nombreUsuario");
+            usuario.Username = nombreUsuario;
             ResponseModel response = securityHelper.CambioContrasenia(usuario);
             if (response.Status.Equals("Success"))
             {
@@ -123,7 +124,7 @@ namespace FrontEnd.Controllers
                     Password = usuario.NewPassword
                 };
                 Login(login);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("LogOff");
             }
             else if (response.Status.Equals("Error"))
             {

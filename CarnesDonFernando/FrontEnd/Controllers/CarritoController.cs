@@ -7,13 +7,20 @@ namespace FrontEnd.Controllers
 {
     public class CarritoController : Controller
     {
+        
+
         ProductoHelper productoHelper = new ProductoHelper();
         UsuarioHelper usuarioHelper = new UsuarioHelper();
-        CarritoHelper carritoHelper = new CarritoHelper(HttpContext.Session.GetString("token"));
+        CarritoHelper carritoHelper = new CarritoHelper();
+        //CarritoHelper carritoHelper;
         CarritoItemsHelper carritoItemsHelper = new CarritoItemsHelper();
+        //CarritoItemsHelper carritoItemsHelper;
 
         int idCarritoUsuario = 0;
         //string idUsuarioSession = "Prueba";
+
+
+
 
         // GET: CarritoController
         public ActionResult Index(string idUsuario)
@@ -30,6 +37,13 @@ namespace FrontEnd.Controllers
             {
                 if (HttpContext.Session.GetString("userId") is not null)
                 {
+                    /*carritoHelper = new CarritoHelper(HttpContext.Session.GetString("token"));
+                    carritoItemsHelper = new CarritoItemsHelper(HttpContext.Session.GetString("token"));
+
+                    string us = HttpContext.Session.GetString("userId");
+                    string tok = HttpContext.Session.GetString("token");*/
+
+
                     idCarritoUsuario = carritoHelper.SetUsuario(HttpContext.Session.GetString("userId")).IdCarrito;
 
                     carritoItemsHelper.GetCarrito(carritoHelper.SetUsuario(HttpContext.Session.GetString("userId")).IdCarrito);
@@ -113,6 +127,7 @@ namespace FrontEnd.Controllers
         {
             try
             {
+                //carritoItemsHelper = new CarritoItemsHelper(HttpContext.Session.GetString("token"));
                 carritoItemsHelper.Delete(id);
                 return RedirectToAction(nameof(Index), new { idUsuario = HttpContext.Session.GetString("userId") });
             }
@@ -129,6 +144,9 @@ namespace FrontEnd.Controllers
             {
                 if(HttpContext.Session.GetString("userId") is not null)
                 {
+                    /*carritoHelper = new CarritoHelper(HttpContext.Session.GetString("token"));
+                    carritoItemsHelper = new CarritoItemsHelper(HttpContext.Session.GetString("token"));*/
+
                     List<CarritoItemViewModel> lista = carritoItemsHelper.GetCarrito(carritoHelper.SetUsuario(HttpContext.Session.GetString("userId")).IdCarrito);
 
                     foreach (var item in lista)
@@ -157,6 +175,9 @@ namespace FrontEnd.Controllers
             }*/
             if(HttpContext.Session.GetString("userId") is not null)
             {
+                /*carritoHelper = new CarritoHelper(HttpContext.Session.GetString("token"));
+                carritoItemsHelper = new CarritoItemsHelper(HttpContext.Session.GetString("token"));*/
+
                 this.idCarritoUsuario = carritoHelper.SetUsuario(HttpContext.Session.GetString("userId")).IdCarrito;
 
                 int precioFinal = productoHelper.Get(idProducto).Precio * cantidadProducto;
@@ -181,11 +202,12 @@ namespace FrontEnd.Controllers
         public ActionResult ActualizaCarrito(int[] idProducto, int[] cantidadProducto, int[] idCarritoItem)
         {
 
-           
+            /*carritoHelper = new CarritoHelper(HttpContext.Session.GetString("token"));
+            carritoItemsHelper = new CarritoItemsHelper(HttpContext.Session.GetString("token"));*/
 
-           // this.idCarritoUsuario = carritoHelper.SetUsuario(HttpContext.Session.GetString("userId")).IdCarrito;
+            // this.idCarritoUsuario = carritoHelper.SetUsuario(HttpContext.Session.GetString("userId")).IdCarrito;
 
-            for(int i = 0; i < idProducto.Length; i++)
+            for (int i = 0; i < idProducto.Length; i++)
             {
                 int precioFinal = productoHelper.Get(idProducto[i]).Precio * cantidadProducto[i];
                 CarritoItemViewModel model = new CarritoItemViewModel

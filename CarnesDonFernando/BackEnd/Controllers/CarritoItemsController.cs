@@ -96,8 +96,7 @@ namespace BackEnd.Controllers
             return new JsonResult(Convertir(carrito));
         }
 
-        [HttpGet("GetCarritoUsuario/{id}")]
-        [Authorize]
+        [HttpGet("GetCarritoUsuario/{id}")]        
         public JsonResult GetCarritoUsuario(int id)
         {
             IEnumerable<CarritoItem> carritos = carritoDAL.GetAll();
@@ -144,8 +143,11 @@ namespace BackEnd.Controllers
                 };
                 ClientPost.BaseAddress = new Uri("http://localhost:5180");
                 HttpResponseMessage responseMessage = ClientPost.PostAsJsonAsync("api/Carrito/", carritoPost).Result;
-                
 
+                if (!client.DefaultRequestHeaders.Contains("ApiKey"))
+                {
+                    client.DefaultRequestHeaders.Add("ApiKey", "1234");
+                };
                 string apiUrlGetUsuario = "http://localhost:5180/api/Carrito/GetCarritoUsuario/" + carritoPost.IdUsuario;
                 HttpResponseMessage responseGetUsuario = client.GetAsync(apiUrlGetUsuario).Result;
                 var contentGetUsuario = responseGetUsuario.Content.ReadAsStringAsync().Result;
