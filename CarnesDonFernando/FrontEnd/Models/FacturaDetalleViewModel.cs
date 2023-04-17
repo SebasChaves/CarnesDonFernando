@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace FrontEnd
+namespace FrontEnd.Models
 {
-    public partial class FacturaDetalleViewModel
+    public class FacturaDetalleViewModel
     {
         public int IdFacturaDetalle { get; set; }
         public int IdFactura { get; set; }

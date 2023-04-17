@@ -97,6 +97,7 @@ namespace BackEnd.Controllers
         }
 
         [HttpGet("GetCarritoUsuario/{id}")]
+        [Authorize]
         public JsonResult GetCarritoUsuario(int id)
         {
             IEnumerable<CarritoItem> carritos = carritoDAL.GetAll();

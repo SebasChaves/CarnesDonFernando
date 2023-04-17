@@ -9,7 +9,7 @@ namespace FrontEnd.Controllers
     {
         ProductoHelper productoHelper = new ProductoHelper();
         UsuarioHelper usuarioHelper = new UsuarioHelper();
-        CarritoHelper carritoHelper = new CarritoHelper();
+        CarritoHelper carritoHelper = new CarritoHelper(HttpContext.Session.GetString("token"));
         CarritoItemsHelper carritoItemsHelper = new CarritoItemsHelper();
 
         int idCarritoUsuario = 0;

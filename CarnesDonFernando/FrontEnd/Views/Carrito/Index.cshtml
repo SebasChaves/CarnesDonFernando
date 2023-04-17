@@ -100,7 +100,7 @@
        
             <div class="column text-lg">Total: <span class="text-medium">₡@Model.Carrito.PrecioFinal</span></div>
         </div>
-        <div class="shopping-cart-footer">
+        <div class="shopping-cart-footer">   
             <div class="column">
                 @if (Model.Carrito.PrecioFinal == 0)
                 {
@@ -110,7 +110,7 @@
                 else
                 {
                     <button type="submit" class="btnCatalogo btn">Actualizar carrito</button>
-                    <a class="btn btn-success" href="#">Finalizar compra</a>
+                    @Html.ActionLink("Finalizar compra", "Create", "Factura",null,new { @class = "btnCatalogo btn"})
                 }
                 
             </div>
