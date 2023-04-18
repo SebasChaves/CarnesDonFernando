@@ -12,7 +12,10 @@ namespace FrontEnd.Helpers
         {
             ServiceRepository = new ServiceRepository();
         }
-
+        public ProductoHelper(string token)
+        {
+            ServiceRepository = new ServiceRepository(token);
+        }
 
 
         public List<ProductoViewModel> GetAll()

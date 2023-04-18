@@ -9,7 +9,7 @@
 <!--p>
     <a asp-action="Create">Create New</a>
 </p-->
-@if(Model.Count() != 0)
+@if (Model.Count() != 0)
 {
     if (Model.First().IdCategoria == 1)
     {
@@ -35,7 +35,13 @@
 
 
 <div class="container-fluid">
+    <div class="row-5 justify-content-center">
+        @Html.ActionLink("Agregar producto", "Create", "Producto")
+    </div>
+    <br />
+
     <div class="row justify-content-center">
+        
         @foreach (var item in Model)
         {
             <div class="card tarjetasProdDest col-md-4" style="width: 23rem;">
@@ -48,6 +54,41 @@
                         <img class="" width="20" height="18" src="~/Imagenes/Iconos/tag-fill.svg" />
                     </h6>
                     @Html.ActionLink("Ver productos", "CompraProducto", "Producto",new { id=item.IdProducto }, new { @class = "btnCatalogo btn"})
+                    <form asp-action="Delete" id="formularioMio-@item.IdProducto" method="post">
+                        <script>
+                            var formularioMio = document.getElementById('formularioMio-@item.IdProducto');
+                            formularioMio.addEventListener('submit', function (event) {
+                                event.preventDefault();
+                                mostrarMensaje();
+                            });
+                            function mostrarMensaje() {
+                                Swal.fire({
+                                    title: '¿Esta seguro?',
+                                    text: "Se eliminara el producto",
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#d33',
+                                    cancelButtonColor: '#3085d6',
+                                    confirmButtonText: 'Eliminar',
+                                    cancelButtonText: 'Cancelar'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        Swal.fire(
+                                            'Eliminado!',
+                                            'El producto se ha eliminado con exito',
+                                            'success'
+                                        )
+                                        formularioMio.submit();
+                                    }
+                                })
+                            }
+                        </script>
+                        <input value="@item.IdProducto" name="idProducto"  hidden/>
+                        
+                        <input style="margin-top: 15px" onclick="mostrarMensaje()" type="submit" value="Delete" class="btn btnCatalogo" />
+                    </form>
+                    
+                    
                 </div>
             </div>
 

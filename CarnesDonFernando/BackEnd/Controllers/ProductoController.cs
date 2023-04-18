@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Entities;
 using BackEnd.Models;
 using System.Reflection.Metadata.Ecma335;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -54,7 +55,7 @@ namespace BackEnd.Controllers
         }
 
         // GET: api/<ProductoController>
-        [HttpGet]
+        [HttpGet]        
         public JsonResult Get()
         {
             IEnumerable<Producto> productos = productoDAL.GetAll();
@@ -99,6 +100,7 @@ namespace BackEnd.Controllers
             return new JsonResult(lista);
         }
         // POST api/<ProductoController>
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public JsonResult Post([FromBody] ProductoModel producto)
         {

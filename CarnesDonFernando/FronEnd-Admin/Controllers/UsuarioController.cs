@@ -50,6 +50,7 @@ namespace FrontEnd.Controllers
                 HttpContext.Session.SetString("token", tokenModel.Token);
                 HttpContext.Session.SetString("userId", idUsuario1.UserId);
                 HttpContext.Session.SetString("userCorreo", idUsuario1.UserCorreo);
+                HttpContext.Session.SetString("role", tokenModel.role);
 
                 HttpContext.Session.SetString("nombreUsuario", usuario.Username);
                 return RedirectToAction(nameof(Index));

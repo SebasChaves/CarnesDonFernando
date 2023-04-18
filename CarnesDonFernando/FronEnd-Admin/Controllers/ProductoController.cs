@@ -49,12 +49,6 @@ namespace FrontEnd.Controllers
         {
             List<CategoriaViewModel> lista = categoriaHelper.GetAll();
 
-           /* List<SelectListItem> listaCategorias = new();
-
-            for (int i = 0; i < lista.Count; i++)
-            {
-                listaCategorias.Add(new SelectListItem { Value = lista[i].IdCategoria.ToString(), Text = lista[i].Nombre.ToString() });
-            }*/
 
 
             ViewBag.idCategorias = dropdownCreate();
@@ -70,10 +64,25 @@ namespace FrontEnd.Controllers
         {
             try
             {
-                productoHelper = new ProductoHelper();
-                producto = productoHelper.Create(producto);
+                if (HttpContext.Session.GetString("role") is not null)
+                {
+                    if (HttpContext.Session.GetString("role").Equals("Admin"))
+                    {
+                        productoHelper = new ProductoHelper(HttpContext.Session.GetString("token"));
+                        producto = productoHelper.Create(producto);
 
-                return RedirectToAction(nameof(Index));
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Error", "Home");
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("Login", "Usuario");
+                }
+                
             }
             catch
             {
@@ -110,23 +119,23 @@ namespace FrontEnd.Controllers
         }
 
         // GET: ProductoController/Delete/5
-        public ActionResult Delete(int id)
+       /* public ActionResult Delete(int id)
         {
             productoHelper = new ProductoHelper();
             ProductoViewModel producto = productoHelper.Get(id);
 
             return View(producto);
-        }
+        }*/
 
         // POST: ProductoController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(ProductoViewModel producto)
+        public ActionResult Delete(string idproducto)
         {
             try
             {
                 productoHelper = new ProductoHelper();
-                productoHelper.Delete(producto.IdProducto);
+            //    productoHelper.Delete(idproducto);
 
 
                 return RedirectToAction(nameof(Index));
