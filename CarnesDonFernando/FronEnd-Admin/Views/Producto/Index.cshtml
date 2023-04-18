@@ -53,40 +53,8 @@
                         ₡@Html.DisplayFor(modelItem => item.Precio)
                         <img class="" width="20" height="18" src="~/Imagenes/Iconos/tag-fill.svg" />
                     </h6>
-                    @Html.ActionLink("Ver productos", "CompraProducto", "Producto",new { id=item.IdProducto }, new { @class = "btnCatalogo btn"})
-                    <form asp-action="Delete" id="formularioMio-@item.IdProducto" method="post">
-                        <script>
-                            var formularioMio = document.getElementById('formularioMio-@item.IdProducto');
-                            formularioMio.addEventListener('submit', function (event) {
-                                event.preventDefault();
-                                mostrarMensaje();
-                            });
-                            function mostrarMensaje() {
-                                Swal.fire({
-                                    title: '¿Esta seguro?',
-                                    text: "Se eliminara el producto",
-                                    icon: 'warning',
-                                    showCancelButton: true,
-                                    confirmButtonColor: '#d33',
-                                    cancelButtonColor: '#3085d6',
-                                    confirmButtonText: 'Eliminar',
-                                    cancelButtonText: 'Cancelar'
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        Swal.fire(
-                                            'Eliminado!',
-                                            'El producto se ha eliminado con exito',
-                                            'success'
-                                        )
-                                        formularioMio.submit();
-                                    }
-                                })
-                            }
-                        </script>
-                        <input value="@item.IdProducto" name="idProducto"  hidden/>
-                        
-                        <input style="margin-top: 15px" onclick="mostrarMensaje()" type="submit" value="Delete" class="btn btnCatalogo" />
-                    </form>
+                    @Html.ActionLink("Modificar producto", "CompraProducto", "Producto",new { id=item.IdProducto }, new { @class = "btnCatalogo btn"})
+                   
                     
                     
                 </div>

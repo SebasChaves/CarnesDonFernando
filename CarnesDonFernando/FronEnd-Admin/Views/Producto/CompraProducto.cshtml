@@ -7,7 +7,7 @@
 
 
 
- 
+
 <div class="row g-0  position-relative compraProduc" style="margin-top: 200px;">
     <div class="zoom-container">
         <img src="@Url.Content(@Model.UrlImg)" alt="Tu imagen">
@@ -38,72 +38,108 @@
 
 
     </script>
-    
-        <div class="col-md-4 p-0 ps-md-0">
-            <form asp-controller="Carrito" asp-action="AgregarCarrito" method="post">
-            <input type="number" value="@Model.IdProducto" id="idProducto" name="idProducto" hidden />
-                <h5 class="mt-0 tituloProductoCompra">@Html.DisplayFor(model => model.Nombre)</h5>
-                <p class="textoProductoCompra">
-                    @Html.DisplayFor(model => model.DescripcionProductoLarga)
-                </p>
-                <h6 class="subtituloProductoCompra">UNIDAD DE MEDIDA</h6>
-                <p class="textoProductoCompra">@Html.DisplayFor(model => model.DescripcionProductoCorta)</p>
 
-                <h6 class="subtituloProductoCompra">PRECIO UNIDAD</h6>
-                <p class="textoProductoCompra" id="">₡@Html.DisplayFor(model => model.Precio)</p>
-                <h6 class="subtituloProductoCompra">CANTIDAD</h6>
-                <div class="col-2 p-0">
-                <input type="number" id="cantidadProducto" style="border-color: #AD2022; border-width: 2px"
-                           class="form-control m-0 selectCantidad"
-                       name="cantidadProducto" title="Cantidad" size="2" placeholder="1" inputmode="numeric" min="1" max="@Model.Cantidad" value="1"/>
-                </div>
-                <br />
-                <h6 class="subtituloProductoCompra">PRECIO TOTAL</h6>
-                <p class="textoProductoCompra" id="result">₡@Html.DisplayFor(model => model.Precio)</p>
-                <br />
+    <div class="col-md-4 p-0 ps-md-0">
 
-                <div class="btnComprar">
-                    <script>
-                        var cantidad;
-                        cantidad.addEventListener("change", function () {
-                        }
-                    </script>
+        <input type="number" value="@Model.IdProducto" id="idProducto" name="idProducto" hidden />
+        <h5 class="mt-0 tituloProductoCompra">@Html.DisplayFor(model => model.Nombre)</h5>
+        <p class="textoProductoCompra">
+            @Html.DisplayFor(model => model.DescripcionProductoLarga)
+        </p>
+        <h6 class="subtituloProductoCompra">UNIDAD DE MEDIDA</h6>
+        <p class="textoProductoCompra">@Html.DisplayFor(model => model.DescripcionProductoCorta)</p>
 
-                   
-                    <button type="submit" class="btnCatalogo btn">Agregar al carrito</button>
-                </div>
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <p hidden id="precioProducto">@Html.DisplayFor(model => model.Precio)</p>
+        <h6 class="subtituloProductoCompra">PRECIO UNIDAD</h6>
+        <p class="textoProductoCompra" id="">₡@Html.DisplayFor(model => model.Precio)</p>
+        <h6 class="subtituloProductoCompra">CANTIDAD</h6>
+        <div class="col-2 p-0">
+            <input type="number" id="cantidadProducto" style="border-color: #AD2022; border-width: 2px"
+                   class="form-control m-0 selectCantidad"
+                   name="cantidadProducto" title="Cantidad" size="2" placeholder="1" inputmode="numeric" min="1" max="@Model.Cantidad" value="1" />
+        </div>
+        <br />
+        <h6 class="subtituloProductoCompra">PRECIO TOTAL</h6>
+        <p class="textoProductoCompra" id="result">₡@Html.DisplayFor(model => model.Precio)</p>
+        <br />
+
+        <div class="btnComprar">
+            <script>
+                var cantidad;
+                cantidad.addEventListener("change", function () {
+                }
+            </script>
 
 
+            <!--button type="submit" class="btnCatalogo btn">Agregar al carrito</button-->
+            <form asp-action="Delete" id="formularioMio" method="post">
                 <script>
-
-                                const myInput = document.getElementById("precioProducto");
-                    const cantidad = document.getElementById("cantidadProducto");
-                    const precioProducto = myInput.textContent;
-
-
-                    cantidad.addEventListener("change", function () {
-                        ;
-                        const precioProductoValue = @Html.DisplayFor(model => model.Precio);
-                        const cantidadProductoValue = parseFloat(cantidad.value);
-                        //alert(precioProductoValue)
-                        const multiplicacion = cantidadProductoValue * precioProductoValue;
-                        result.textContent = `₡${multiplicacion}`;
+                    var formularioMio = document.getElementById('formularioMio');
+                    formularioMio.addEventListener('submit', function (event) {
+                        event.preventDefault();
+                        mostrarMensaje();
                     });
-
+                    function mostrarMensaje() {
+                        Swal.fire({
+                            title: '¿Esta seguro?',
+                            text: "Se eliminara el producto",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#d33',
+                            cancelButtonColor: '#3085d6',
+                            confirmButtonText: 'Eliminar',
+                            cancelButtonText: 'Cancelar'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                Swal.fire(
+                                    'Eliminado!',
+                                    'El producto se ha eliminado con exito',
+                                    'success'
+                                ).then(function () {
+                                    // document.forms[0].submit();
+                                    formularioMio.submit();
+                                });
+                                
+                            }
+                        })
+                    }
                 </script>
-
+                <input value="@Model.IdProducto" name="idProducto" hidden />
+                <input onclick="mostrarMensaje()" type="submit" value="Eliminar producto" class="btn btnCatalogo" />
+                @Html.ActionLink("Editar producto", "Edit", "Producto",new { id=Model.IdProducto }, new { @class = "btnCatalogo btn"})
             </form>
         </div>
-    
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <p hidden id="precioProducto">@Html.DisplayFor(model => model.Precio)</p>
 
-    
+
+        <script>
+
+            const myInput = document.getElementById("precioProducto");
+            const cantidad = document.getElementById("cantidadProducto");
+            const precioProducto = myInput.textContent;
+
+
+            cantidad.addEventListener("change", function () {
+                ;
+                const precioProductoValue = @Html.DisplayFor(model => model.Precio);
+                const cantidadProductoValue = parseFloat(cantidad.value);
+                //alert(precioProductoValue)
+                const multiplicacion = cantidadProductoValue * precioProductoValue;
+                result.textContent = `₡${multiplicacion}`;
+            });
+
+        </script>
+
+
+    </div>
+
+
+
 </div>
 
 

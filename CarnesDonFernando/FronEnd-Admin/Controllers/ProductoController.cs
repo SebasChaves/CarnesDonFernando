@@ -47,14 +47,30 @@ namespace FrontEnd.Controllers
         // GET: ProductoController/Create
         public ActionResult Create()
         {
-            List<CategoriaViewModel> lista = categoriaHelper.GetAll();
+            if (HttpContext.Session.GetString("role") is not null)
+            {
+                if (HttpContext.Session.GetString("role").Equals("Admin"))
+                {
+                    List<CategoriaViewModel> lista = categoriaHelper.GetAll();
 
 
 
-            ViewBag.idCategorias = dropdownCreate();
+                    ViewBag.idCategorias = dropdownCreate();
 
 
-            return View();
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("Error", "Home");
+                }
+                
+            }
+            else
+            {
+                return RedirectToAction("Login", "Usuario");
+            }
+            
         }
 
         // POST: ProductoController/Create
@@ -93,10 +109,15 @@ namespace FrontEnd.Controllers
         // GET: ProductoController/Edit/5
         public ActionResult Edit(int id)
         {
+            List<CategoriaViewModel> lista = categoriaHelper.GetAll();
+
             productoHelper = new ProductoHelper();
             ProductoViewModel producto = productoHelper.Get(id);
 
+            ViewBag.idCategorias = dropdownCreate();
+
             return View(producto);
+
         }
 
         // POST: ProductoController/Edit/5
@@ -106,11 +127,25 @@ namespace FrontEnd.Controllers
         {
             try
             {
-                ProductoHelper productoHelper = new ProductoHelper();
-                producto = productoHelper.Edit(producto);
+                if (HttpContext.Session.GetString("role") is not null)
+                {
+                    if (HttpContext.Session.GetString("role").Equals("Admin"))
+                    {
+                        productoHelper = new ProductoHelper(HttpContext.Session.GetString("token"));
+                        //ProductoHelper productoHelper = new ProductoHelper();
+                        producto = productoHelper.Edit(producto);
 
-
-                return RedirectToAction(nameof(Index));
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Error", "Home");
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("Login", "Usuario");
+                }
             }
             catch
             {
@@ -130,28 +165,44 @@ namespace FrontEnd.Controllers
         // POST: ProductoController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(string idproducto)
+        public ActionResult Delete(int idproducto)
         {
             try
             {
                 productoHelper = new ProductoHelper();
-            //    productoHelper.Delete(idproducto);
+                productoHelper.Delete(idproducto);
 
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
             catch
             {
-                return View();
+                return RedirectToAction("Index", "Home");
             }
         }
 
         public ActionResult CompraProducto(int id)
         {
-            productoHelper = new ProductoHelper();
-            ProductoViewModel producto = productoHelper.Get(id);
+            if (HttpContext.Session.GetString("role") is not null)
+            {
+                if (HttpContext.Session.GetString("role").Equals("Admin"))
+                {
+                    productoHelper = new ProductoHelper();
+                    ProductoViewModel producto = productoHelper.Get(id);
 
-            return View(producto);
+                    return View(producto);
+                }
+                else
+                {
+                    return RedirectToAction("Error", "Home");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "Usuario");
+            }
+
+            
         }
 
        

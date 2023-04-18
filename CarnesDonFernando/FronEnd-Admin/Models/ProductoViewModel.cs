@@ -24,7 +24,7 @@ namespace FrontEnd.Models
         public string DescripcionProductoLarga { get; set; } = null!;
 
         [Required(ErrorMessage = "El campo es obligatorio.")]
-        [Display(Name = "Medida del producto")]
+        [Display(Name = "Unidad de medida")]
         public string DescripcionProductoCorta { get; set; } = null!;
 
         [Required(ErrorMessage = "El campo es obligatorio.")]
