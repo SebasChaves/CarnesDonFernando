@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--title>@ViewData["Title"] - FrontEnd</title-->
+    <title>Carnes Don Fernando Admin</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/navBar.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/FrontEnd.styles.css" asp-append-version="true" />
+    <link rel="icon" href="~/Imagenes/logo_Don_fernando (1).png"/>
+    <link href="c:\users\sebas\onedrive\escritorio\pruebascarnesdonfernando\carnesdonfernando\frontend\estilos\estilos_navbar.css" rel="stylesheet" />  
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-xIP/5cjRfJt/e63aW8+oCiRVLO9XrLq3hJ5Bn57cBL+gHPmoJh5p5Yjsb8MDg+5I9X2mGyHjmJ0aVv81gH1abQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body style="margin-bottom:0px">
+    @using Microsoft.AspNetCore.Http
+    @inject IHttpContextAccessor HttpContextAccessor
+    <header>
+        <nav class="navbar navbar-expand-md navbar-toggleable-md navbar-dark bg-dark  box-shadow ">
+            <div class="container-fluid" id="navbar">
+                <!--a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">FrontEnd</a-->
+                <a href="http://localhost:5013/"><img id="logo" class="" src="~/Imagenes/logo_Don_fernando (1).png" /></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon "></span>
+                </button>
+                
+                <div class="navbar-collapse  collapse d-sm-inline-flex justify-content-center">
+                    <ul class="navbar-nav  mb-2 mb-lg-0 text-al">
+                        <li class="nav-item" id="menuInicial">
+                            @Html.ActionLink("Nosotros", "Index", "Nosotros",null, new { @class = "itemNavbar nav-link active" })
+                        </li>
+                        <li class="nav-item dropdown" id="menuInicial">
+                            <a class="itemNavbar active nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-hover="dropdown">
+                                Comprar
+                            </a>
+                            <ul class="dropdown-menu " style="background-color: #AD2022;" id="menuDrop" aria-labelledby="navbarDropdown">
+                                <li>@Html.ActionLink("Corte de Res", "Index", "Producto",new { id=1 }, new { @class = "itemDropdown text-center dropdown-item" })</li>
+                                <li>@Html.ActionLink("Corte de Pollo", "Index", "Producto",new { id=3 }, new { @class = "itemDropdown text-center dropdown-item" })</li>
+                                <li>@Html.ActionLink("Corte de Cerdo", "Index", "Producto",new { id=2 }, new { @class = "itemDropdown text-center dropdown-item" })</li>
+                                <li>@Html.ActionLink("Productos Varios", "Index", "Producto",new { id=4 }, new { @class = "itemDropdown text-center dropdown-item" })</li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item" id="menuInicial">
+                            @Html.ActionLink("Tiendas", "Index", "Local",null, new { @class = "itemNavbar nav-link active" })
+                        </li>
+                        <li class="nav-item" id="menuInicial">
+                            @Html.ActionLink("Contacto", "Index", "Contacto",null, new { @class = "itemNavbar nav-link active" })
+                        </li>
+
+                        <li class="nav-item" id="menuInicial">
+                            @Html.ActionLink("Restaurantes", "Index", "Restaurante",null, new { @class = "itemNavbar nav-link active" })
+                        </li>
+                        <li class="nav-item" id="menuInicial">
+                            @Html.ActionLink("Carrito", "Index", "Carrito",new {idUsuario = HttpContextAccessor.HttpContext.Session.GetString("userId")}, new { @class = "itemNavbar nav-link active" })
+                        </li>
+                        @if (HttpContextAccessor.HttpContext.Session.GetString("nombreUsuario") is null)
+                        {
+
+                            <li class="nav-item" id="menuInicial">
+                                @Html.ActionLink("Iniciar Sesión", "Login", "Usuario",null, new { @class = "nombreUsuarioNavBar nav-link active" })
+                            </li>
+                            <li class="nav-item" id="menuInicial">
+                                @Html.ActionLink("Registrarse", "Registrar", "Usuario",null, new { @class = "nombreUsuarioNavBar nav-link active" })
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item" id="menuInicial">
+                                @Html.ActionLink("Perfil", "Index", "Usuario",null, new { @class = "itemNavbar nav-link active" })
+                            </li>
+                        }
+
+                    </ul>
+                    
+                </div>
+
+            </div>
+           
+
+        </nav>
+
+        <script>
+         
+            window.onscroll = function () { scrollFunction() };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
+                    document.getElementById("navbar").style.padding = "0px 0px";
+                    //document.getElementById("logo").style.fontSize = "25px";
+                    document.getElementById("logo").style.width = "70px";
+                    document.getElementById("logo").style.height = "70px";
+                } else {
+                    document.getElementById("navbar").style.padding = "10px 10px";
+                    //document.getElementById("logo").style.fontSize = "35px";
+                    document.getElementById("logo").style.width = "150px";
+                    document.getElementById("logo").style.height = "150px";
+                    /*document.getElementById("logo").style.width = "150px";
+                    document.getElementById("logo").style.height = "150px";
+                    document.getElementById("logo").style.margin = "0px";
+                    document.getElementById("logo").style.padding = "0px";
+                    document.getElementById("navbar").style.padding = "30px 10px";*/
+                }
+            }
+        </script>
+    </header>
+
+ 
+
+    <div class="">
+        <main role="main"  class="" >
+            
+            @RenderBody()
+            
+        </main>
+       
+        <footer class="text-center text-white footer" style="background-color: #AD2022;">
+      
+            <div class="container ">
+                <div class="text-center" style="line-height:normal">
+                
+                    <a class="btn  btn-link btn-floating btn-lg text-dark m-1 iconosFooter" style=" background-color:#AD2022"
+                       href="https://www.facebook.com/carnesdonfernando/"
+                       role="button" arget="_blank"
+                       data-mdb-ripple-color="dark">
+
+                        <img src="~/Imagenes/Iconos/facebook.svg" style="filter: invert(1);" />
+
+                    </a>
+
+                 
+                    <a class="btn btn-link btn-floating btn-lg text-dark m-1 iconosFooter" style=" background-color:#AD2022"
+                       href="https://www.instagram.com/donfernandocr/" +
+                       role="button" arget="_blank"
+                       data-mdb-ripple-color="dark">
+
+                        <img src="~/Imagenes/Iconos/instagram.svg" style="filter: invert(1)" />
+
+                    </a>
+
+           
+                    <a class="btn btn-link btn-floating btn-lg text-dark m-1 iconosFooter" style=" background-color:#AD2022"
+                       href="https://api.whatsapp.com/send?phone=50672612983"
+                       role="button" arget="_blank"
+                       data-mdb-ripple-color="dark">
+
+                        <img src="~/Imagenes/Iconos/whatsapp.svg" style="filter: invert(1)" />
+
+                    </a>
+
+
+                </div>
+                <div class="text-center" style="line-height:normal">
+           
+                    <a href="http://localhost:5013/" class="btn btn-link btn-floating btn-lg m-1 menuFooter" style=" background-color:#AD2022"
+                       role="button" arget="_blank"
+                       data-mdb-ripple-color="dark">
+                        Inicio
+                    </a>
+
+                
+                    <a href="http://localhost:5013/Nosotros" class="btn btn-link btn-floating btn-lg text-dark m-1 menuFooter" style=" background-color:#AD2022"
+                       role="button" arget="_blank"
+                       data-mdb-ripple-color="dark">
+                        Nosotros
+                    </a>
+
+                    <a href="http://localhost:5013/Contacto" class="btn btn-link btn-floating btn-lg text-dark m-1 menuFooter" style=" background-color:#AD2022"
+                       role="button" arget="_blank"
+                       data-mdb-ripple-color="dark">
+                        Contacto
+                    </a>
+
+
+                </div>
+
+         
+            </div>
+        
+            <div class="text-center menuFooter" style="">
+                <p style=" font-weight: normal; line-height:normal">Copyright © @DateTime.Now.Year Carnes Don Fernando</p>
+            </div>
+        </footer>
+    </div>
+
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

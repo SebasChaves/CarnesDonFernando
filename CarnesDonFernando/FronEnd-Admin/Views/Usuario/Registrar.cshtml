@@ -1,0 +1,63 @@
+﻿@model FrontEnd.Models.RegisterModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+<br />
+<br />
+<br />
+<form asp-controller="Usuario" asp-action="Registrar" method="post">
+    <section class="vh-100" style="margin-top: 100px; margin-bottom: 100px">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div class="card shadow-2-strong" style="border-radius: 1rem; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3)">
+                        <div class="card-body p-5 text-center">
+
+                            <h3 class="mb-5 LoginTitulo" style="color: #8492AF">Crear <span style="color: #AD2022">Cuenta!</span></h3>
+
+                            <div class="form-outline mb-4">
+                                <!--input  id="typeEmailX-2" placeHolder="Nombre de usuario" class="form-control form-control-lg LoginInput" /-->
+                                <input asp-for="Username" placeHolder="Nombre de usuario" class="form-control form-control-lg LoginInput" />
+                                <span asp-validation-for="Username" class="text-danger msjText"></span>
+                            </div>
+                            <div class="form-outline mb-4">
+                                <!--input  id="typeEmailX-2" placeHolder="Nombre de usuario" class="form-control form-control-lg LoginInput" /-->
+                                <input asp-for="Email" type="email" placeHolder="Correo" class="form-control form-control-lg LoginInput" />
+                                <span asp-validation-for="Email" class="text-danger msjText"></span>
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <!--input type="password" id="typePasswordX-2" placeHolder="Contraseña" class="form-control form-control-lg LoginInput" /-->
+                                <input asp-for="Password" type="password" placeHolder="Contraseña" class="form-control form-control-lg LoginInput" />
+                                <span asp-validation-for="Password" class="text-danger msjText"></span>
+                            </div>
+                            <div class="form-outline mb-4">
+                                <!--input type="password" id="typePasswordX-2" placeHolder="Contraseña" class="form-control form-control-lg LoginInput" /-->
+                                <input asp-for="ConfirmPassword" type="password" placeHolder="Confirmar contraseña" class="form-control form-control-lg LoginInput" />
+                                <span asp-validation-for="ConfirmPassword" class="text-danger msjText"></span>
+                                <br />
+                                <span class="text-danger msjText">@ViewBag.Message</span>
+                            </div>
+
+                            <button class="btnCatalogo btn" type="submit">Crear cuenta</button>
+
+                           
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>
+<br />
+<br />
+<br />
+<br />
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

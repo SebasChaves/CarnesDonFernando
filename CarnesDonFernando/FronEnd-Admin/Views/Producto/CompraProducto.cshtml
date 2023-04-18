@@ -1,0 +1,110 @@
+﻿@model FrontEnd.Models.ProductoViewModel
+
+@{
+    ViewData["Title"] = "compraProducto";
+}
+
+
+
+
+ 
+<div class="row g-0  position-relative compraProduc" style="margin-top: 200px;">
+    <div class="zoom-container">
+        <img src="@Url.Content(@Model.UrlImg)" alt="Tu imagen">
+    </div>
+    <script>
+        const zoomContainers = document.querySelectorAll('.zoom-container');
+
+        zoomContainers.forEach((container) => {
+            container.addEventListener('mousemove', (e) => {
+                const image = container.querySelector('img');
+                const rect = container.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const dx = (x - centerX) / centerX;
+                const dy = (y - centerY) / centerY;
+                const transformValue = `scale(1.8) translate(${dx * 50}px, ${dy * 50}px)`;
+                image.style.transform = transformValue;
+            });
+
+            container.addEventListener('mouseleave', (e) => {
+                const image = container.querySelector('img');
+                image.style.transform = 'scale(1)';
+            });
+        });
+
+
+
+    </script>
+    
+        <div class="col-md-4 p-0 ps-md-0">
+            <form asp-controller="Carrito" asp-action="AgregarCarrito" method="post">
+            <input type="number" value="@Model.IdProducto" id="idProducto" name="idProducto" hidden />
+                <h5 class="mt-0 tituloProductoCompra">@Html.DisplayFor(model => model.Nombre)</h5>
+                <p class="textoProductoCompra">
+                    @Html.DisplayFor(model => model.DescripcionProductoLarga)
+                </p>
+                <h6 class="subtituloProductoCompra">UNIDAD DE MEDIDA</h6>
+                <p class="textoProductoCompra">@Html.DisplayFor(model => model.DescripcionProductoCorta)</p>
+
+                <h6 class="subtituloProductoCompra">PRECIO UNIDAD</h6>
+                <p class="textoProductoCompra" id="">₡@Html.DisplayFor(model => model.Precio)</p>
+                <h6 class="subtituloProductoCompra">CANTIDAD</h6>
+                <div class="col-2 p-0">
+                <input type="number" id="cantidadProducto" style="border-color: #AD2022; border-width: 2px"
+                           class="form-control m-0 selectCantidad"
+                       name="cantidadProducto" title="Cantidad" size="2" placeholder="1" inputmode="numeric" min="1" max="@Model.Cantidad" value="1"/>
+                </div>
+                <br />
+                <h6 class="subtituloProductoCompra">PRECIO TOTAL</h6>
+                <p class="textoProductoCompra" id="result">₡@Html.DisplayFor(model => model.Precio)</p>
+                <br />
+
+                <div class="btnComprar">
+                    <script>
+                        var cantidad;
+                        cantidad.addEventListener("change", function () {
+                        }
+                    </script>
+
+                   
+                    <button type="submit" class="btnCatalogo btn">Agregar al carrito</button>
+                </div>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <p hidden id="precioProducto">@Html.DisplayFor(model => model.Precio)</p>
+
+
+                <script>
+
+                                const myInput = document.getElementById("precioProducto");
+                    const cantidad = document.getElementById("cantidadProducto");
+                    const precioProducto = myInput.textContent;
+
+
+                    cantidad.addEventListener("change", function () {
+                        ;
+                        const precioProductoValue = @Html.DisplayFor(model => model.Precio);
+                        const cantidadProductoValue = parseFloat(cantidad.value);
+                        //alert(precioProductoValue)
+                        const multiplicacion = cantidadProductoValue * precioProductoValue;
+                        result.textContent = `₡${multiplicacion}`;
+                    });
+
+                </script>
+
+            </form>
+        </div>
+    
+
+    
+</div>
+
+
+

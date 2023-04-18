@@ -1,0 +1,59 @@
+﻿@model IEnumerable<FrontEnd.Models.ProductoViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+<!--p>
+    <a asp-action="Create">Create New</a>
+</p-->
+@if(Model.Count() != 0)
+{
+    if (Model.First().IdCategoria == 1)
+    {
+        <h1 class="display-4 text-center tituloPaginaIndex" style="margin-top: 200px;">Cortes de res</h1>
+    }
+    else if (Model.First().IdCategoria == 2)
+    {
+        <h1 class="display-4 text-center tituloPaginaIndex" style="margin-top: 200px;">Cortes de cerdo</h1>
+    }
+    else if (Model.First().IdCategoria == 3)
+    {
+        <h1 class="display-4 text-center tituloPaginaIndex" style="margin-top: 200px;">Cortes de pollo</h1>
+    }
+    else if (Model.First().IdCategoria == 4)
+    {
+        <h1 class="display-4 text-center tituloPaginaIndex" style="margin-top: 200px;">Productos Varios</h1>
+    }
+    else
+    {
+        <h1 class="display-4 text-center tituloPaginaIndex" style="margin-top: 200px;">Cortes de cerdo</h1>
+    }
+}
+
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        @foreach (var item in Model)
+        {
+            <div class="card tarjetasProdDest col-md-4" style="width: 23rem;">
+                <img src="@Url.Content(@item.UrlImg)" class="card-img-top " alt="" />
+                <div class="card-body text-center">
+                    <h5 class="card-title titulosTarjetas">@Html.DisplayFor(modelItem => item.Nombre)</h5>
+                    <p class="card-text descripcionTarjetas">@Html.DisplayFor(modelItem => item.DescripcionProductoCorta)</p>
+                    <h6 class="card-text">
+                        ₡@Html.DisplayFor(modelItem => item.Precio)
+                        <img class="" width="20" height="18" src="~/Imagenes/Iconos/tag-fill.svg" />
+                    </h6>
+                    @Html.ActionLink("Ver productos", "CompraProducto", "Producto",new { id=item.IdProducto }, new { @class = "btnCatalogo btn"})
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
+<br />
+<br />
+<br />
