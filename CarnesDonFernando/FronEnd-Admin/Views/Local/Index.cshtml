@@ -6,62 +6,12 @@
 
 
 
-<!--p>
-    <a asp-action="Create">Create New</a>
-</!--p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IdLocal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NombreLocal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ubicacion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Horario)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UrlImg)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdLocal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreLocal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ubicacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Horario)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UrlImg)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.IdLocal  }) |
-                    @Html.ActionLink("Details", "Details", new { id=item.IdLocal }) |
-                    @Html.ActionLink("Delete", "Delete", new { id=item.IdLocal })
-            </td>
-        </tr>
-}
-    </tbody>
-</table-->
 
 <h1 class="display-4 text-center tituloPaginaIndex" style="margin-top: 200px;">Tiendas</h1>
 
 
-<div class="container-fluid">
+<div class="container-fluid">   
+    
     <div class="row g-0 bg-light position-relative vinculoDonFer">
 
         <div class="col-md-6 p-4 ps-md-0">
@@ -79,6 +29,10 @@
 </div>
 
 <div class="container-fluid">
+    <div class="row-5 justify-content-center">
+        @Html.ActionLink("Agregar local", "Create", "Local")
+    </div>
+    <br />
     <div class="row row-cols-1 row-cols-md-3 g-4">
         @foreach (var item in Model)
         {
@@ -92,7 +46,47 @@
                         <p class="card-text textoTienda "> @Html.DisplayFor(modelItem => item.Telefono)</p>
                         <p class="card-text textoTienda"> @Html.DisplayFor(modelItem => item.Horario)</p>
                     </div>
-                <img src="@Url.Content(@item.UrlImg)" class="card-img-top" />
+                    <img src="@Url.Content(@item.UrlImg)" class="card-img-top" />
+                    <div class="d-flex justify-content-around" style="margin-top: 12px;">
+
+                        <form asp-action="Delete" id="formularioMio-@item.IdLocal" method="post">
+                            <script>
+                                var formularioMio = document.getElementById('formularioMio-@item.IdLocal');
+                                formularioMio.addEventListener('submit', function (event) {
+                                    event.preventDefault();
+                                    mostrarMensaje();
+                                });
+                                function mostrarMensaje(idLocal) {
+                                    Swal.fire({
+                                        title: '¿Esta seguro?' +idLocal,
+                                        text: "Se eliminara el producto",
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#d33',
+                                        cancelButtonColor: '#3085d6',
+                                        confirmButtonText: 'Eliminar',
+                                        cancelButtonText: 'Cancelar'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            Swal.fire(
+                                                'Eliminado!',
+                                                'El producto se ha eliminado con exito',
+                                                'success'
+                                            ).then(function () {
+                                                 //document.forms[7].submit();
+                                                var formularioMio = document.getElementById('formularioMio-'+idLocal);
+                                                formularioMio.submit();
+                                            });
+
+                                        }
+                                    })
+                                }
+                            </script>
+                            <input value="@item.IdLocal" name="idLocal" hidden />
+                            <input onclick="mostrarMensaje(@item.IdLocal)" type="button" value="Eliminar tienda" class="btn btnCatalogo" />
+                            @Html.ActionLink("Editar tienda", "Edit", "Local", new {id = item.IdLocal}, new { @class = "btnCatalogo btn " })
+                        </form>
+                    </div>
                 </div>
 
             </div>

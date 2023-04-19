@@ -40,6 +40,10 @@
                         <p class="card-text textoTienda"> @Html.DisplayFor(modelItem => item.Horario)</p>
                     </div>
                     <img src="@Url.Content(@item.UrlImg)" class="card-img-top" />
+                    <div class="d-flex justify-content-between" style="margin-top: 12px;">
+                        @Html.ActionLink("Editar producto", "Edit", "Producto", null, new { @class = "btnCatalogo btn " })
+                        @Html.ActionLink("Editar producto", "Edit", "Producto", null, new { @class = "btnCatalogo btn " })
+                    </div>
                 </div>
 
             </div>

@@ -40,7 +40,7 @@ namespace FrontEnd.Controllers
             {
                 local = localHelper.Create(local);
 
-                return RedirectToAction("Details", new { id = local.IdLocal});
+                return RedirectToAction("Index", "Home");
             }
             catch
             {
@@ -74,21 +74,21 @@ namespace FrontEnd.Controllers
         }
 
         // GET: LocalController/Delete/5
-        public ActionResult Delete(int id)
+       /* public ActionResult Delete(int id)
         {
             LocalViewModel local = localHelper.Get(id);
 
             return View(local);
-        }
+        }*/
 
         // POST: LocalController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(LocalViewModel local)
+        public ActionResult Delete(int IdLocal)
         {
             try
             {
-                localHelper.Delete(local.IdLocal);
+                //localHelper.Delete(idLocal);
 
                 return RedirectToAction(nameof(Index));
             }
