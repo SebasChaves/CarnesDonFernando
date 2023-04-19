@@ -109,6 +109,7 @@ namespace BackEnd.Controllers
         }
 
         // PUT api/<ProductoController>/5
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         public JsonResult Put([FromBody] ProductoModel producto)
         {
@@ -117,6 +118,7 @@ namespace BackEnd.Controllers
         }
 
         // DELETE api/<ProductoController>/5
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public JsonResult Delete(int id)
         {

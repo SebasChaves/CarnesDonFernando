@@ -109,7 +109,7 @@ namespace FrontEnd.Controllers
         // GET: ProductoController/Edit/5
         public ActionResult Edit(int id)
         {
-            List<CategoriaViewModel> lista = categoriaHelper.GetAll();
+            //List<CategoriaViewModel> lista = categoriaHelper.GetAll();
 
             productoHelper = new ProductoHelper();
             ProductoViewModel producto = productoHelper.Get(id);
@@ -169,7 +169,7 @@ namespace FrontEnd.Controllers
         {
             try
             {
-                productoHelper = new ProductoHelper();
+                productoHelper = new ProductoHelper(HttpContext.Session.GetString("token"));
                 productoHelper.Delete(idproducto);
 
 
