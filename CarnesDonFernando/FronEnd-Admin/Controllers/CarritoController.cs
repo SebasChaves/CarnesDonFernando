@@ -66,7 +66,48 @@ namespace FrontEnd.Controllers
             }
             
         }
+        public ActionResult verCarritos()
+        {
+            if (HttpContext.Session.GetString("role") is not null)
+            {
+                if (HttpContext.Session.GetString("role").Equals("Admin"))
+                {
+                    carritoHelper = new CarritoHelper(HttpContext.Session.GetString("token"));
+                    List<CarritoViewModel> lista = carritoHelper.GetAll();
+                    return View(lista);
+                }
+                else
+                {
+                    return RedirectToAction("Error", "Home");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "Usuario");
+            }
+            
+        }
+        public ActionResult verCarritosItems()
+        {
+            if (HttpContext.Session.GetString("role") is not null)
+            {
+                if (HttpContext.Session.GetString("role").Equals("Admin"))
+                {
+                    carritoItemsHelper = new CarritoItemsHelper(HttpContext.Session.GetString("token"));
+                    List<CarritoItemViewModel> lista = carritoItemsHelper.GetAll();
+                    return View(lista);
+                }
+                else
+                {
+                    return RedirectToAction("Error", "Home");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "Usuario");
+            }
 
+        }
         // GET: CarritoController/Details/5
         public ActionResult Details(int id)
         {

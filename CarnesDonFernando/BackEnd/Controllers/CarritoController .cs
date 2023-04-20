@@ -3,6 +3,8 @@ using DAL.Implementations;
 using Entities;
 using Microsoft.AspNetCore.Mvc;
 using BackEnd.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -57,6 +59,7 @@ namespace BackEnd.Controllers
         }
 
         // GET: api/<CarritoController>
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public JsonResult Get()
         {

@@ -70,6 +70,7 @@ namespace BackEnd.Controllers
 
         // GET: api/<CarritoController>        
         //[Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public JsonResult Get()
         {
