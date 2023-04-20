@@ -1,0 +1,187 @@
+﻿@model IEnumerable<FrontEnd.Models.FacturaViewModel>
+
+@{
+    ViewData["Title"] = "verFactura";
+}
+
+
+<h1 class="display-4 text-center tituloPaginaIndex" style="margin-top: 200px;">Facturas</h1>
+
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container padding-bottom-3x mb-1">
+
+    <div class="table-responsive shopping-cart">
+        <table class="table">
+            <thead>
+                <tr style="border: hidden">
+                    <th style="border: hidden">Id de la factura</th>
+                    <th style="border: hidden">Fecha creado</th>
+                    <th style="border: hidden">Id del usuario</th>
+                    <th style="border: hidden">Nombre del usuario</th>
+                    <th style="border: hidden">Apellido del usuario</th>
+                    <th style="border: hidden">Cedula del usuario</th>
+                    <th style="border: hidden">Direccion del usuario</th>
+                    <th style="border: hidden">Telefono del usuario</th>
+                    <th style="border: hidden">Correo del usuario</th>
+                    <th style="border: hidden">Precio final</th>
+                    <th style="border: hidden">Estado de la factura</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+
+
+
+
+                @foreach (var item in Model)
+                {
+
+
+
+                    <tr>
+                        <form asp-action="Edit" id="formularioMio-@item.IdFactura" method="post">
+                        <td>
+                            <div class="product-item">
+
+                                <div class="product-info">
+                                    <h4 class="product-title "><a href="#"> @item.IdFactura</a></h4>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="product-item">
+
+                                <div class="product-info">
+                                    <h4 class="product-title "><a href="#"> @item.FechaCreado</a></h4>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="product-item">
+
+                                <div class="product-info">
+                                    <h4 class="product-title "><a href="#"> @item.IdUsuario</a></h4>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="product-item">
+
+                                <div class="product-info">
+                                    <h4 class="product-title "><a href="#"> @item.NombreUsuario</a></h4>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="product-item">
+
+                                <div class="product-info">
+                                    <h4 class="product-title "><a href="#"> @item.ApellidoUsuario</a></h4>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="product-item">
+
+                                <div class="product-info">
+                                    <h4 class="product-title "><a href="#"> @item.CedulaUsuario</a></h4>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="product-item">
+
+                                <div class="product-info">
+                                    <h4 class="product-title "><a href="#"> @item.DireccionUsuario</a></h4>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="product-item">
+
+                                <div class="product-info">
+                                    <h4 class="product-title "><a href="#"> @item.TelefonoUsuario</a></h4>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="product-item">
+
+                                <div class="product-info">
+                                    <h4 class="product-title "><a href="#"> @item.CorreoUsuario</a></h4>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="product-item">
+
+                                <div class="product-info">
+                                    <h4 class="product-title "><a href="#"> @item.PrecioFinal</a></h4>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="product-item">
+
+                                <div class="product-info">
+                                        @if (item.EstadoFactura.Equals("Por pagar") || item.EstadoFactura.Equals("por_pagar"))
+                                        {
+                                        <select id="estado" name="estado" class="form-control text-center">
+                                            <option value="por_pagar" selected>Por pagar</option>
+                                            <option value="pagado">Pagado</option>
+                                        </select>
+                                    }else{
+                                        <select id="estado" name="estado" class="form-control text-center">
+                                            <option value="por_pagar" >Por pagar</option>
+                                            <option value="pagado" selected>Pagado</option>
+                                        </select>
+                                    }                                    
+                                    <!--h4 class="product-title "><a href="#"> @item.EstadoFactura</a></h4-->
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <script>
+                                var formularioMio = document.getElementById('formularioMio-@item.IdFactura');
+                                formularioMio.addEventListener('submit', function (event) {
+                                    event.preventDefault();
+                                    mostrarMensaje();
+                                });
+                                function mostrarMensaje(idMensaje) {
+                                    Swal.fire({
+                                        title: '¡Factura actualizada!',
+                                        text: 'La factura se actualizo con exito',
+                                        icon: 'success',
+                                        confirmButtonColor: '#AD2022',
+                                        confirmButtonText: 'Entendido'
+                                    }).then(function () {
+                                        var formularioMio = document.getElementById('formularioMio-' + idMensaje);
+                                        formularioMio.submit();
+                                    });
+                                }
+                            </script>
+                            <input value="@item.IdFactura" name="idFactura" hidden />
+                            <input onclick="mostrarMensaje(@item.IdFactura)" type="button" value="Actualizar factura" class="btn btnCatalogo" />
+                        </td>
+                        </form>
+                    </tr>
+
+                }
+
+
+
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />

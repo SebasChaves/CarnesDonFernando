@@ -5,6 +5,8 @@ using Entities;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mail;
 using System.Net;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -60,6 +62,7 @@ namespace BackEnd.Controllers
             };
         }
         // GET: api/<RecetaController>
+        
         [HttpGet]
         public JsonResult Get()
         {
@@ -133,10 +136,11 @@ namespace BackEnd.Controllers
             }
             return new JsonResult(receta);
         }
-            
+
 
 
         // PUT api/<RecetaController>/5
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         public JsonResult Put([FromBody] FacturaModel receta)
         {

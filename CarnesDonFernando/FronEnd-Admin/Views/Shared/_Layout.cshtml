@@ -68,7 +68,19 @@
                                 </li>
                             </ul>
                         </li>
-                        
+                        <li class="nav-item dropdown" id="menuInicial">
+                            <a class="itemNavbar active nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-hover="dropdown">
+                                Facturas
+                            </a>
+                            <ul class="dropdown-menu " style="background-color: #AD2022;" id="menuDrop" aria-labelledby="navbarDropdown">
+                                <li class="nav-item" id="menuInicial">
+                                    @Html.ActionLink("Facturas", "verFactura", "Factura",null, new { @class = "itemDropdown text-center dropdown-item" })
+                                </li>
+                                <li class="nav-item" id="menuInicial">
+                                    @Html.ActionLink("Detalle de las facturas", "verFacturaDetalle", "Factura",null, new { @class = "itemDropdown text-center dropdown-item" })
+                                </li>
+                            </ul>
+                        </li>
                         @if (HttpContextAccessor.HttpContext.Session.GetString("nombreUsuario") is null)
                         {
 

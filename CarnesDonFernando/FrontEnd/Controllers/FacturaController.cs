@@ -79,8 +79,10 @@ namespace FrontEnd.Controllers
                         PrecioFinal = carritoHelper.SetUsuario(HttpContext.Session.GetString("userId")).PrecioFinal
 
                     };
+                    /*string to = HttpContext.Session.GetString("token");
+                    facturaHelper = new FacturaHelper(HttpContext.Session.GetString("token"));*/
                     facturaHelper.Create(facturaViewModel);
-                    int idFactura = facturaHelper.GetAll().Last().IdFactura;
+                   int idFactura = facturaHelper.GetAll().Last().IdFactura;
 
                     foreach (var carritoItem in lista)
                     {

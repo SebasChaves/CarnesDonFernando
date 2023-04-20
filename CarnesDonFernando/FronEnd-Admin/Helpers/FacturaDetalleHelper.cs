@@ -14,7 +14,10 @@ namespace FrontEnd.Helpers
             ServiceRepository = new ServiceRepository();
         }
 
-
+        public FacturaDetalleHelper(string token)
+        {
+            ServiceRepository = new ServiceRepository(token);
+        }
 
         public List<FacturaDetalleViewModel> GetAll()
         {

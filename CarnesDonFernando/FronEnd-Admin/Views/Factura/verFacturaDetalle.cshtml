@@ -1,0 +1,90 @@
+﻿@model IEnumerable<FrontEnd.Models.FacturaDetalleViewModel>
+
+@{
+    ViewData["Title"] = "verFacturaDetalle";
+}
+
+<h1 class="display-4 text-center tituloPaginaIndex" style="margin-top: 200px;">Detalle de las facturas</h1>
+
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container padding-bottom-3x mb-1">
+
+    <div class="table-responsive shopping-cart">
+        <table class="table">
+            <thead>
+                <tr style="border: hidden">
+                    <th style="border: hidden">Id del detalle</th>
+                    <th style="border: hidden">Id de la factura</th>
+                    <th style="border: hidden">Id del producto</th>
+                    <th style="border: hidden">Cantidad</th>
+                    <th style="border: hidden">Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <div class="product-item">
+
+                                <div class="product-info">
+                                    <h4 class="product-title "><a href="#"> @item.IdFacturaDetalle</a></h4>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="product-item">
+
+                                <div class="product-info">
+                                    <h4 class="product-title "><a href="#"> @item.IdFactura</a></h4>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="product-item">
+
+                                <div class="product-info">
+                                    <h4 class="product-title "><a href="#"> @item.IdProducto</a></h4>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="product-item">
+
+                                <div class="product-info">
+                                    <h4 class="product-title "><a href="#"> @item.Cantidad</a></h4>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="product-item">
+
+                                <div class="product-info">
+                                    <h4 class="product-title "><a href="#"> @item.Precio</a></h4>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                }
+
+
+
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />

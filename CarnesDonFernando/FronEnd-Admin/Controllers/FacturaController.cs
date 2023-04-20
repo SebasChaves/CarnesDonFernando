@@ -79,6 +79,7 @@ namespace FrontEnd.Controllers
                         PrecioFinal = carritoHelper.SetUsuario(HttpContext.Session.GetString("userId")).PrecioFinal
 
                     };
+                    facturaHelper = new FacturaHelper(HttpContext.Session.GetString("token"));
                     facturaHelper.Create(facturaViewModel);
                     int idFactura = facturaHelper.GetAll().Last().IdFactura;
 
@@ -128,11 +129,30 @@ namespace FrontEnd.Controllers
         // POST: FacturaController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int idFactura, string estado)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (HttpContext.Session.GetString("role") is not null)
+                {
+                    if (HttpContext.Session.GetString("role").Equals("Admin"))
+                    {
+                        facturaHelper = new FacturaHelper(HttpContext.Session.GetString("token"));
+                        FacturaViewModel facturaNueva = facturaHelper.Get(idFactura);
+                        facturaNueva.EstadoFactura = estado;
+                        facturaHelper.Edit(facturaNueva);
+
+                        return RedirectToAction("verFactura", "Factura");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Error", "Home");
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("Login", "Usuario");
+                }                
             }
             catch
             {
@@ -159,6 +179,47 @@ namespace FrontEnd.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult verFactura()
+        {
+            if (HttpContext.Session.GetString("role") is not null)
+            {
+                if (HttpContext.Session.GetString("role").Equals("Admin"))
+                {
+                    facturaHelper = new FacturaHelper(HttpContext.Session.GetString("token"));
+                    List<FacturaViewModel> lista = facturaHelper.GetAll();
+                    return View(lista);
+                }
+                else
+                {
+                    return RedirectToAction("Error", "Home");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "Usuario");
+            }
+        }
+        public ActionResult verFacturaDetalle()
+        {
+            if (HttpContext.Session.GetString("role") is not null)
+            {
+                if (HttpContext.Session.GetString("role").Equals("Admin"))
+                {
+                    facturaDetalleHelper = new FacturaDetalleHelper(HttpContext.Session.GetString("token"));
+                    List<FacturaDetalleViewModel> lista = facturaDetalleHelper.GetAll();
+                    return View(lista);
+                }
+                else
+                {
+                    return RedirectToAction("Error", "Home");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "Usuario");
+            }            
         }
     }
 }

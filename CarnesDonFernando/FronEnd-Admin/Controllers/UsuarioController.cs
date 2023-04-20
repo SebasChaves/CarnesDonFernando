@@ -87,7 +87,7 @@ namespace FrontEnd.Controllers
         [HttpPost]
         public IActionResult Registrar(RegisterModel usuario)
         {
-            ResponseModel response = securityHelper.Registrar(usuario);
+            ResponseModel response = securityHelper.RegistrarAdmin(usuario);
             if (response.Status.Equals("Success"))
             {
                 LoginModel login = new LoginModel {

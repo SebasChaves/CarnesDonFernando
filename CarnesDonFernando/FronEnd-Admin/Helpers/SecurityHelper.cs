@@ -80,6 +80,26 @@ namespace FrontEnd.Helpers
 
 
         }
+        public ResponseModel RegistrarAdmin(RegisterModel usuario)
+        {
+            try
+            {
+                ResponseModel response;
+
+                HttpResponseMessage responseMessage = ServiceRepository.PostResponse("api/Authenticate/register-admin", usuario);
+                var content = responseMessage.Content.ReadAsStringAsync().Result;
+                response = JsonConvert.DeserializeObject<ResponseModel>(content);
+
+                return response;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+        }
 
         public ResponseModel CambioContrasenia(ContraseniaModel usuario)
         {
