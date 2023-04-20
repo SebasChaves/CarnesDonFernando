@@ -7,11 +7,12 @@ namespace FrontEnd.Controllers
 {
     public class RestauranteController : Controller
     {
-        RestauranteHelper restauranteHelper = new RestauranteHelper();
+        RestauranteHelper restauranteHelper;
 
         // GET: RestauranteController
         public ActionResult Index()
         {
+            restauranteHelper = new RestauranteHelper();
             List<RestauranteViewModel> lista = restauranteHelper.GetAll();
 
             return View(lista);
@@ -28,7 +29,21 @@ namespace FrontEnd.Controllers
         // GET: RestauranteController/Create
         public ActionResult Create()
         {
-            return View();
+            if (HttpContext.Session.GetString("role") is not null)
+            {
+                if (HttpContext.Session.GetString("role").Equals("Admin"))
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("Error", "Home");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "Usuario");
+            }
         }
 
         // POST: RestauranteController/Create
@@ -38,9 +53,23 @@ namespace FrontEnd.Controllers
         {
             try
             {
-                restaurante = restauranteHelper.Create(restaurante);
-
-                return RedirectToAction("Details", new { id = restaurante.IdRestaurante});
+                if (HttpContext.Session.GetString("role") is not null)
+                {
+                    if (HttpContext.Session.GetString("role").Equals("Admin"))
+                    {
+                        restauranteHelper = new RestauranteHelper(HttpContext.Session.GetString("token"));
+                        restaurante = restauranteHelper.Create(restaurante);
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
+                    {
+                        return RedirectToAction("Error", "Home");
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("Login", "Usuario");
+                }
             }
             catch
             {
@@ -51,9 +80,23 @@ namespace FrontEnd.Controllers
         // GET: RestauranteController/Edit/5
         public ActionResult Edit(int id)
         {
-            RestauranteViewModel restaurante = restauranteHelper.Get(id);
-
-            return View(restaurante);
+            if (HttpContext.Session.GetString("role") is not null)
+            {
+                if (HttpContext.Session.GetString("role").Equals("Admin"))
+                {
+                    restauranteHelper = new RestauranteHelper(HttpContext.Session.GetString("token"));
+                    RestauranteViewModel local = restauranteHelper.Get(id);
+                    return View(local);
+                }
+                else
+                {
+                    return RedirectToAction("Error", "Home");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "Usuario");
+            }
         }
 
         // POST: RestauranteController/Edit/5
@@ -63,9 +106,23 @@ namespace FrontEnd.Controllers
         {
             try
             {
-                restaurante = restauranteHelper.Edit(restaurante);
-
-                return RedirectToAction("Details", new { id = restaurante.IdRestaurante });
+                if (HttpContext.Session.GetString("role") is not null)
+                {
+                    if (HttpContext.Session.GetString("role").Equals("Admin"))
+                    {
+                        restauranteHelper = new RestauranteHelper(HttpContext.Session.GetString("token"));
+                        restaurante = restauranteHelper.Edit(restaurante);
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
+                    {
+                        return RedirectToAction("Error", "Home");
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("Login", "Usuario");
+                }
             }
             catch
             {
@@ -74,23 +131,37 @@ namespace FrontEnd.Controllers
         }
 
         // GET: RestauranteController/Delete/5
-        public ActionResult Delete(int id)
+       /* public ActionResult Delete(int id)
         {
             RestauranteViewModel restaurante = restauranteHelper.Get(id);
 
             return View(restaurante);
-        }
+        }*/
 
         // POST: RestauranteController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(RestauranteViewModel restaurante)
+        public ActionResult Delete(int idRestaurante)
         {
             try
             {
-                restauranteHelper.Delete(restaurante.IdRestaurante);
-
-                return RedirectToAction(nameof(Index));
+                if (HttpContext.Session.GetString("role") is not null)
+                {
+                    if (HttpContext.Session.GetString("role").Equals("Admin"))
+                    {
+                        restauranteHelper = new RestauranteHelper(HttpContext.Session.GetString("token"));
+                        restauranteHelper.Delete(idRestaurante);
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
+                    {
+                        return RedirectToAction("Error", "Home");
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("Login", "Usuario");
+                }
             }
             catch
             {

@@ -30,7 +30,7 @@
 
 <div class="container-fluid">
     <div class="row-5 justify-content-center">
-        @Html.ActionLink("Agregar local", "Create", "Local")
+        @Html.ActionLink("Agregar tienda", "Create", "Local")
     </div>
     <br />
     <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -58,8 +58,8 @@
                                 });
                                 function mostrarMensaje(idLocal) {
                                     Swal.fire({
-                                        title: '¿Esta seguro?' +idLocal,
-                                        text: "Se eliminara el producto",
+                                        title: '¿Esta seguro?',
+                                        text: "Se eliminara la tienda",
                                         icon: 'warning',
                                         showCancelButton: true,
                                         confirmButtonColor: '#d33',
@@ -70,7 +70,7 @@
                                         if (result.isConfirmed) {
                                             Swal.fire(
                                                 'Eliminado!',
-                                                'El producto se ha eliminado con exito',
+                                                'La tienda se ha eliminado con exito',
                                                 'success'
                                             ).then(function () {
                                                  //document.forms[7].submit();

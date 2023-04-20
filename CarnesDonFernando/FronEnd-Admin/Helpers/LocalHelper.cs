@@ -13,7 +13,10 @@ namespace FrontEnd.Helpers
             ServiceRepository = new ServiceRepository();
         }
 
-
+        public LocalHelper(string token)
+        {
+            ServiceRepository = new ServiceRepository(token);
+        }
 
         public List<LocalViewModel> GetAll()
         {

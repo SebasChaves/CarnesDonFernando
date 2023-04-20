@@ -2,7 +2,9 @@
 using DAL.Implementations;
 using DAL.Interfaces;
 using Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -89,6 +91,7 @@ namespace BackEnd.Controllers
         }
 
         // POST api/<LocalController>
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public JsonResult Post([FromBody] LocalModel local)
         {
@@ -97,6 +100,7 @@ namespace BackEnd.Controllers
         }
 
         // PUT api/<LocalController>/5
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         public JsonResult Put([FromBody] LocalModel local)
         {
@@ -105,6 +109,7 @@ namespace BackEnd.Controllers
         }
 
         // DELETE api/<LocalController>/5
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public JsonResult Delete(int id)
         {

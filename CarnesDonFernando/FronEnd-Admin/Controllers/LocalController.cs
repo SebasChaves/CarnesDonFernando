@@ -7,11 +7,12 @@ namespace FrontEnd.Controllers
 {
     public class LocalController : Controller
     {
-        LocalHelper localHelper= new LocalHelper();
+        LocalHelper localHelper;
 
         // GET: LocalController
         public ActionResult Index()
         {
+            localHelper = new LocalHelper();
             List<LocalViewModel> lista = localHelper.GetAll();
 
             return View(lista);
@@ -28,7 +29,21 @@ namespace FrontEnd.Controllers
         // GET: LocalController/Create
         public ActionResult Create()
         {
-            return View();
+            if (HttpContext.Session.GetString("role") is not null)
+            {
+                if (HttpContext.Session.GetString("role").Equals("Admin"))
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("Error", "Home");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "Usuario");
+            }
         }
 
         // POST: LocalController/Create
@@ -38,9 +53,23 @@ namespace FrontEnd.Controllers
         {
             try
             {
-                local = localHelper.Create(local);
-
-                return RedirectToAction("Index", "Home");
+                if (HttpContext.Session.GetString("role") is not null)
+                {
+                    if (HttpContext.Session.GetString("role").Equals("Admin"))
+                    {
+                        localHelper = new LocalHelper(HttpContext.Session.GetString("token"));
+                        local = localHelper.Create(local);
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
+                    {
+                        return RedirectToAction("Error", "Home");
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("Login", "Usuario");
+                }                
             }
             catch
             {
@@ -51,9 +80,24 @@ namespace FrontEnd.Controllers
         // GET: LocalController/Edit/5
         public ActionResult Edit(int id)
         {
-            LocalViewModel local = localHelper.Get(id);
-
-            return View(local);
+            if (HttpContext.Session.GetString("role") is not null)
+            {
+                if (HttpContext.Session.GetString("role").Equals("Admin"))
+                {
+                    localHelper = new LocalHelper(HttpContext.Session.GetString("token"));
+                    LocalViewModel local = localHelper.Get(id);
+                    return View(local);
+                }
+                else
+                {
+                    return RedirectToAction("Error", "Home");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "Usuario");
+            }
+            
         }
 
         // POST: LocalController/Edit/5
@@ -63,9 +107,23 @@ namespace FrontEnd.Controllers
         {
             try
             {
-                local = localHelper.Edit(local);
-
-                return RedirectToAction("Details", new { id = local.IdLocal });
+                if (HttpContext.Session.GetString("role") is not null)
+                {
+                    if (HttpContext.Session.GetString("role").Equals("Admin"))
+                    {
+                        localHelper = new LocalHelper(HttpContext.Session.GetString("token"));
+                        local = localHelper.Edit(local);
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
+                    {
+                        return RedirectToAction("Error", "Home");
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("Login", "Usuario");
+                }
             }
             catch
             {
@@ -88,9 +146,24 @@ namespace FrontEnd.Controllers
         {
             try
             {
-                //localHelper.Delete(idLocal);
-
-                return RedirectToAction(nameof(Index));
+                if (HttpContext.Session.GetString("role") is not null)
+                {
+                    if (HttpContext.Session.GetString("role").Equals("Admin"))
+                    {
+                        localHelper = new LocalHelper(HttpContext.Session.GetString("token"));
+                        localHelper.Delete(IdLocal);
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
+                    {
+                        return RedirectToAction("Error", "Home");
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("Login", "Usuario");
+                }
+                
             }
             catch
             {

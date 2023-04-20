@@ -12,7 +12,10 @@ namespace FrontEnd.Helpers
         {
             ServiceRepository = new ServiceRepository();
         }
-
+        public RestauranteHelper(string token)
+        {
+            ServiceRepository = new ServiceRepository(token);
+        }
 
 
         public List<RestauranteViewModel> GetAll()

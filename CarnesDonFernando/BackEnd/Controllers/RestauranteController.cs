@@ -2,7 +2,9 @@
 using DAL.Implementations;
 using DAL.Interfaces;
 using Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -36,7 +38,8 @@ namespace BackEnd.Controllers
                     Horario = model.Horario,
                     NombreRestaurante = model.NombreRestaurante,
                     Ubicacion = model.Ubicacion,
-                    UrlImg = model.UrlImg
+                    UrlImg = model.UrlImg,
+                    Telefono = model.Telefono
                 };
             }
         }
@@ -54,7 +57,8 @@ namespace BackEnd.Controllers
                     Horario = model.Horario,
                     NombreRestaurante = model.NombreRestaurante,
                     Ubicacion = model.Ubicacion,
-                    UrlImg = model.UrlImg
+                    UrlImg = model.UrlImg,
+                    Telefono = model.Telefono
                 };
             }
         }
@@ -87,6 +91,7 @@ namespace BackEnd.Controllers
         }
 
         // POST api/<RestauranteController>
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public JsonResult Post([FromBody] RestauranteModel restaurante)
         {
@@ -95,6 +100,7 @@ namespace BackEnd.Controllers
         }
 
         // PUT api/<RestauranteController>/5
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         public JsonResult Put([FromBody] RestauranteModel restaurante)
         {
@@ -103,6 +109,7 @@ namespace BackEnd.Controllers
         }
 
         // DELETE api/<RestauranteController>/5
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public JsonResult Delete(int id)
         {

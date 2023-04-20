@@ -50,7 +50,7 @@
                     </div>
                     <div class="shopping-cart-footer" style="margin-top: 50px; border-color: white">
                         <div class="column">
-                            <input  value="@Model.IdLocal" hidden class="form-control" />
+                            <input asp-for="IdLocal" value="@Model.IdLocal" hidden class="form-control" />
                             <script>
                                 var formularioMio = document.getElementById('formularioMio');
                                 formularioMio.addEventListener('submit', function (event) {
@@ -74,7 +74,7 @@
                                 }
                             </script>
 
-                            <a href="http://localhost:8000/" class="btnCatalogo btn">Regresar</a>                                                        
+                            <a href="http://localhost:8000/Local" class="btnCatalogo btn">Regresar</a>
                             <input type="submit" onclick="mostrarMensaje()" value="Actualizar tienda" class="btn btnCatalogo" />
                         </div>
                     </div>
