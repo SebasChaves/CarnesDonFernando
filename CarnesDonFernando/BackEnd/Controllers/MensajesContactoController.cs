@@ -3,6 +3,8 @@ using DAL.Implementations;
 using Microsoft.AspNetCore.Mvc;
 using Entities;
 using BackEnd.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -53,6 +55,7 @@ namespace BackEnd.Controllers
         }
 
         // GET: api/<MensajesContactoController>
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public JsonResult Get()
         {
@@ -97,6 +100,7 @@ namespace BackEnd.Controllers
         }
 
         // DELETE api/<MensajesContactoController>/5
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public JsonResult Delete(int id)
         {

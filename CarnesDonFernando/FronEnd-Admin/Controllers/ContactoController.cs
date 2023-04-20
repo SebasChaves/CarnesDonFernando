@@ -34,9 +34,24 @@ namespace FrontEnd.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.idLocal = dropdownCreate();
-            //ViewBag.isConfirm = false;
-            return View();
+            if (HttpContext.Session.GetString("role") is not null)
+            {
+                if (HttpContext.Session.GetString("role").Equals("Admin"))
+                {
+                    mensajesContactoHelper = new MensajesContactoHelper(HttpContext.Session.GetString("token"));
+                    List<MensajesContactoViewModel> lista = mensajesContactoHelper.GetAll();
+                    //ViewBag.isConfirm = false;
+                    return View(lista);
+                }
+                else
+                {
+                    return RedirectToAction("Error", "Home");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "Usuario");
+            }           
         }
 
         public IActionResult Privacy()
@@ -52,7 +67,8 @@ namespace FrontEnd.Controllers
 
         public IActionResult Create()
         {
-            return RedirectToAction(nameof(Index));
+            ViewBag.idLocal = dropdownCreate();
+            return View();
         }
 
         [HttpPost]
@@ -65,8 +81,38 @@ namespace FrontEnd.Controllers
                 ViewBag.isConfirm = true;
                 Thread.Sleep(5000);
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Create","Contacto");
                 //return View();
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int idMensaje)
+        {
+            try
+            {
+                 if (HttpContext.Session.GetString("role") is not null)
+                 {
+                     if (HttpContext.Session.GetString("role").Equals("Admin"))
+                     {
+                        mensajesContactoHelper = new MensajesContactoHelper(HttpContext.Session.GetString("token"));
+                        mensajesContactoHelper.Delete(idMensaje);                        
+                        return RedirectToAction(nameof(Index));
+                     }
+                     else
+                     {
+                         return RedirectToAction("Error", "Home");
+                     }
+                 }
+                 else
+                 {
+                     return RedirectToAction("Login", "Usuario");
+                 }
             }
             catch
             {
@@ -75,3 +121,4 @@ namespace FrontEnd.Controllers
         }
     }
 }
+

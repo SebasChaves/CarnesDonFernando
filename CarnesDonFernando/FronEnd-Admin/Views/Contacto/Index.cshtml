@@ -1,123 +1,136 @@
-﻿@model FrontEnd.Models.MensajesContactoViewModel
+﻿@model IEnumerable<FrontEnd.Models.MensajesContactoViewModel>
+
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Index";
 }
 
-<h1 class="display-4 text-center tituloPaginaIndex" style="margin-top: 200px;">Contacto</h1>
+<h1 class="display-4 text-center tituloPaginaIndex" style="margin-top: 200px;">Mensajes de contacto</h1>
 
-<div class="container-fluid">
-    <div class="row g-0 bg-light position-relative vinculoDonFer">
 
-        <div class="col-md-6 p-4 ps-md-0 ">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container padding-bottom-3x mb-1">
+    <form asp-controller="Carrito" asp-action="ActualizaCarrito" method="post">
+        <div class="table-responsive shopping-cart">
+            <table class="table">
+                <thead>
+                    <tr style="border: hidden">
+                        <th style="border: hidden">Id del mensaje</th>
+                        <th style="border: hidden">Nombre de la persona</th>
+                        <th style="border: hidden">Correo</th>
+                        <th style="border: hidden">Telefono</th>
+                        <th style="border: hidden">Id del local</th>
+                        <th style="border: hidden">Mensaje</th>
 
-            <div>
-                <p class="" style="font-family: 'Overpass'; font-size:18px;">
-                    <strong> Correo electronico: </strong>momentos@carnesdonfernando.com
-                </p>
-                <p class="" style="font-family: 'Overpass'; font-size:18px;">
-                    <strong>Visite nuestros restaurantes y tiendas en: </strong>
-                </p>
-            </div>
-            <div class="row g-0 bg-light position-relative vinculoDonFer">
-                <div class="col" style="padding:0px; margin:0px">
-                    <p class="" style="font-family: 'Overpass'; font-size: 18px; color: #AD2022">
-                        <strong>Escazu </strong>
-                    </p>
-                    <p class="" style="font-family: 'Overpass'; font-size:18px; ">
-                        2289-9165
-                    </p>
-                    <p class="" style="font-family: 'Overpass'; font-size: 18px; color: #AD2022">
-                        <strong>Pinares </strong>
-                    </p>
-                    <p class="" style="font-family: 'Overpass'; font-size:18px;">
-                        2271-3334
-                    </p>
-                </div>
-                <div class="col" style="padding:0px; margin:0px">
-                    <p class="" style="font-family: 'Overpass'; font-size: 18px; color: #AD2022">
-                        <strong>Santa Ana </strong>
-                    </p>
-                    <p class="" style="font-family: 'Overpass'; font-size:18px;">
-                        2582-1549
-                    </p>
-                    <p class="" style="font-family: 'Overpass'; font-size: 18px; color: #AD2022">
-                        <strong>Heredia </strong>
-                    </p>
-                    <p class="" style="font-family: 'Overpass'; font-size:18px;">
-                        2237-7750
-                    </p>
-                </div>
-            </div>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+
+                    @{
+
+                        @foreach (var item in Model)
+                        {
+
+                            <tr>
+                                <td>
+                                    <div class="product-item">
+
+                                        <div class="product-info">
+                                            <h4 class="product-title "><a href="#"> @item.IdMensaje</a></h4>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="product-item">
+
+                                        <div class="product-info">
+                                            <h4 class="product-title "><a href="#"> @item.NombrePersona</a></h4>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="product-item">
+
+                                        <div class="product-info">
+                                            <h4 class="product-title "><a href="#"> @item.Correo</a></h4>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="product-item">
+
+                                        <div class="product-info">
+                                            <h4 class="product-title "><a href="#"> @item.Telefono</a></h4>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="product-item">
+
+                                        <div class="product-info">
+                                            <h4 class="product-title "><a href="#"> @item.IdLocal</a></h4>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="product-item">
+
+                                        <div class="product-info">
+                                            <h4 class="product-title "><a href="#"> @item.Mensaje</a></h4>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <form asp-action="Delete" id="formularioMio-@item.IdMensaje" method="post">
+                                        <script>
+                                            var formularioMio = document.getElementById('formularioMio-@item.IdMensaje');
+                                            formularioMio.addEventListener('submit', function (event) {
+                                                event.preventDefault();
+                                                mostrarMensaje();
+                                            });
+                                            function mostrarMensaje(idMensaje) {
+                                                Swal.fire({
+                                                    title: '¿Esta seguro?',
+                                                    text: "Se eliminara el mensaje",
+                                                    icon: 'warning',
+                                                    showCancelButton: true,
+                                                    confirmButtonColor: '#d33',
+                                                    cancelButtonColor: '#3085d6',
+                                                    confirmButtonText: 'Eliminar',
+                                                    cancelButtonText: 'Cancelar'
+                                                }).then((result) => {
+                                                    if (result.isConfirmed) {
+                                                        Swal.fire(
+                                                            'Eliminado!',
+                                                            'El mensaje se ha eliminado con exito',
+                                                            'success'
+                                                        ).then(function () {
+                                                            //document.forms[7].submit();
+                                                            var formularioMio = document.getElementById('formularioMio-' + idMensaje);
+                                                            formularioMio.submit();
+                                                        });
+
+                                                    }
+                                                })
+                                            }
+                                        </script>
+                                        <input value="@item.IdMensaje" name="idMensaje" hidden />
+                                        <input onclick="mostrarMensaje(@item.IdMensaje)" type="button" value="Eliminar mensaje" class="btn btnCatalogo" />                                        
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+
+
+
+                </tbody>
+            </table>
         </div>
-        <div class="col-md-4 mb-md-0 p-md-4" style="background-color: #EBEBEB">
-            
-            <form asp-action="Create" id="formularioMio">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-                <div class="form-group">
-                    <label asp-for="NombrePersona" class="control-label"></label>
-                    <input asp-for="NombrePersona" required class="form-control text-center" style="margin-bottom: 15px"/>
-                    <span asp-validation-for="NombrePersona" class="text-danger msjError"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Correo"  class="control-label"></label>
-                    <input asp-for="Correo"  required class="form-control text-center" style="margin-bottom: 15px" />
-                    <span asp-validation-for="Correo" id="Correo-validation" class="text-danger msjError"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Telefono" class="control-label"></label>
-                    <input asp-for="Telefono" id="Telefono" class="form-control text-center" style="margin-bottom: 15px" />
-                    <span asp-validation-for="Telefono" id="Telefono-validation" class="text-danger msjError"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="IdLocal" class="control-label"></label>
-                    <select asp-for="IdLocal" class="form-control text-center" style="margin-bottom: 15px" asp-items="@ViewBag.idLocal"></select>
-                    <span asp-validation-for="IdLocal" class="text-danger msjError"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Mensaje" class="control-label"></label>
-                    <textarea  asp-for="Mensaje" required class="form-control " style="margin-bottom: 15px" ></textarea>
-                    <span asp-validation-for="Mensaje"  class="text-danger msjError"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal" value="Enviar" class="btn btnCatalogo" />
-                </div>
-            </form>
-            
-        </div>
-    </div>
-   
+    </form>
 </div>
 
-<div id="success-message" class="success-message hidden">
-    <i class="fa fa-check-circle"></i>
-    <span>¡El mensaje se envio con exito!</span>
-</div>
-<script>
-    
-    const correoInput = document.getElementById('Correo');
-    const correoValidation = document.getElementById('Correo-validation');   
-
-
-    const telefonoInput = document.getElementById('Telefono');
-    //alert(telefonoInput);
-    document.querySelector('#formularioMio').addEventListener('submit', (event) => {
-    
-        if (formularioMio.checkValidity()) {
-           
-                
-            const successMessage = document.querySelector('#success-message');
-            successMessage.classList.add('show');
-            setTimeout(() => {
-                successMessage.classList.remove('show');
-            }, 3000);
-        }
-    });
-
-
-</script>
-
-
 
 <br />
 <br />
@@ -125,8 +138,3 @@
 <br />
 <br />
 <br />
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}
