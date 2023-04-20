@@ -94,7 +94,7 @@ namespace BackEnd.Controllers
         public JsonResult Post([FromBody] FacturaModel receta)
         {
             recetaDAL.Add(Convertir(receta));
-            string fromAddress = "freddiemercury1705@gmail.com";
+            string fromAddress = "proyectoprogramacionavanzada17@gmail.com";
             string toAddress = receta.CorreoUsuario;
             string subject = "Creacion de cuenta en Carnes Don Fernando";
             //string body = "<h3 style: color='#000000 '>Se ha creado una cuenta en la pagina de Carnes Don Fernando, con el siguiente nombre de usuario: </h3><h3 style: color='#AD2022'>" + model.Username+"</h3>";
@@ -120,7 +120,7 @@ namespace BackEnd.Controllers
             SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
             client.EnableSsl = true;
             client.UseDefaultCredentials = false;
-            client.Credentials = new NetworkCredential("freddiemercury1705@gmail.com", "dhxpwyxyugncbezo");
+            client.Credentials = new NetworkCredential("proyectoprogramacionavanzada17@gmail.com", "libesyyjduollcta");
 
             MailMessage message = new MailMessage(fromAddress, toAddress, subject, body);
             message.IsBodyHtml = true;
