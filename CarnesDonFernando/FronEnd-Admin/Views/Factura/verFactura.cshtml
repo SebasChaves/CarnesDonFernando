@@ -10,7 +10,10 @@
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container padding-bottom-3x mb-1">
-
+    <div class="search-container">
+        <input type="text" class="searchUser" placeholder="Buscar por id del usuario" id="search-input">
+        <button type="button" class="btn btnCatalogo" id="search-button">Buscar</button>
+    </div>
     <div class="table-responsive shopping-cart">
         <table class="table">
             <thead>
@@ -177,6 +180,23 @@
         </table>
 
     </div>
+    @section scripts {
+        <script>
+            $(document).ready(function () {
+                $('#search-button').click(function () {
+                    var searchTerm = $('#search-input').val().toLowerCase();
+                    $('tbody tr').each(function () {
+                        var currentRowText = $(this).find('td:eq(2)').text().toLowerCase();
+                        if (currentRowText.indexOf(searchTerm) >= 0) {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    });
+                });
+            });
+        </script>
+    }
 </div>
 
 <br />

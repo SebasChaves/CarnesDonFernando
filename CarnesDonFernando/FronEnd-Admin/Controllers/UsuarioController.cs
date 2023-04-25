@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Net.Mail;
 using System.Net;
+using FronEnd_Admin.Models;
 
 namespace FrontEnd.Controllers
 {
@@ -137,7 +138,27 @@ namespace FrontEnd.Controllers
             return View();
         }
 
+        public ActionResult GetUsuarios()
+        {
+            if (HttpContext.Session.GetString("role") is not null)
+            {
+                if (HttpContext.Session.GetString("role").Equals("Admin"))
+                {
+                    List<NombreUsuarioId> lista = securityHelper.getAllUsuarios();
+                    return View(lista);
+                }
+                else
+                {
+                    return RedirectToAction("Error", "Home");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "Usuario");
+            }
 
+           
+        }
 
 
 

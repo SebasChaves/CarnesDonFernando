@@ -1,0 +1,98 @@
+﻿@model IEnumerable<FronEnd_Admin.Models.NombreUsuarioId>
+
+@{
+    ViewData["Title"] = "GetUsuarios";
+}
+
+<h1 class="display-4 text-center tituloPaginaIndex" style="margin-top: 200px;">Usuarios</h1>
+
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container padding-bottom-3x mb-1">
+    
+        <div class="search-container">
+            <input type="text" class="searchUser" placeholder="Buscar por nombre de usuario" id="search-input">
+            <button type="button" class="btn btnCatalogo" id="search-button">Buscar</button>
+        </div>
+        <div class="table-responsive shopping-cart">
+            
+
+            <table class="table">
+                <thead>
+                    <tr style="border: hidden">
+                        <th style="border: hidden">Id del usuario</th>
+                        <th style="border: hidden">Nombre usuario</th>
+                        
+
+
+                    </tr>
+                </thead>
+                <tbody>
+
+
+                    @{
+
+                        @foreach (var item in Model)
+                        {
+
+                            <tr>
+                                <td>
+                                    <div class="product-item">
+
+                                        <div class="product-info">
+                                            <h4 class="product-title "><a href="#"> @item.id_usuario</a></h4>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="product-item">
+
+                                        <div class="product-info">
+                                            <h4 class="product-title "><a href="#"> @item.nombre</a></h4>
+                                        </div>
+                                    </div>
+                                </td>                                
+                            </tr>
+                        }
+                    }
+
+
+
+                </tbody>
+            </table>
+        </div>
+    
+
+    @section scripts {
+        <script>
+            $(document).ready(function () {
+                $('#search-button').click(function () {
+                    var searchTerm = $('#search-input').val().toLowerCase();
+                    $('tbody tr').each(function () {
+                        var currentRowText = $(this).text().toLowerCase();
+                        if (currentRowText.indexOf(searchTerm) >= 0) {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    });
+                });
+            });
+        </script>
+    }
+
+
+
+
+
+
+
+</div>
+
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />

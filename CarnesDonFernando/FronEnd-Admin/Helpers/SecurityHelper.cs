@@ -1,5 +1,6 @@
 ﻿
 
+using FronEnd_Admin.Models;
 using FrontEnd.Models;
 using Newtonsoft.Json;
 
@@ -110,6 +111,27 @@ namespace FrontEnd.Helpers
                 HttpResponseMessage responseMessage = ServiceRepository.PostResponse("api/Authenticate/putContrasenia", usuario);
                 var content = responseMessage.Content.ReadAsStringAsync().Result;
                 response = JsonConvert.DeserializeObject<ResponseModel>(content);
+
+                return response;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+        }
+
+        public List<NombreUsuarioId> getAllUsuarios()
+        {
+            try
+            {
+                List<NombreUsuarioId> response;
+
+                HttpResponseMessage responseMessage = ServiceRepository.GetResponse("api/Authenticate");
+                var content = responseMessage.Content.ReadAsStringAsync().Result;
+                response = JsonConvert.DeserializeObject<List<NombreUsuarioId>>(content);
 
                 return response;
             }

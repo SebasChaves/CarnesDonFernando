@@ -741,3 +741,13 @@ select.form-control {
 .tabla-precio th{
     
 }
+
+
+.searchUser {
+    border-radius: 15px;
+    padding-right: 50px;
+    border-color: #AD2022;
+    padding-top:3px;
+    padding-bottom:3px;
+    font-size: 17px;
+}

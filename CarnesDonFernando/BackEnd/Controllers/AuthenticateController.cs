@@ -1,4 +1,6 @@
 ﻿using BackEnd.Models;
+using DAL.Interfaces;
+using Entities;
 using Entities.Authentication;
 
 using Microsoft.AspNetCore.Http;
@@ -204,6 +206,21 @@ namespace BackEndAPI.Controllers
                 return Ok(new Response { Status = "Success", Message = "Cambio realizado correctamente!" });
             }
             return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Fallo el cambio de contraseña, revise las credenciales" });
+        }
+
+        [HttpGet]
+        public JsonResult Get()
+        {
+            List<ApplicationUser> usuarios = userManager.Users.ToList();
+
+            // Obtener los nombres de usuario
+            List<NombreUsuarioId> nombresUsuarios = new List<NombreUsuarioId>();
+            foreach (var usuario in usuarios)
+            {
+                NombreUsuarioId model = new NombreUsuarioId { id_usuario = usuario.Id, nombre = usuario.UserName };
+                nombresUsuarios.Add(model);
+            }
+            return new JsonResult(nombresUsuarios);
         }
     }
 }
